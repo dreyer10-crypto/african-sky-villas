@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>African Sky Villas — Operations</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --bg:#0d0a06; --bg2:#16110a; --panel:#1c1610; --panel2:#241c12;
+  --line:rgba(212,162,76,0.14); --line2:rgba(212,162,76,0.28);
+  --gold:#d4a24c; --gold-soft:#e4bd74; --cream:#f4ece0; --bone:#c9bca8;
+  --muted:rgba(244,236,224,0.42); --muted2:rgba(244,236,224,0.62);
+  --green:#5aa86f; --red:#c45a4a; --blue:#5a8bb0; --wa:#25D366;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg); font-family:'Manrope',sans-serif; color:var(--cream);
+  min-height:100vh; line-height:1.5; -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12% 0%,rgba(212,162,76,0.06),transparent 42%),radial-gradient(circle at 88% 8%,rgba(90,139,176,0.05),transparent 40%);
+  background-attachment:fixed;
+}
+::selection{background:var(--gold);color:var(--bg);}
+
+/* NAV */
+.nav{background:rgba(13,10,6,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line2);
+  display:flex;align-items:center;position:sticky;top:0;z-index:100;}
+.nav-logo{padding:14px 22px;display:flex;align-items:center;gap:12px;border-right:1px solid var(--line);}
+.nav-logo .mark{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--bg2);flex-shrink:0;}
+.nav-logo .txt{font-family:'Fraunces',serif;font-size:15px;letter-spacing:0.04em;white-space:nowrap;}
+.nav-logo .txt b{color:var(--gold);font-weight:600;}
+.nav-tabs{display:flex;flex:1;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{padding:18px 16px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;
+  color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-tab:hover{color:var(--cream);}
+
+/* LAYOUT */
+.page{display:none;padding:30px 26px 60px;max-width:1180px;margin:0 auto;animation:fade .4s ease;}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.page-head{margin-bottom:24px;}
+.page-eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px;}
+.page-title{font-family:'Fraunces',serif;font-size:30px;font-weight:500;letter-spacing:-0.01em;}
+.page-title em{font-style:italic;color:var(--gold-soft);}
+.page-sub{color:var(--muted2);font-size:14px;margin-top:6px;max-width:620px;}
+
+/* PANELS */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;margin-bottom:18px;}
+.panel-head{font-family:'Fraunces',serif;font-size:17px;margin-bottom:4px;}
+.panel-sub{color:var(--muted);font-size:12.5px;margin-bottom:16px;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px;}
+.stat{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden;}
+.stat::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:0.6;}
+.stat-label{font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600;}
+.stat-val{font-family:'Fraunces',serif;font-size:27px;font-weight:500;line-height:1;}
+.stat-sub{font-size:11px;color:var(--gold);margin-top:6px;}
+
+/* ALERTS */
+.alert{padding:12px 15px;border-radius:8px;font-size:13px;margin-bottom:12px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+.alert .ico{flex-shrink:0;font-size:15px;}
+.alert-warn{background:rgba(212,162,76,0.09);border:1px solid rgba(212,162,76,0.28);color:var(--gold-soft);}
+.alert-danger{background:rgba(196,90,74,0.1);border:1px solid rgba(196,90,74,0.32);color:#e08a7a;}
+.alert-info{background:rgba(90,139,176,0.1);border:1px solid rgba(90,139,176,0.3);color:#8fb6d4;}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead{background:var(--panel2);}
+th{padding:12px 13px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:700;white-space:nowrap;}
+td{padding:12px 13px;border-top:1px solid var(--line);color:var(--bone);vertical-align:middle;}
+tr:hover td{background:rgba(212,162,76,0.03);}
+td b{color:var(--cream);font-weight:600;}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+.badge-tomsg{background:rgba(90,139,176,0.16);color:#8fb6d4;}
+.badge-sent{background:rgba(90,168,111,0.16);color:#7fc596;}
+.badge-test{background:rgba(212,162,76,0.16);color:var(--gold-soft);}
+.badge-warn{background:rgba(196,90,74,0.16);color:#e08a7a;}
+
+/* BUTTONS */
+.btn{font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border-radius:6px;cursor:pointer;border:1px solid transparent;font-weight:700;white-space:nowrap;transition:all .18s;display:inline-flex;align-items:center;gap:6px;text-decoration:none;}
+.btn-gold{background:var(--gold);color:var(--bg);}.btn-gold:hover{background:var(--gold-soft);}
+.btn-outline{background:transparent;color:var(--gold);border-color:var(--line2);}.btn-outline:hover{background:rgba(212,162,76,0.08);}
+.btn-wa{background:var(--wa);color:#fff;}.btn-wa:hover{filter:brightness(1.1);}
+.btn-sm{padding:6px 11px;font-size:10px;}
+.btn-row{display:flex;gap:7px;flex-wrap:wrap;}
+
+/* FORMS */
+label{display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;font-weight:600;}
+input,select,textarea{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:10px 12px;color:var(--cream);font-family:'Manrope',sans-serif;font-size:14px;margin-bottom:14px;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.field-mono{font-family:'Manrope';font-variant-numeric:tabular-nums;}
+
+/* INVOICE PREVIEW */
+.inv-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;}
+.inv-total{display:flex;justify-content:space-between;padding:13px 0 0;font-family:'Fraunces',serif;font-size:19px;color:var(--gold-soft);}
+
+/* CALENDAR */
+.cal-month{margin-bottom:24px;}
+.cal-month h3{font-family:'Fraunces',serif;font-size:18px;color:var(--gold-soft);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+.cal-row{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:8px;transition:background .15s;}
+.cal-row:hover{background:rgba(212,162,76,0.04);}
+.cal-date{font-family:'Fraunces',serif;font-size:14px;color:var(--gold);min-width:54px;text-align:center;line-height:1.2;}
+.cal-date .d{font-size:21px;display:block;}
+.cal-info{flex:1;}
+.cal-info b{color:var(--cream);}
+.cal-info .meta{font-size:12px;color:var(--muted2);}
+
+/* LINKS / MISC */
+.link-pill{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-size:11.5px;color:var(--bone);text-decoration:none;font-family:monospace;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.link-pill:hover{border-color:var(--gold);color:var(--gold);}
+.muted{color:var(--muted);}
+.step{display:flex;gap:14px;margin-bottom:16px;}
+.step-num{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;flex-shrink:0;font-size:14px;}
+.step-body b{color:var(--cream);}
+.step-body p{font-size:13px;color:var(--muted2);margin-top:3px;}
+.kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.kv span:first-child{color:var(--muted2);}
+.kv span:last-child{color:var(--cream);font-weight:600;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:var(--bg);padding:13px 22px;border-radius:8px;font-weight:700;font-size:13px;z-index:200;transition:transform .3s;box-shadow:0 8px 30px rgba(0,0,0,0.4);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.search-bar input{margin-bottom:0;flex:1;min-width:200px;}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr;}
+  .page-title{font-size:24px;}
+  .nav-logo .txt{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="mark">🦁</div>
+    <div class="txt">African <b>Sky</b> Villas</div>
+  </div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button class="nav-tab" onclick="showPage('arrivals',this)">Arrivals</button>
+    <button class="nav-tab" onclick="showPage('whatsapp',this)">WhatsApp</button>
+    <button class="nav-tab" onclick="showPage('invoices',this)">Invoices</button>
+    <button class="nav-tab" onclick="showPage('calendar',this)">Calendar</button>
+    <button class="nav-tab" onclick="showPage('guide',this)">Guide</button>
+  </div>
+</nav>
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="page-head">
+    <div class="page-eyebrow">Operations</div>
+    <h1 class="page-title">Welcome back, <em>Dreyer</em>.</h1>
+    <p class="page-sub">Your upcoming arrivals, outreach status, and revenue at a glance. Everything runs offline in your browser — your data never leaves this device.</p>
+  </div>
+  <div class="stats" id="dashStats"></div>
+  <div class="panel">
+    <div class="panel-head">Needs your attention</div>
+    <div class="panel-sub">Items to action before messaging guests</div>
+    <div id="dashAlerts"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head">Next 5 arrivals</div>
+    <div class="panel-sub">Soonest check-ins coming up</div>
+    <div id="dashNext"></div>
+  </div>
+</div>
+
+<!-- ARRIVALS -->
+<div class="page" id="page-arrivals">
+  <div class="page-head">
+    <div class="page-eyebrow">Guest Register</div>
+    <h1 class="page-title">Upcoming <em>arrivals</em></h1>
+    <p class="page-sub">All confirmed bookings from June 2026 onward, with personalised activity links ready to send.</p>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="arrSearch" placeholder="Search guest, villa, country…" oninput="renderArrivals()">
+    <button class="btn btn-outline" onclick="document.getElementById('arrSearch').value='';renderArrivals()">Clear</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Arrival</th><th>Guest</th><th>Villa</th><th>Guests</th><th>Phone</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="arrBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- WHATSAPP -->
+<div class="page" id="page-whatsapp">
+  <div class="page-head">
+    <div class="page-eyebrow">Outreach</div>
+    <h1 class="page-title">WhatsApp <em>outreach</em></h1>
+    <p class="page-sub">Tap a guest's button to open WhatsApp with their personalised welcome message pre-written. Mark them sent as you go.</p>
+  </div>
+  <div class="alert alert-warn"><span class="ico">⚠</span><span><b>Renate Wenghöfer</b> has an unverified phone number (Brazilian format on a German booking). Confirm it before sending. The two <b>CATTEAU</b> entries share a number — check before messaging both.</span></div>
+  <div id="waList"></div>
+</div>
+
+<!-- INVOICES -->
+<div class="page" id="page-invoices">
+  <div class="page-head">
+    <div class="page-eyebrow">Billing</div>
+    <h1 class="page-title">Invoice <em>builder</em></h1>
+    <p class="page-sub">Build a quote with the 3.5% transaction fee added automatically. Then create the matching invoice in Zoho Books and the pay link in iKhokha.</p>
+  </div>
+  <div class="panel">
+    <div class="panel-head">Build a quote</div>
+    <div class="panel-sub">Pick a guest and add activities — the total and fee calculate live</div>
+    <div class="form-grid">
+      <div>
+        <label>Guest</label>
+        <select id="invGuest" onchange="invPrefill()"></select>
+      </div>
+      <div>
+        <label>Booking ref</label>
+        <input type="text" id="invRef" placeholder="auto-filled">
+      </div>
+    </div>
+    <label>Add activity</label>
+    <div style="display:flex;gap:10px;align-items:flex-start;">
+      <select id="invAct" style="flex:1"></select>
+      <input type="number" id="invQty" value="2" min="1" style="width:90px" title="guests">
+      <button class="btn btn-gold" onclick="invAdd()">Add</button>
+    </div>
+    <div id="invLines" style="margin-top:14px;"></div>
+    <div id="invSummary"></div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div class="page" id="page-calendar">
+  <div class="page-head">
+    <div class="page-eyebrow">Schedule</div>
+    <h1 class="page-title">Arrivals <em>calendar</em></h1>
+    <p class="page-sub">Your check-ins grouped by month, soonest first.</p>
+  </div>
+  <div id="calBody"></div>
+</div>
+
+<!-- GUIDE -->
+<div class="page" id="page-guide">
+  <div class="page-head">
+    <div class="page-eyebrow">Reference</div>
+    <h1 class="page-title">How the <em>system</em> works</h1>
+    <p class="page-sub">The full booking-to-payment flow, and where each piece lives.</p>
+  </div>
+  <div class="panel">
+    <div class="panel-head">The 8-step flow</div>
+    <div class="gold-line"></div>
+    <div id="guideSteps"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head">Key details</div>
+    <div class="panel-sub">Everything you need on hand</div>
+    <div id="guideKV"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head">Activity price list</div>
+    <div class="panel-sub">Per person, ZAR — used by the invoice builder</div>
+    <div id="guidePrices"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SEED_GUESTS = [{"ref": "TEST-DREYER", "first": "Dreyer", "last": "Hoffman", "phone": "+27842153430", "country": "za", "arrival": "2026-06-15", "departure": "2026-06-18", "nights": "3", "unit": "Sky Villa", "guests": "2", "lang": "en", "status": "test", "flag": "test", "url": "https://african-skyvillas-activities.netlify.app/?name=Dreyer%20Hoffman&phone=%2B27842153430&arrival=2026-06-15&ref=TEST-DREYER", "wa": "https://wa.me/27842153430?text=Hi%20Dreyer%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-06-15.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DDreyer%2520Hoffman%26phone%3D%252B27842153430%26arrival%3D2026-06-15%26ref%3DTEST-DREYER"}, {"ref": "5584720208", "first": "Katja", "last": "Faude", "phone": "+491791002149", "country": "de", "arrival": "2026-06-04", "departure": "2026-06-05", "nights": "1", "unit": "Sky Villa", "guests": "4", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Katja%20Faude&phone=%2B491791002149&arrival=2026-06-04&ref=5584720208", "wa": "https://wa.me/491791002149?text=Hallo%20Katja%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-06-04.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DKatja%2520Faude%26phone%3D%252B491791002149%26arrival%3D2026-06-04%26ref%3D5584720208"}, {"ref": "5117363018", "first": "Eric", "last": "Cillien", "phone": "+352661785606", "country": "lu", "arrival": "2026-06-06", "departure": "2026-06-09", "nights": "3", "unit": "Sky Villa", "guests": "2", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Eric%20Cillien&phone=%2B352661785606&arrival=2026-06-06&ref=5117363018", "wa": "https://wa.me/352661785606?text=Hi%20Eric%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-06-06.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DEric%2520Cillien%26phone%3D%252B352661785606%26arrival%3D2026-06-06%26ref%3D5117363018"}, {"ref": "5771526269", "first": "Renate", "last": "Wenghöfer", "phone": "+55929998520", "country": "de", "arrival": "2026-06-15", "departure": "2026-06-17", "nights": "2", "unit": "Sky Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "REVIEW-invalid", "url": "https://african-skyvillas-activities.netlify.app/?name=Renate%20Wengh%C3%B6fer&phone=%2B55929998520&arrival=2026-06-15&ref=5771526269", "wa": "https://wa.me/55929998520?text=Hallo%20Renate%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-06-15.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DRenate%2520Wengh%25C3%25B6fer%26phone%3D%252B55929998520%26arrival%3D2026-06-15%26ref%3D5771526269"}, {"ref": "6330767114", "first": "Karl", "last": "Kisch", "phone": "+491702259047", "country": "de", "arrival": "2026-06-16", "departure": "2026-06-19", "nights": "3", "unit": "Remington Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Karl%20Kisch&phone=%2B491702259047&arrival=2026-06-16&ref=6330767114", "wa": "https://wa.me/491702259047?text=Hallo%20Karl%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-06-16.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DKarl%2520Kisch%26phone%3D%252B491702259047%26arrival%3D2026-06-16%26ref%3D6330767114"}, {"ref": "6998611296", "first": "NATALIA", "last": "VARGAS", "phone": "+5511985724230", "country": "br", "arrival": "2026-06-19", "departure": "2026-06-21", "nights": "2", "unit": "Remington Villa, Sky Villa", "guests": "5", "lang": "pt", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=NATALIA%20VARGAS&phone=%2B5511985724230&arrival=2026-06-19&ref=6998611296", "wa": "https://wa.me/5511985724230?text=Ol%C3%A1%20NATALIA%21%20%F0%9F%A6%81%20Bem-vindo%20%E2%80%94%20a%20partir%20de%202026-06-19.%20Veja%20e%20reserve%20as%20suas%20atividades%20aqui%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DNATALIA%2520VARGAS%26phone%3D%252B5511985724230%26arrival%3D2026-06-19%26ref%3D6998611296"}, {"ref": "6724355047", "first": "Katarzyna", "last": "Wisniewski", "phone": "+48605044422", "country": "pl", "arrival": "2026-06-27", "departure": "2026-07-07", "nights": "10", "unit": "Remington Villa", "guests": "2", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Katarzyna%20Wisniewski&phone=%2B48605044422&arrival=2026-06-27&ref=6724355047", "wa": "https://wa.me/48605044422?text=Hi%20Katarzyna%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-06-27.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DKatarzyna%2520Wisniewski%26phone%3D%252B48605044422%26arrival%3D2026-06-27%26ref%3D6724355047"}, {"ref": "6741792522", "first": "Nadja", "last": "Van rems", "phone": "+31643747494", "country": "nl", "arrival": "2026-06-28", "departure": "2026-07-03", "nights": "5", "unit": "Sky Villa", "guests": "3", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Nadja%20Van%20rems&phone=%2B31643747494&arrival=2026-06-28&ref=6741792522", "wa": "https://wa.me/31643747494?text=Hallo%20Nadja%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-06-28%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DNadja%2520Van%2520rems%26phone%3D%252B31643747494%26arrival%3D2026-06-28%26ref%3D6741792522"}, {"ref": "5575640006", "first": "Jan", "last": "Hoogendyk", "phone": "+27826021321", "country": "za", "arrival": "2026-07-03", "departure": "2026-07-06", "nights": "3", "unit": "Sky Villa", "guests": "4", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Jan%20Hoogendyk&phone=%2B27826021321&arrival=2026-07-03&ref=5575640006", "wa": "https://wa.me/27826021321?text=Hi%20Jan%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-07-03.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DJan%2520Hoogendyk%26phone%3D%252B27826021321%26arrival%3D2026-07-03%26ref%3D5575640006"}, {"ref": "6053636078", "first": "Mirko", "last": "Scheske", "phone": "+491729164654", "country": "de", "arrival": "2026-07-07", "departure": "2026-07-10", "nights": "3", "unit": "Remington Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Mirko%20Scheske&phone=%2B491729164654&arrival=2026-07-07&ref=6053636078", "wa": "https://wa.me/491729164654?text=Hallo%20Mirko%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-07-07.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DMirko%2520Scheske%26phone%3D%252B491729164654%26arrival%3D2026-07-07%26ref%3D6053636078"}, {"ref": "6407532974", "first": "Henry", "last": "Wolff", "phone": "+27723148788", "country": "za", "arrival": "2026-07-07", "departure": "2026-07-10", "nights": "3", "unit": "Sky Villa", "guests": "3", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Henry%20Wolff&phone=%2B27723148788&arrival=2026-07-07&ref=6407532974", "wa": "https://wa.me/27723148788?text=Hi%20Henry%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-07-07.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DHenry%2520Wolff%26phone%3D%252B27723148788%26arrival%3D2026-07-07%26ref%3D6407532974"}, {"ref": "6050906338", "first": "Gwendolyn", "last": "Bron", "phone": "+31640173721", "country": "nl", "arrival": "2026-07-10", "departure": "2026-07-13", "nights": "3", "unit": "Remington Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Gwendolyn%20Bron&phone=%2B31640173721&arrival=2026-07-10&ref=6050906338", "wa": "https://wa.me/31640173721?text=Hallo%20Gwendolyn%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-10%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DGwendolyn%2520Bron%26phone%3D%252B31640173721%26arrival%3D2026-07-10%26ref%3D6050906338"}, {"ref": "6769243509", "first": "Joana", "last": "Ferreira", "phone": "+351969221319", "country": "pt", "arrival": "2026-07-10", "departure": "2026-07-13", "nights": "3", "unit": "Sky Villa", "guests": "2", "lang": "pt", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Joana%20Ferreira&phone=%2B351969221319&arrival=2026-07-10&ref=6769243509", "wa": "https://wa.me/351969221319?text=Ol%C3%A1%20Joana%21%20%F0%9F%A6%81%20Bem-vindo%20%E2%80%94%20a%20partir%20de%202026-07-10.%20Veja%20e%20reserve%20as%20suas%20atividades%20aqui%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DJoana%2520Ferreira%26phone%3D%252B351969221319%26arrival%3D2026-07-10%26ref%3D6769243509"}, {"ref": "6143714227", "first": "Angelique", "last": "CATTEAU", "phone": "+33695853153", "country": "fr", "arrival": "2026-07-13", "departure": "2026-07-14", "nights": "1", "unit": "Remington Villa", "guests": "3", "lang": "fr", "status": "to-message", "flag": "fixed-added-cc", "url": "https://african-skyvillas-activities.netlify.app/?name=Angelique%20CATTEAU&phone=%2B33695853153&arrival=2026-07-13&ref=6143714227", "wa": "https://wa.me/33695853153?text=Bonjour%20Angelique%20%21%20%F0%9F%A6%81%20Bienvenue%20%E2%80%94%20nous%20avons%20h%C3%A2te%20de%20vous%20accueillir%20%C3%A0%20African%20Sky%20Villas%20%C3%A0%20partir%20du%202026-07-13.%20R%C3%A9servez%20vos%20activit%C3%A9s%20ici%20%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DAngelique%2520CATTEAU%26phone%3D%252B33695853153%26arrival%3D2026-07-13%26ref%3D6143714227"}, {"ref": "6450132413", "first": "Marieke", "last": "Hulshof", "phone": "+31618242478", "country": "nl", "arrival": "2026-07-13", "departure": "2026-07-15", "nights": "2", "unit": "Sky Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Marieke%20Hulshof&phone=%2B31618242478&arrival=2026-07-13&ref=6450132413", "wa": "https://wa.me/31618242478?text=Hallo%20Marieke%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-13%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DMarieke%2520Hulshof%26phone%3D%252B31618242478%26arrival%3D2026-07-13%26ref%3D6450132413"}, {"ref": "6149098879", "first": "Angélique", "last": "CATTEAU", "phone": "+33695853153", "country": "fr", "arrival": "2026-07-14", "departure": "2026-07-16", "nights": "2", "unit": "Remington Villa", "guests": "3", "lang": "fr", "status": "to-message", "flag": "fixed-added-cc", "url": "https://african-skyvillas-activities.netlify.app/?name=Ang%C3%A9lique%20CATTEAU&phone=%2B33695853153&arrival=2026-07-14&ref=6149098879", "wa": "https://wa.me/33695853153?text=Bonjour%20Ang%C3%A9lique%20%21%20%F0%9F%A6%81%20Bienvenue%20%E2%80%94%20nous%20avons%20h%C3%A2te%20de%20vous%20accueillir%20%C3%A0%20African%20Sky%20Villas%20%C3%A0%20partir%20du%202026-07-14.%20R%C3%A9servez%20vos%20activit%C3%A9s%20ici%20%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DAng%25C3%25A9lique%2520CATTEAU%26phone%3D%252B33695853153%26arrival%3D2026-07-14%26ref%3D6149098879"}, {"ref": "6973097108", "first": "Marjolein", "last": "Dubbeld", "phone": "+31611910621", "country": "nl", "arrival": "2026-07-15", "departure": "2026-07-17", "nights": "2", "unit": "Sky Villa", "guests": "3", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Marjolein%20Dubbeld&phone=%2B31611910621&arrival=2026-07-15&ref=6973097108", "wa": "https://wa.me/31611910621?text=Hallo%20Marjolein%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-15%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DMarjolein%2520Dubbeld%26phone%3D%252B31611910621%26arrival%3D2026-07-15%26ref%3D6973097108"}, {"ref": "5164020060", "first": "Mark", "last": "Ruiter", "phone": "+31642038026", "country": "nl", "arrival": "2026-07-17", "departure": "2026-07-22", "nights": "5", "unit": "Sky Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Mark%20Ruiter&phone=%2B31642038026&arrival=2026-07-17&ref=5164020060", "wa": "https://wa.me/31642038026?text=Hallo%20Mark%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-17%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DMark%2520Ruiter%26phone%3D%252B31642038026%26arrival%3D2026-07-17%26ref%3D5164020060"}, {"ref": "6296294358", "first": "TRIMOULLA", "last": "Maria", "phone": "+33677382631", "country": "fr", "arrival": "2026-07-19", "departure": "2026-07-31", "nights": "12", "unit": "Remington Villa", "guests": "4", "lang": "fr", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=TRIMOULLA%20Maria&phone=%2B33677382631&arrival=2026-07-19&ref=6296294358", "wa": "https://wa.me/33677382631?text=Bonjour%20TRIMOULLA%20%21%20%F0%9F%A6%81%20Bienvenue%20%E2%80%94%20nous%20avons%20h%C3%A2te%20de%20vous%20accueillir%20%C3%A0%20African%20Sky%20Villas%20%C3%A0%20partir%20du%202026-07-19.%20R%C3%A9servez%20vos%20activit%C3%A9s%20ici%20%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DTRIMOULLA%2520Maria%26phone%3D%252B33677382631%26arrival%3D2026-07-19%26ref%3D6296294358"}, {"ref": "5932729645", "first": "Marcel", "last": "luijnenburg", "phone": "+31611748807", "country": "nl", "arrival": "2026-07-23", "departure": "2026-07-25", "nights": "2", "unit": "Sky Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Marcel%20luijnenburg&phone=%2B31611748807&arrival=2026-07-23&ref=5932729645", "wa": "https://wa.me/31611748807?text=Hallo%20Marcel%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-23%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DMarcel%2520luijnenburg%26phone%3D%252B31611748807%26arrival%3D2026-07-23%26ref%3D5932729645"}, {"ref": "5230320187", "first": "dominiek", "last": "pillaert", "phone": "+32496599189", "country": "be", "arrival": "2026-07-31", "departure": "2026-08-02", "nights": "2", "unit": "Remington Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=dominiek%20pillaert&phone=%2B32496599189&arrival=2026-07-31&ref=5230320187", "wa": "https://wa.me/32496599189?text=Hallo%20dominiek%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-07-31%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3Ddominiek%2520pillaert%26phone%3D%252B32496599189%26arrival%3D2026-07-31%26ref%3D5230320187"}, {"ref": "6342631957", "first": "Anja", "last": "Schiller", "phone": "+491622672232", "country": "de", "arrival": "2026-07-31", "departure": "2026-08-03", "nights": "3", "unit": "Sky Villa", "guests": "4", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Anja%20Schiller&phone=%2B491622672232&arrival=2026-07-31&ref=6342631957", "wa": "https://wa.me/491622672232?text=Hallo%20Anja%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-07-31.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DAnja%2520Schiller%26phone%3D%252B491622672232%26arrival%3D2026-07-31%26ref%3D6342631957"}, {"ref": "5769232533", "first": "Jan", "last": "Janssen", "phone": "+31634134829", "country": "nl", "arrival": "2026-08-02", "departure": "2026-08-06", "nights": "4", "unit": "Remington Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Jan%20Janssen&phone=%2B31634134829&arrival=2026-08-02&ref=5769232533", "wa": "https://wa.me/31634134829?text=Hallo%20Jan%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-08-02%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DJan%2520Janssen%26phone%3D%252B31634134829%26arrival%3D2026-08-02%26ref%3D5769232533"}, {"ref": "5163532381", "first": "Aren", "last": "SERIK", "phone": "+33677490408", "country": "fr", "arrival": "2026-08-03", "departure": "2026-08-05", "nights": "2", "unit": "Sky Villa", "guests": "4", "lang": "fr", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Aren%20SERIK&phone=%2B33677490408&arrival=2026-08-03&ref=5163532381", "wa": "https://wa.me/33677490408?text=Bonjour%20Aren%20%21%20%F0%9F%A6%81%20Bienvenue%20%E2%80%94%20nous%20avons%20h%C3%A2te%20de%20vous%20accueillir%20%C3%A0%20African%20Sky%20Villas%20%C3%A0%20partir%20du%202026-08-03.%20R%C3%A9servez%20vos%20activit%C3%A9s%20ici%20%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DAren%2520SERIK%26phone%3D%252B33677490408%26arrival%3D2026-08-03%26ref%3D5163532381"}, {"ref": "5232243687", "first": "Carl-helmut", "last": "Coulon", "phone": "+491753080036", "country": "de", "arrival": "2026-08-05", "departure": "2026-08-06", "nights": "1", "unit": "Sky Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Carl-helmut%20Coulon&phone=%2B491753080036&arrival=2026-08-05&ref=5232243687", "wa": "https://wa.me/491753080036?text=Hallo%20Carl-helmut%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-08-05.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DCarl-helmut%2520Coulon%26phone%3D%252B491753080036%26arrival%3D2026-08-05%26ref%3D5232243687"}, {"ref": "6088391029", "first": "Sabine", "last": "Coulon", "phone": "+4915152525748", "country": "de", "arrival": "2026-08-06", "departure": "2026-08-07", "nights": "1", "unit": "Sky Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Sabine%20Coulon&phone=%2B4915152525748&arrival=2026-08-06&ref=6088391029", "wa": "https://wa.me/4915152525748?text=Hallo%20Sabine%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-08-06.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DSabine%2520Coulon%26phone%3D%252B4915152525748%26arrival%3D2026-08-06%26ref%3D6088391029"}, {"ref": "5298475145", "first": "Kaat", "last": "De Tant", "phone": "+32486361689", "country": "be", "arrival": "2026-08-07", "departure": "2026-08-09", "nights": "2", "unit": "Remington Villa", "guests": "4", "lang": "nl", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Kaat%20De%20Tant&phone=%2B32486361689&arrival=2026-08-07&ref=5298475145", "wa": "https://wa.me/32486361689?text=Hallo%20Kaat%21%20%F0%9F%A6%81%20Welkom%20%E2%80%94%20we%20kijken%20ernaar%20uit%20u%20vanaf%202026-08-07%20te%20ontvangen%20bij%20African%20Sky%20Villas.%20Bekijk%20%26%20boek%20uw%20activiteiten%20hier%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DKaat%2520De%2520Tant%26phone%3D%252B32486361689%26arrival%3D2026-08-07%26ref%3D5298475145"}, {"ref": "5590123003", "first": "Lewis", "last": "Palmer", "phone": "+447903888446", "country": "gb", "arrival": "2026-08-09", "departure": "2026-08-14", "nights": "5", "unit": "Sky Villa, Remington Villa", "guests": "5", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Lewis%20Palmer&phone=%2B447903888446&arrival=2026-08-09&ref=5590123003", "wa": "https://wa.me/447903888446?text=Hi%20Lewis%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-08-09.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DLewis%2520Palmer%26phone%3D%252B447903888446%26arrival%3D2026-08-09%26ref%3D5590123003"}, {"ref": "5501791085", "first": "Alexandria", "last": "Moore", "phone": "+13368307929", "country": "us", "arrival": "2026-08-16", "departure": "2026-08-20", "nights": "4", "unit": "Remington Villa", "guests": "3", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Alexandria%20Moore&phone=%2B13368307929&arrival=2026-08-16&ref=5501791085", "wa": "https://wa.me/13368307929?text=Hi%20Alexandria%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-08-16.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DAlexandria%2520Moore%26phone%3D%252B13368307929%26arrival%3D2026-08-16%26ref%3D5501791085"}, {"ref": "5197224563", "first": "Vanessa", "last": "Sauvage", "phone": "+33695870343", "country": "fr", "arrival": "2026-08-19", "departure": "2026-08-21", "nights": "2", "unit": "Sky Villa", "guests": "4", "lang": "fr", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Vanessa%20Sauvage&phone=%2B33695870343&arrival=2026-08-19&ref=5197224563", "wa": "https://wa.me/33695870343?text=Bonjour%20Vanessa%20%21%20%F0%9F%A6%81%20Bienvenue%20%E2%80%94%20nous%20avons%20h%C3%A2te%20de%20vous%20accueillir%20%C3%A0%20African%20Sky%20Villas%20%C3%A0%20partir%20du%202026-08-19.%20R%C3%A9servez%20vos%20activit%C3%A9s%20ici%20%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DVanessa%2520Sauvage%26phone%3D%252B33695870343%26arrival%3D2026-08-19%26ref%3D5197224563"}, {"ref": "6001350745", "first": "Stefanie", "last": "Luise Achtziger-Vollmert", "phone": "+491772919121", "country": "de", "arrival": "2026-08-22", "departure": "2026-08-25", "nights": "3", "unit": "Sky Villa", "guests": "4", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Stefanie%20Luise%20Achtziger-Vollmert&phone=%2B491772919121&arrival=2026-08-22&ref=6001350745", "wa": "https://wa.me/491772919121?text=Hallo%20Stefanie%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-08-22.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DStefanie%2520Luise%2520Achtziger-Vollmert%26phone%3D%252B491772919121%26arrival%3D2026-08-22%26ref%3D6001350745"}, {"ref": "6886986987", "first": "Elke", "last": "Huber", "phone": "+491742063336", "country": "de", "arrival": "2026-08-27", "departure": "2026-08-30", "nights": "3", "unit": "Remington Villa", "guests": "3", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Elke%20Huber&phone=%2B491742063336&arrival=2026-08-27&ref=6886986987", "wa": "https://wa.me/491742063336?text=Hallo%20Elke%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-08-27.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DElke%2520Huber%26phone%3D%252B491742063336%26arrival%3D2026-08-27%26ref%3D6886986987"}, {"ref": "6553269803", "first": "Christian", "last": "Hartmann", "phone": "+4917664992100", "country": "de", "arrival": "2026-08-29", "departure": "2026-08-31", "nights": "2", "unit": "Sky Villa", "guests": "4", "lang": "de", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Christian%20Hartmann&phone=%2B4917664992100&arrival=2026-08-29&ref=6553269803", "wa": "https://wa.me/4917664992100?text=Hallo%20Christian%21%20%F0%9F%A6%81%20Willkommen%20%E2%80%94%20wir%20freuen%20uns%20auf%20Ihren%20Aufenthalt%20ab%202026-08-29.%20Aktivit%C3%A4ten%20hier%20ansehen%20%26%20buchen%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DChristian%2520Hartmann%26phone%3D%252B4917664992100%26arrival%3D2026-08-29%26ref%3D6553269803"}, {"ref": "5759953718", "first": "Lisa", "last": "Buttigieg", "phone": "+61425365947", "country": "au", "arrival": "2026-08-31", "departure": "2026-09-12", "nights": "12", "unit": "Remington Villa", "guests": "3", "lang": "en", "status": "to-message", "flag": "valid", "url": "https://african-skyvillas-activities.netlify.app/?name=Lisa%20Buttigieg&phone=%2B61425365947&arrival=2026-08-31&ref=5759953718", "wa": "https://wa.me/61425365947?text=Hi%20Lisa%21%20%F0%9F%A6%81%20Welcome%20%E2%80%94%20we%27re%20looking%20forward%20to%20hosting%20you%20at%20African%20Sky%20Villas%20from%202026-08-31.%20While%20you%27re%20here%2C%20you%20can%20book%20unforgettable%20safaris%2C%20river%20cruises%20and%20day%20tours.%20Browse%20%26%20book%20your%20activities%20here%20%28your%20details%20are%20already%20filled%20in%29%3A%20https%3A//african-skyvillas-activities.netlify.app/%3Fname%3DLisa%2520Buttigieg%26phone%3D%252B61425365947%26arrival%3D2026-08-31%26ref%3D5759953718"}];
+const ACTIVITIES = {"CF Moto Sunset Drive": 500, "Thermal Night Drive": 750, "Komati Sunset Cruise": 995, "Komati Tiger Fishing — Half Day": 1150, "Komati Tiger Fishing — Full Day": 1450, "Airport Transfer": 1700, "Kruger Sunrise Safari": 1775, "Kruger Full-Day Safari": 1875, "Chimp Eden & Caves": 2500, "Eswatini Cultural Day": 2750, "Bush Braai Experience": 2795, "Hlane Royal Safari": 2950, "Panorama Day Tour": 3000, "Maputo Day Tour": 3050};
+</script>
+<script>
+/* ============ STATE ============ */
+let guests = [];
+let waSent = {};
+try { waSent = JSON.parse(localStorage.getItem('asv_wasent')||'{}'); } catch(e){}
+let storedGuests = null;
+try { storedGuests = JSON.parse(localStorage.getItem('asv_guests')||'null'); } catch(e){}
+guests = storedGuests || SEED_GUESTS.slice();
+function saveGuests(){ try{localStorage.setItem('asv_guests',JSON.stringify(guests));}catch(e){} }
+function saveWA(){ try{localStorage.setItem('asv_wasent',JSON.stringify(waSent));}catch(e){} }
+
+const FEE_RATE = 0.035;
+function fmtR(n){ return 'R'+Math.round(n).toLocaleString('en-ZA'); }
+function fullName(g){ return (g.first+' '+g.last).trim(); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
+/* ============ NAV ============ */
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+/* ============ DASHBOARD ============ */
+function renderDash(){
+  const real = guests.filter(g=>g.status!=='test');
+  const total = real.length;
+  const toMsg = real.filter(g=>!waSent[g.ref]).length;
+  const sent = real.filter(g=>waSent[g.ref]).length;
+  const flagged = real.filter(g=>g.flag&&g.flag.indexOf('REVIEW')>-1).length;
+  const totalGuests = real.reduce((s,g)=>s+(parseInt(g.guests)||0),0);
+  const villas = new Set(real.map(g=>g.unit)).size;
+  document.getElementById('dashStats').innerHTML =
+    stat('Upcoming Arrivals',total,'June–Sep 2026')+
+    stat('To Message',toMsg,toMsg?'tap to send':'all done')+
+    stat('Messaged',sent,'')+
+    stat('Total Guests',totalGuests,'across all bookings')+
+    stat('Flagged',flagged,flagged?'need review':'all clear');
+
+  // alerts
+  let a='';
+  const renate = real.find(g=>g.flag&&g.flag.indexOf('REVIEW')>-1);
+  if(renate) a+=alert('danger','⚠','<b>'+fullName(renate)+'</b> — phone unverified ('+renate.phone+'). Confirm before messaging.');
+  const cat = real.filter(g=>g.last.toUpperCase()==='CATTEAU');
+  if(cat.length>1) a+=alert('warn','⚑','The two <b>CATTEAU</b> bookings share a phone number — verify before messaging both.');
+  if(toMsg>0) a+=alert('info','✉','<b>'+toMsg+' guests</b> still to message. Head to the WhatsApp tab to send their welcome links.');
+  if(!a) a=alert('info','✓','All caught up — nothing needs attention right now.');
+  document.getElementById('dashAlerts').innerHTML=a;
+
+  // next 5
+  const next = real.slice().sort((x,y)=>x.arrival<y.arrival?-1:1).slice(0,5);
+  document.getElementById('dashNext').innerHTML = next.map(g=>{
+    const d=new Date(g.arrival+'T00:00:00');
+    return '<div class="cal-row"><div class="cal-date"><span class="d">'+d.getDate()+'</span>'+d.toLocaleString('en',{month:'short'})+'</div>'+
+      '<div class="cal-info"><b>'+fullName(g)+'</b><div class="meta">'+g.unit+' · '+g.guests+' guests · '+g.nights+' nights</div></div>'+
+      '<div>'+(waSent[g.ref]?'<span class="badge badge-sent">Messaged</span>':'<span class="badge badge-tomsg">To message</span>')+'</div></div>';
+  }).join('');
+}
+function stat(l,v,s){ return '<div class="stat"><div class="stat-label">'+l+'</div><div class="stat-val">'+v+'</div>'+(s?'<div class="stat-sub">'+s+'</div>':'')+'</div>'; }
+function alert(type,ico,msg){ return '<div class="alert alert-'+type+'"><span class="ico">'+ico+'</span><span>'+msg+'</span></div>'; }
+
+/* ============ ARRIVALS ============ */
+function renderArrivals(){
+  const q=(document.getElementById('arrSearch').value||'').toLowerCase();
+  const rows=guests.filter(g=>g.status!=='test').filter(g=>{
+    if(!q)return true;
+    return (fullName(g)+' '+g.unit+' '+g.country).toLowerCase().indexOf(q)>-1;
+  }).sort((x,y)=>x.arrival<y.arrival?-1:1);
+  document.getElementById('arrBody').innerHTML = rows.map(g=>{
+    const flagBadge = g.flag&&g.flag.indexOf('REVIEW')>-1?'<span class="badge badge-warn">review</span>':'';
+    const st = waSent[g.ref]?'<span class="badge badge-sent">Messaged</span>':'<span class="badge badge-tomsg">To message</span>';
+    return '<tr><td class="field-mono">'+g.arrival+'</td><td><b>'+fullName(g)+'</b><br><span class="muted" style="font-size:11px">'+g.country.toUpperCase()+' · '+g.lang+'</span></td>'+
+      '<td>'+g.unit+'</td><td>'+g.guests+'</td><td class="field-mono">'+g.phone+' '+flagBadge+'</td><td>'+st+'</td>'+
+      '<td><a class="btn btn-wa btn-sm" href="'+g.wa+'" target="_blank" onclick="markSent(\''+g.ref+'\')">WhatsApp</a></td></tr>';
+  }).join('') || '<tr><td colspan="7" class="muted" style="text-align:center;padding:30px">No matching guests.</td></tr>';
+}
+
+/* ============ WHATSAPP ============ */
+function renderWA(){
+  const rows=guests.filter(g=>g.status!=='test').sort((x,y)=>x.arrival<y.arrival?-1:1);
+  document.getElementById('waList').innerHTML = rows.map(g=>{
+    const sent=waSent[g.ref];
+    const warn=g.flag&&g.flag.indexOf('REVIEW')>-1;
+    return '<div class="panel" style="padding:16px 18px;'+(sent?'opacity:0.6':'')+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">'+
+      '<div><b style="font-family:Fraunces,serif;font-size:16px">'+fullName(g)+'</b> '+(warn?'<span class="badge badge-warn">verify phone</span>':'')+
+      '<div class="muted" style="font-size:12px;margin-top:3px">'+g.arrival+' · '+g.unit+' · '+g.guests+' guests · '+g.lang.toUpperCase()+' · '+g.phone+'</div></div>'+
+      '<div class="btn-row">'+
+      '<a class="btn btn-wa btn-sm" href="'+g.wa+'" target="_blank" onclick="markSent(\''+g.ref+'\')">Open WhatsApp</a>'+
+      (sent?'<button class="btn btn-outline btn-sm" onclick="unmarkSent(\''+g.ref+'\')">Sent ✓</button>':'<button class="btn btn-outline btn-sm" onclick="markSent(\''+g.ref+'\')">Mark sent</button>')+
+      '<a class="btn btn-outline btn-sm" href="'+g.url+'" target="_blank">Preview link</a>'+
+      '</div></div></div>';
+  }).join('');
+}
+function markSent(ref){ waSent[ref]=true; saveWA(); renderWA(); renderArrivals(); renderDash(); }
+function unmarkSent(ref){ delete waSent[ref]; saveWA(); renderWA(); renderArrivals(); renderDash(); toast('Marked unsent'); }
+
+/* ============ INVOICES ============ */
+let invLines=[];
+function initInv(){
+  const gsel=document.getElementById('invGuest');
+  gsel.innerHTML='<option value="">— choose guest —</option>'+guests.map((g,i)=>'<option value="'+i+'">'+fullName(g)+' ('+g.arrival+')</option>').join('');
+  const asel=document.getElementById('invAct');
+  asel.innerHTML=Object.keys(ACTIVITIES).map(n=>'<option value="'+n+'">'+n+' — '+fmtR(ACTIVITIES[n])+'</option>').join('');
+}
+function invPrefill(){
+  const i=document.getElementById('invGuest').value;
+  if(i==='')return;
+  const g=guests[i];
+  document.getElementById('invRef').value=g.ref;
+  document.getElementById('invQty').value=g.guests;
+}
+function invAdd(){
+  const name=document.getElementById('invAct').value;
+  const qty=parseInt(document.getElementById('invQty').value)||1;
+  invLines.push({name:name,rate:ACTIVITIES[name],qty:qty});
+  renderInv();
+}
+function invDel(i){ invLines.splice(i,1); renderInv(); }
+function renderInv(){
+  if(!invLines.length){ document.getElementById('invLines').innerHTML='<p class="muted" style="font-size:13px">No activities added yet.</p>'; document.getElementById('invSummary').innerHTML=''; return; }
+  document.getElementById('invLines').innerHTML=invLines.map((l,i)=>
+    '<div class="inv-line"><span>'+l.name+' <span class="muted">× '+l.qty+'</span></span><span class="field-mono">'+fmtR(l.rate*l.qty)+' <button class="btn btn-outline btn-sm" style="margin-left:8px" onclick="invDel('+i+')">×</button></span></div>'
+  ).join('');
+  const sub=invLines.reduce((s,l)=>s+l.rate*l.qty,0);
+  const fee=Math.round(sub*FEE_RATE);
+  const tot=sub+fee;
+  document.getElementById('invSummary').innerHTML=
+    '<div class="inv-line"><span>Subtotal</span><span class="field-mono">'+fmtR(sub)+'</span></div>'+
+    '<div class="inv-line"><span>Transaction fee (3.5%)</span><span class="field-mono">'+fmtR(fee)+'</span></div>'+
+    '<div class="inv-total"><span>Total due</span><span>'+fmtR(tot)+'</span></div>'+
+    '<div class="alert alert-info" style="margin-top:16px"><span class="ico">→</span><span>Now create this in <b>Zoho Books</b> (org_id 888790812, no VAT) as a draft, then generate the <b>iKhokha</b> pay link for '+fmtR(tot)+' and send both to the guest.</span></div>';
+}
+
+/* ============ CALENDAR ============ */
+function renderCal(){
+  const rows=guests.filter(g=>g.status!=='test').sort((x,y)=>x.arrival<y.arrival?-1:1);
+  const months={};
+  rows.forEach(g=>{ const m=g.arrival.slice(0,7); (months[m]=months[m]||[]).push(g); });
+  document.getElementById('calBody').innerHTML=Object.keys(months).sort().map(m=>{
+    const d=new Date(m+'-01T00:00:00');
+    const label=d.toLocaleString('en',{month:'long',year:'numeric'});
+    return '<div class="cal-month"><h3>'+label+' · '+months[m].length+' arrivals</h3>'+months[m].map(g=>{
+      const dd=new Date(g.arrival+'T00:00:00');
+      return '<div class="cal-row"><div class="cal-date"><span class="d">'+dd.getDate()+'</span>'+dd.toLocaleString('en',{weekday:'short'})+'</div>'+
+        '<div class="cal-info"><b>'+fullName(g)+'</b><div class="meta">'+g.unit+' · '+g.guests+' guests · '+g.nights+' nights · until '+g.departure+'</div></div>'+
+        '<div>'+(waSent[g.ref]?'<span class="badge badge-sent">Messaged</span>':'<span class="badge badge-tomsg">To message</span>')+'</div></div>';
+    }).join('')+'</div>';
+  }).join('');
+}
+
+/* ============ GUIDE ============ */
+function renderGuide(){
+  const steps=[
+    ['Booking.com reservation','A guest books a villa via Booking.com.'],
+    ['Send their activity link','Tap the guest\'s WhatsApp button — opens with their personalised link pre-written.'],
+    ['Guest books activities','They pick tours on the site; their details are pre-filled.'],
+    ['Booking reaches you','Arrives in your WhatsApp + reservations email with all details and the ref.'],
+    ['Create the invoice','Ask Claude (in chat) to invoice it — Zoho draft with the tour + 3.5% fee.'],
+    ['Make the iKhokha pay link','In the iKhokha app, create a pay link for the invoice total (~30 sec).'],
+    ['Send to guest','Send the invoice + pay link together.'],
+    ['Record payment','When iKhokha shows payment, mark the Zoho invoice paid.']
+  ];
+  document.getElementById('guideSteps').innerHTML=steps.map((s,i)=>
+    '<div class="step"><div class="step-num">'+(i+1)+'</div><div class="step-body"><b>'+s[0]+'</b><p>'+s[1]+'</p></div></div>').join('');
+  const kv=[['Live site','african-skyvillas-activities.netlify.app'],['GitHub repo','dreyer10-crypto/african-sky-villas'],['Zoho Books org','African Sky (Pty) Ltd'],['Zoho org_id','888790812'],['Business WhatsApp','+27 76 209 5334'],['Reservations email','reservations@africanskyvillas.com'],['VAT','Not registered — no VAT'],['Transaction fee','3.5% — separate line item']];
+  document.getElementById('guideKV').innerHTML=kv.map(k=>'<div class="kv"><span>'+k[0]+'</span><span>'+k[1]+'</span></div>').join('');
+  document.getElementById('guidePrices').innerHTML=Object.keys(ACTIVITIES).sort((a,b)=>ACTIVITIES[a]-ACTIVITIES[b]).map(n=>
+    '<div class="kv"><span>'+n+'</span><span>'+fmtR(ACTIVITIES[n])+'</span></div>').join('');
+}
+
+/* ============ INIT ============ */
+renderDash(); renderArrivals(); renderWA(); initInv(); renderInv(); renderCal(); renderGuide();
+</script>
+</body>
+</html>
