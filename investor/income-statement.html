@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>African Sky — Monthly Segmented Income Statement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--paper:#f6f1e7;--paper2:#efe8d8;--ink:#23201a;--muted:#6f6857;--faint:#8a826e;
+--line:#ddd3bf;--bush:#2c4031;--coast:#33586b;--brass:#b0832f;--pos:#2f6b46;--neg:#9c3a2a;--zero:#b8b09a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+header{padding:54px 0 22px}
+.status{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);
+border:1px solid var(--line);background:#fff8;padding:7px 13px;border-radius:999px;display:inline-block}
+h1{font-size:clamp(30px,5vw,46px);margin:18px 0 8px}
+.sub{color:var(--muted);max-width:640px}
+.ent{margin-top:10px;font-size:12.5px;color:var(--faint)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:30px 0}
+.kpi{background:#fff7;border:1px solid var(--line);border-radius:14px;padding:17px}
+.kpi .l{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.kpi .v{font-family:'Fraunces';font-size:25px;margin-top:6px}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:3px}
+.pos{color:var(--pos)}.neg{color:var(--neg)}.zero{color:var(--zero)}
+.basis{background:var(--paper2);border:1px solid var(--line);border-left:3px solid var(--brass);
+border-radius:10px;padding:15px 18px;font-size:13px;color:#4a4536;margin:8px 0 26px}
+.basis b{color:var(--ink)}
+.card{background:#fff8;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 36px -26px rgba(60,48,20,.5)}
+.chart{position:relative;height:300px;margin-bottom:26px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px;font-variant-numeric:tabular-nums}
+caption{caption-side:top;text-align:left;font-family:'Fraunces';font-size:19px;padding:4px 0 14px}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+td.mn,th.mn{text-align:left}
+thead th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);font-weight:600;border-bottom:1.5px solid #cdc3ab}
+.grphead th{font-family:'Fraunces';font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;
+border-bottom:none;padding-bottom:2px}
+.grphead .gm{color:var(--bush)} .grphead .gb{color:var(--coast)}
+td.b{font-weight:600} td.bb2{font-weight:700;border-left:1px solid var(--line)}
+th.sepL,td.sepL{border-left:1px solid var(--line)}
+tbody tr:hover{background:#fffdf6}
+tr.tot td{border-top:2px solid #cdc3ab;border-bottom:none;font-weight:600;padding-top:12px}
+.note{font-size:12px;color:var(--faint);margin-top:16px;line-height:1.6}
+footer{margin:34px 0 60px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint)}
+@media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div style="background:#1c241d;border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter Tight',system-ui,sans-serif"><div style="max-width:1080px;margin:0 auto;padding:8px 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="color:#e7c98b;font-weight:700;font-size:13px;letter-spacing:.02em">African Sky</span><span style="color:#7e8a7c;font-size:11.5px;margin-right:2px">Portfolio documents</span><a href="index.html" style="color:#d8d2c4;text-decoration:none;font-size:12.5px;padding:5px 11px;border-radius:7px">Portfolio Overview</a><a href="income-statement.html" style="color:#1a1206;background:linear-gradient(135deg,#d4af6e,#e7c98b);font-weight:600;text-decoration:none;font-size:12.5px;padding:5px 11px;border-radius:7px">Income Statement</a><a href="financial-report.html" style="color:#d8d2c4;text-decoration:none;font-size:12.5px;padding:5px 11px;border-radius:7px">Financial Report</a><a href="financial-report.pdf" target="_blank" style="color:#d8d2c4;text-decoration:none;font-size:12.5px;padding:5px 11px;border-radius:7px">PDF ↓</a></div></div>
+<header><div class="wrap">
+<span class="status">Management accounts · Indicative &amp; unaudited · Private &amp; confidential</span>
+<h1>Monthly Segmented Income Statement</h1>
+<p class="sub">Operating cash result by property for the period Sep 25 – Jun 26, reconstructed from the bank record and segmented Marloth Park / Big Bay.</p>
+<div class="ent">African Sky (Pty) Ltd · Reg 2025/571527/07 · ZAR · not VAT-registered</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Portfolio net result</div><div class="v mono pos">R176 874</div><div class="s">Revenue R1 333 723 − costs R1 156 850</div></div>
+<div class="kpi"><div class="l">Marloth lodge — net</div><div class="v mono pos">R113 003</div><div class="s">incl. allocated shared costs</div></div>
+<div class="kpi"><div class="l">Big Bay — net</div><div class="v mono pos">R63 871</div><div class="s">passive long-term rental</div></div>
+<div class="kpi"><div class="l">Total revenue</div><div class="v mono">R1 333 723</div><div class="s">10 months of receipts</div></div>
+</div></div></header>
+<div class="wrap">
+<div class="basis"><b>Allocation basis.</b> Figures are operating cash movements (excludes inter-account transfers). Income = customer receipts; expenses = operating payments. Each transaction is tagged Marloth / Big Bay / Shared. Big Bay is treated as a <b>passive</b> long-term rental, so 100% of shared / unallocated costs (R622,169 over the period) and other receipts (R109,874) are allocated to the operating Marloth lodge — per the model's Control allocation key. Partial months: Sep 2025 (from 19th) and Jun 2026 (to 19th).</div>
+
+<div class="card">
+<div class="chart"><canvas id="c"></canvas></div>
+<div class="tbl"><table>
+<caption>Net operating result by property, by month</caption>
+<thead>
+<tr class="grphead"><th class="mn"></th><th colspan="3" class="gm sepL">Marloth Park lodge</th><th colspan="3" class="gb sepL">Big Bay</th><th></th></tr>
+<tr><th class="mn">Month</th><th class="sepL">Revenue</th><th>Expenses</th><th>Net</th><th class="sepL">Revenue</th><th>Expenses</th><th>Net</th><th>Total net</th></tr>
+</thead>
+<tbody>
+<tr>
+<td class="mn">Sep 2025</td>
+<td>–</td><td>R1 729</td><td class="neg b">(R1 729)</td>
+<td>–</td><td>–</td><td class="zero b">–</td>
+<td class="neg bb2">(R1 729)</td></tr>
+<tr>
+<td class="mn">Oct 2025</td>
+<td>R101 558</td><td>R45 760</td><td class="pos b">R55 798</td>
+<td>–</td><td>–</td><td class="zero b">–</td>
+<td class="pos bb2">R55 798</td></tr>
+<tr>
+<td class="mn">Nov 2025</td>
+<td>R121 079</td><td>R182 680</td><td class="neg b">(R61 601)</td>
+<td>–</td><td>–</td><td class="zero b">–</td>
+<td class="neg bb2">(R61 601)</td></tr>
+<tr>
+<td class="mn">Dec 2025</td>
+<td>R24 380</td><td>R35 539</td><td class="neg b">(R11 159)</td>
+<td>–</td><td>–</td><td class="zero b">–</td>
+<td class="neg bb2">(R11 159)</td></tr>
+<tr>
+<td class="mn">Jan 2026</td>
+<td>R236 319</td><td>R210 355</td><td class="pos b">R25 964</td>
+<td>–</td><td>R16 822</td><td class="neg b">(R16 822)</td>
+<td class="pos bb2">R9 142</td></tr>
+<tr>
+<td class="mn">Feb 2026</td>
+<td>R219 266</td><td>R180 215</td><td class="pos b">R39 051</td>
+<td>–</td><td>R1 442</td><td class="neg b">(R1 442)</td>
+<td class="pos bb2">R37 609</td></tr>
+<tr>
+<td class="mn">Mar 2026</td>
+<td>R101 608</td><td>R89 501</td><td class="pos b">R12 108</td>
+<td>R42 545</td><td>–</td><td class="pos b">R42 545</td>
+<td class="pos bb2">R54 653</td></tr>
+<tr>
+<td class="mn">Apr 2026</td>
+<td>R208 187</td><td>R140 736</td><td class="pos b">R67 451</td>
+<td>R24 373</td><td>R9 156</td><td class="pos b">R15 217</td>
+<td class="pos bb2">R82 668</td></tr>
+<tr>
+<td class="mn">May 2026</td>
+<td>R161 923</td><td>R183 341</td><td class="neg b">(R21 418)</td>
+<td>R24 373</td><td>–</td><td class="pos b">R24 373</td>
+<td class="pos bb2">R2 955</td></tr>
+<tr>
+<td class="mn">Jun 2026</td>
+<td>R68 112</td><td>R59 574</td><td class="pos b">R8 538</td>
+<td>–</td><td>–</td><td class="zero b">–</td>
+<td class="pos bb2">R8 538</td></tr>
+</tbody>
+<tfoot><tr class="tot">
+<td class="mn">Total · Sep 25–Jun 26</td>
+<td>R1 242 432</td><td>R1 129 430</td><td class="pos b">R113 003</td>
+<td>R91 291</td><td>R27 420</td><td class="pos b">R63 871</td>
+<td class="pos bb2">R176 874</td></tr></tfoot>
+</table></div>
+<p class="note">Marloth expenses include the lodge's direct costs plus all shared overheads (staff, groceries, safari operators, utilities, fuel, subscriptions). Big Bay shows direct rent received via Seaside Village less direct property costs only. Net result reconciles to the portfolio cash movement of R176 874. Source: bank-notification analysis (Account_Activity), 947 transactions.</p>
+</div>
+
+<footer><b>Notice.</b> Unaudited management information for internal use; not an offer, solicitation, or audited financial statement, and not financial, tax or legal advice. Figures are cash-basis and subject to verification, including a pending VAT-registration review (revenue &gt; R1m). © 2026 African Sky (Pty) Ltd.</footer>
+</div>
+<script>
+const gc=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+new Chart(document.getElementById('c'),{type:'bar',data:{labels:["Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26", "Jun 26"],datasets:[
+{label:'Marloth lodge',data:[-1729, 55798, -61601, -11159, 25964, 39051, 12108, 67451, -21418, 8538],backgroundColor:gc('--bush'),borderRadius:4,stack:'s'},
+{label:'Big Bay',data:[0, 0, 0, 0, -16822, -1442, 42545, 15217, 24373, 0],backgroundColor:gc('--coast'),borderRadius:4,stack:'s'}]},
+options:{responsive:true,maintainAspectRatio:false,
+plugins:{legend:{position:'top',labels:{color:gc('--ink'),font:{family:'Inter Tight'},boxWidth:12}},
+title:{display:true,text:'Net operating result by property (R)',color:gc('--muted'),font:{family:'Fraunces',size:14}},
+tooltip:{callbacks:{label:c=>c.dataset.label+': R'+c.parsed.y.toLocaleString('en-ZA')}}},
+scales:{x:{grid:{display:false},ticks:{color:gc('--muted')}},
+y:{grid:{color:gc('--line')},ticks:{color:gc('--muted'),callback:v=>'R'+(v/1000)+'k'}}}}});
+</script></body></html>
