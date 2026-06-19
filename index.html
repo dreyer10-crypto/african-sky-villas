@@ -300,10 +300,16 @@ section { padding: 7rem 2.5rem; position: relative; }
 .activity-rows { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.85rem; }
 .activity-row {
   display: grid;
-  grid-template-columns: 1fr 140px 75px 32px;
-  gap: 0.55rem; align-items: stretch;
+  grid-template-columns: 1fr 150px 104px 34px;
+  gap: 0.55rem; align-items: end;
   padding: 0.7rem; border: 1px dashed var(--line);
   border-radius: 8px; background: rgba(196, 77, 44, 0.025);
+}
+.activity-row .row-field { display: flex; flex-direction: column; gap: 0.28rem; min-width: 0; width: 100%; }
+.activity-row .row-field input { width: 100%; }
+.activity-row .row-field-label {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--taupe); line-height: 1.15;
 }
 .activity-row select, .activity-row input {
   font-family: inherit; font-size: 0.88rem; padding: 0.6rem 0.7rem;
@@ -432,6 +438,58 @@ footer a:hover { color: var(--bone); }
   nav.topnav .brand { font-size: 0.95rem; }
   nav.topnav ul { gap: 0.45rem; }
   .nav-cta { padding: 0.45rem 0.8rem; font-size: 0.72rem; }
+}
+</style>
+<style>
+@media (max-width: 768px) {
+  nav.topnav, header nav, .topnav {
+    padding: 0.6rem 1rem !important;
+    background: rgba(251, 246, 238, 0.95) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid var(--line-soft) !important;
+    z-index: 1000 !important;
+    display: flex !important; align-items: center !important;
+    justify-content: space-between !important; gap: 8px !important;
+  }
+  nav .logo, nav .wordmark, nav a:first-child, header .logo,
+  nav.topnav .brand {
+    display: flex !important; align-items: center !important; gap: 8px !important;
+    white-space: nowrap !important; font-size: 14.5px !important;
+    color: var(--espresso) !important;
+    flex: 0 1 auto !important; min-width: 0 !important; overflow: visible !important;
+  }
+  /* Show the full "African Sky Villas" wordmark, all in the same dark colour */
+  nav.topnav .brand span { display: inline !important; color: var(--espresso) !important; }
+  nav img, header img, .topnav img {
+    width: 28px !important; height: 28px !important;
+    flex-shrink: 0 !important; object-fit: cover !important;
+  }
+  nav.topnav ul { flex: 0 0 auto !important; gap: 0.5rem !important; }
+  nav .book-cta, nav .book-now, nav a[href*="book" i], nav a.cta {
+    background: #1F1410 !important; color: #FBF6EE !important;
+    padding: 8px 14px !important; font-size: 12px !important;
+    font-weight: 600 !important; border-radius: 999px !important;
+    white-space: nowrap !important; flex-shrink: 0 !important;
+    border: 1px solid rgba(0,0,0,0.10) !important;
+  }
+  /* Language selector stays dark + visible on the light bar */
+  nav.topnav .lang-trigger { color: var(--espresso) !important; border-color: var(--line) !important; }
+  /* Hero: target ONLY the hero element itself (not its decorative children),
+     anchor content to the top so there's no empty gap under the fixed nav. */
+  header.hero, section.hero {
+    min-height: auto !important;
+    justify-content: flex-start !important;
+    padding: 6.25rem 1.5rem 3.5rem !important;
+  }
+  /* Keep grain / silhouette / logo as absolutely-positioned décor (never in flow) */
+  .hero-grain, .hero-silhouette, .hero-logo-bg { position: absolute !important; }
+  .hero-content { padding-top: 0 !important; }
+  /* Language dropdown must sit above everything and stay on-screen */
+  .lang-menu {
+    z-index: 1200 !important; right: 0 !important; left: auto !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
 }
 </style>
 </head>
@@ -646,7 +704,37 @@ footer a:hover { color: var(--bone); }
 // COOKIE CONSENT + GA LOADER
 // ============================
 const GA_ID = 'G-VM28F24DH4';
-const BOOKING_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwdiCOjD3RVkLuTUVEGC3nHd1UYZeUnq_0bFlcc9Q5ckl8F5T3YXZ6psF_p0F5W_ZbV/exec';
+
+// ============================
+// Server-side booking record (Google Sheets via Apps Script web app)
+// 1. Deploy the script in google-apps-script/Code.gs (see SETUP.md)
+// 2. Paste the resulting "/exec" Web App URL below, replacing the placeholder.
+// Until a real URL is pasted, capture is skipped silently and the form still works.
+// (Previous unused endpoint kept here for reference: AKfycbwdiCOjD3RVkLuTUVEGC3nHd1UYZeUnq_0bFlcc9Q5ckl8F5T3YXZ6psF_p0F5W_ZbV)
+// ============================
+const SHEETS_ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+// Fire-and-forget write to Google Sheets. Uses sendBeacon so the record is
+// delivered even though the page navigates to the mailto: link straight after.
+// Never throws — booking handoff must continue regardless.
+function recordToSheet(payload) {
+  try {
+    if (!SHEETS_ENDPOINT || SHEETS_ENDPOINT.indexOf('PASTE_') === 0) return;
+    const body = JSON.stringify(Object.assign({
+      timestamp: new Date().toISOString(),
+      source: 'booking_form',
+      page: location.href
+    }, payload));
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(SHEETS_ENDPOINT, new Blob([body], { type: 'text/plain;charset=UTF-8' }));
+    } else {
+      fetch(SHEETS_ENDPOINT, {
+        method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: body
+      }).catch(function () {});
+    }
+  } catch (e) { /* never block the booking */ }
+}
 
 function consentGranted() {
   try { return localStorage.getItem('asv_cookie_consent') === 'granted'; }
@@ -1071,31 +1159,31 @@ const translations = {
 // ============================
 const activities = [
   {
-    id: "6461940000001200002", category: "safari", duration: "4:30am – 3pm", price: 1875, img: "images/kruger-elephant.jpg", pdf: "pdfs/kruger-safaris.pdf",
+    id: "6461940000001200002", category: "safari", duration: "4:30am – 3pm", price: 1500, img: "images/kruger-elephant.jpg", pdf: "pdfs/kruger-safaris.pdf",
     name: { en: "Full-Day Kruger Safari", nl: "Hele dag Kruger Safari", fr: "Safari Kruger journée complète", de: "Ganztags-Kruger-Safari", pt: "Safári Kruger dia inteiro", es: "Safari Kruger día completo" },
     tag: { en: "Full Day", nl: "Hele dag", fr: "Journée", de: "Ganztags", pt: "Dia inteiro", es: "Día completo" },
     capacity: { en: "Max 9 guests", nl: "Max 9 gasten", fr: "Max 9 invités", de: "Max. 9 Gäste", pt: "Máx 9 hóspedes", es: "Máx 9 invitados" },
     desc: {
-      en: "Open-vehicle Big 5 game drive into Kruger National Park. Breakfast box included. Conservation fee included in rate.",
-      nl: "Big 5 safari in een open voertuig in Kruger National Park. Ontbijtbox inbegrepen. Conserveringskosten inclusief.",
-      fr: "Safari Big 5 en véhicule ouvert dans le parc national Kruger. Petit-déjeuner inclus. Frais de conservation inclus.",
-      de: "Big-5-Pirschfahrt im offenen Fahrzeug in den Kruger-Nationalpark. Frühstücksbox inklusive. Naturschutzgebühr im Preis enthalten.",
-      pt: "Safári Big 5 em veículo aberto no Parque Nacional Kruger. Pequeno-almoço incluído. Taxa de conservação incluída.",
-      es: "Safari Big 5 en vehículo abierto en el Parque Nacional Kruger. Desayuno incluido. Tarifa de conservación incluida."
+      en: "Open-vehicle Big 5 game drive into Kruger National Park. Breakfast box included. Excludes SANParks conservation fee, payable in cash or card at the Kruger gate on arrival — R602 per adult, R300 per child (2–11).",
+      nl: "Big 5 safari in een open voertuig in Kruger National Park. Ontbijtbox inbegrepen. Exclusief SANParks-natuurbehoudsheffing, te betalen in contanten of met kaart bij de Kruger-poort bij aankomst — R602 per volwassene, R300 per kind (2–11).",
+      fr: "Safari Big 5 en véhicule ouvert dans le parc national Kruger. Petit-déjeuner inclus. Hors frais de conservation SANParks, payables en espèces ou par carte à la porte du Kruger à l'arrivée — 602 R par adulte, 300 R par enfant (2–11 ans).",
+      de: "Big-5-Pirschfahrt im offenen Fahrzeug in den Kruger-Nationalpark. Frühstücksbox inklusive. Zzgl. SANParks-Naturschutzgebühr, bei Ankunft am Kruger-Tor in bar oder mit Karte zu zahlen — 602 R pro Erwachsenem, 300 R pro Kind (2–11).",
+      pt: "Safári Big 5 em veículo aberto no Parque Nacional Kruger. Pequeno-almoço incluído. Exclui a taxa de conservação SANParks, a pagar em dinheiro ou cartão no portão do Kruger à chegada — R602 por adulto, R300 por criança (2–11).",
+      es: "Safari Big 5 en vehículo abierto en el Parque Nacional Kruger. Desayuno incluido. No incluye la tarifa de conservación SANParks, pagadera en efectivo o con tarjeta en la puerta del Kruger a la llegada — R602 por adulto, R300 por niño (2–11)."
     }
   },
   {
-    id: "6461940000001201001", category: "safari", duration: "4am – 2pm", price: 1775, img: "images/kruger-giraffe.jpg", pdf: "pdfs/kruger-safaris.pdf",
+    id: "6461940000001201001", category: "safari", duration: "4am – 2pm", price: 1300, img: "images/kruger-giraffe.jpg", pdf: "pdfs/kruger-safaris.pdf",
     name: { en: "Half-Day Morning Safari", nl: "Halve dag ochtendsafari", fr: "Safari matinal demi-journée", de: "Halbtags-Morgensafari", pt: "Safári matinal meio dia", es: "Safari matinal medio día" },
     tag: { en: "Half Day", nl: "Halve dag", fr: "Demi-journée", de: "Halbtags", pt: "Meio dia", es: "Medio día" },
     capacity: { en: "Max 9 guests", nl: "Max 9 gasten", fr: "Max 9 invités", de: "Max. 9 Gäste", pt: "Máx 9 hóspedes", es: "Máx 9 invitados" },
     desc: {
-      en: "Open vehicle morning safari into the Kruger. Back at the villa before lunch. Breakfast box included.",
-      nl: "Ochtendsafari in een open voertuig in het Kruger. Terug bij de villa voor de lunch. Ontbijtbox inbegrepen.",
-      fr: "Safari matinal en véhicule ouvert dans le Kruger. Retour à la villa avant le déjeuner. Petit-déjeuner inclus.",
-      de: "Morgensafari im offenen Fahrzeug im Kruger. Vor dem Mittagessen zurück in der Villa. Frühstücksbox inklusive.",
-      pt: "Safári matinal em veículo aberto no Kruger. De volta à villa antes do almoço. Pequeno-almoço incluído.",
-      es: "Safari matinal en vehículo abierto en el Kruger. De vuelta en la villa antes del almuerzo. Desayuno incluido."
+      en: "Open vehicle morning safari into the Kruger. Back at the villa before lunch. Breakfast box included. Excludes SANParks conservation fee, payable in cash or card at the Kruger gate on arrival — R602 per adult, R300 per child (2–11).",
+      nl: "Ochtendsafari in een open voertuig in het Kruger. Terug bij de villa voor de lunch. Ontbijtbox inbegrepen. Exclusief SANParks-natuurbehoudsheffing, te betalen in contanten of met kaart bij de Kruger-poort bij aankomst — R602 per volwassene, R300 per kind (2–11).",
+      fr: "Safari matinal en véhicule ouvert dans le Kruger. Retour à la villa avant le déjeuner. Petit-déjeuner inclus. Hors frais de conservation SANParks, payables en espèces ou par carte à la porte du Kruger à l'arrivée — 602 R par adulte, 300 R par enfant (2–11 ans).",
+      de: "Morgensafari im offenen Fahrzeug im Kruger. Vor dem Mittagessen zurück in der Villa. Frühstücksbox inklusive. Zzgl. SANParks-Naturschutzgebühr, bei Ankunft am Kruger-Tor in bar oder mit Karte zu zahlen — 602 R pro Erwachsenem, 300 R pro Kind (2–11).",
+      pt: "Safári matinal em veículo aberto no Kruger. De volta à villa antes do almoço. Pequeno-almoço incluído. Exclui a taxa de conservação SANParks, a pagar em dinheiro ou cartão no portão do Kruger à chegada — R602 por adulto, R300 por criança (2–11).",
+      es: "Safari matinal en vehículo abierto en el Kruger. De vuelta en la villa antes del almuerzo. Desayuno incluido. No incluye la tarifa de conservación SANParks, pagadera en efectivo o con tarjeta en la puerta del Kruger a la llegada — R602 por adulto, R300 por niño (2–11)."
     }
   },
   {
@@ -1169,7 +1257,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001206001", category: "day-tour", duration: "6:30am – 5pm", price: 3050, img: "images/lions.webp", pdf: "pdfs/maputo.pdf",
+    id: "6461940000001206001", category: "day-tour", duration: "6:30am – 5pm", price: 3050, img: "images/maputo.png", pdf: "pdfs/maputo.pdf",
     name: { en: "Maputo Day Tour", nl: "Maputo dagtocht", fr: "Excursion à Maputo", de: "Maputo-Tagestour", pt: "Excursão a Maputo", es: "Excursión a Maputo" },
     tag: { en: "Cross-Border", nl: "Grensoverschrijdend", fr: "Transfrontalier", de: "Grenzüberschreitend", pt: "Transfronteiriço", es: "Transfronterizo" },
     capacity: { en: "Passport + visa required", nl: "Paspoort + visum vereist", fr: "Passeport + visa requis", de: "Reisepass + Visum erforderlich", pt: "Passaporte + visto necessários", es: "Pasaporte + visado requeridos" },
@@ -1211,7 +1299,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001209001", category: "river", duration: "5 hrs · AM or PM", price: 1150, img: "images/tiger-fishing.jpg", pdf: "pdfs/komati-river.pdf",
+    id: "6461940000001209001", category: "river", duration: "5 hrs · AM or PM", price: 1150, img: "images/komati-pontoon.jpg", pdf: "pdfs/komati-river.pdf",
     name: { en: "Komati Tiger Fishing — Half Day", nl: "Komati Tigervissen — halve dag", fr: "Pêche au tigre Komati — demi-journée", de: "Komati Tigerfischen — Halbtags", pt: "Pesca ao tigre Komati — meio dia", es: "Pesca de tigre Komati — medio día" },
     tag: { en: "River", nl: "Rivier", fr: "Rivière", de: "Fluss", pt: "Rio", es: "Río" },
     capacity: { en: "Min 2, max 6 guests", nl: "Min 2, max 6 gasten", fr: "Min 2, max 6 invités", de: "Min. 2, max. 6 Gäste", pt: "Mín 2, máx 6 hóspedes", es: "Mín 2, máx 6 invitados" },
@@ -1353,8 +1441,14 @@ function addActivityRow(preselectedId) {
   row.dataset.row = String(idx);
   row.innerHTML = `
     <select class="row-activity" required>${buildActivityOptions(preselectedId)}</select>
-    <input type="date" class="row-date" min="${today}" required>
-    <input type="number" class="row-guests" min="1" max="20" value="2" required>
+    <label class="row-field">
+      <span class="row-field-label" data-field="date">${t('form.date')}</span>
+      <input type="date" class="row-date" min="${today}" required>
+    </label>
+    <label class="row-field">
+      <span class="row-field-label" data-field="guests">${t('form.guests')}</span>
+      <input type="number" class="row-guests" min="1" max="20" value="2" inputmode="numeric" required>
+    </label>
     <button type="button" class="row-remove" aria-label="${t('form.removeActivity')}" title="${t('form.removeActivity')}">×</button>
   `;
   activityRowsEl.appendChild(row);
@@ -1374,6 +1468,10 @@ function refreshAllRowOptions() {
   Array.from(activityRowsEl.querySelectorAll('.row-remove')).forEach(b => {
     b.setAttribute('aria-label', t('form.removeActivity'));
     b.setAttribute('title', t('form.removeActivity'));
+  });
+  Array.from(activityRowsEl.querySelectorAll('.row-field-label')).forEach(el => {
+    const k = el.dataset.field;
+    if (k) el.textContent = t('form.' + k);
   });
 }
 
@@ -1551,9 +1649,13 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
   submitBtn.textContent = t('form.submitting');
 
   try {
+    // === Server-side record FIRST (so the lead is saved even if the guest
+    // never completes the WhatsApp/email send) ===
+    recordToSheet(payload);
+
     // === WhatsApp + Email handoff — no backend, cannot fail ===
     const WA_NUMBER = '27762095334';
-    const EMAIL_TO = 'reservations@africanskyvillas.com';
+    const EMAIL_TO = 'welcome@africanskyvillas.com';
 
     const fullName = (payload.firstName + ' ' + payload.lastName).trim() || 'Guest';
 
