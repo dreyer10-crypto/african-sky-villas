@@ -209,16 +209,16 @@
     <div class="headline">
       <div class="cell big">
         <div class="k">Portfolio valuation (indicative)</div>
-        <div class="v" data-count="%%PORT_VAL_NUM%%" data-prefix="R" data-suffix="m" data-div="1000000">%%PORT_VAL%%<small>vs %%PORT_COST%% acquisition cost</small></div>
-        <span class="up">▲ +%%PORT_GAIN%% unrealised · +%%PORT_UPLIFT%%</span>
+        <div class="v" data-count="8000000" data-prefix="R" data-suffix="m" data-div="1000000">R8.0m<small>vs R5.0m acquisition cost</small></div>
+        <span class="up">▲ +R3.0m unrealised · +60%</span>
       </div>
       <div class="cell">
         <div class="k">Revenue (10 months)</div>
-        <div class="v" data-count="%%REV_NUM%%" data-prefix="R" data-div="1000" data-suffix="k">%%REV_TOTAL%%<small>reconciled to bank, to the cent</small></div>
+        <div class="v" data-count="1333723" data-prefix="R" data-div="1000" data-suffix="k">R1.3m<small>reconciled to bank, to the cent</small></div>
       </div>
       <div class="cell">
         <div class="k">Net operating result</div>
-        <div class="v">%%NET_RESULT%%<small>%%PERIOD%%</small></div>
+        <div class="v">R177k<small>Sep 2025 – Jun 2026</small></div>
       </div>
     </div>
   </div>
@@ -226,9 +226,9 @@
 
 <section id="snapshot"><div class="wrap">
   <div class="kpis">
-    <div class="k"><div class="lbl">Acquisition cost</div><div class="num">%%PORT_COST%%</div></div>
-    <div class="k"><div class="lbl">Indicative value</div><div class="num">%%PORT_VAL%% <small>+%%PORT_UPLIFT%%</small></div></div>
-    <div class="k"><div class="lbl">Blended ADR</div><div class="num">%%ADR%% <small>/ night</small></div></div>
+    <div class="k"><div class="lbl">Acquisition cost</div><div class="num">R5.0m</div></div>
+    <div class="k"><div class="lbl">Indicative value</div><div class="num">R8.0m <small>+60%</small></div></div>
+    <div class="k"><div class="lbl">Blended ADR</div><div class="num">R3,968 <small>/ night</small></div></div>
     <div class="k"><div class="lbl">Keys &amp; units</div><div class="num">4 <small>3 lodge + 1 coastal</small></div></div>
   </div>
 </div></section>
@@ -252,19 +252,19 @@
         <h3>African Sky Lodge</h3>
         <p class="addr">Erf 2344, Koperkapel Street, Marloth Park — three-key safari lodge with F&amp;B and game-drive revenue, on Kruger's doorstep.</p>
         <div class="valbox">
-          <div><div class="vk">Acquired</div><div class="vv">%%MAR_ACQ%%</div></div>
-          <div><div class="vk">Valued</div><div class="vv">%%MAR_VAL%%</div></div>
-          <div><div class="vk">Uplift</div><div class="vv up">+%%MAR_UPLIFT%%</div></div>
+          <div><div class="vk">Acquired</div><div class="vv">R2.6m</div></div>
+          <div><div class="vk">Valued</div><div class="vv">R4.5m</div></div>
+          <div><div class="vk">Uplift</div><div class="vv up">+73%</div></div>
         </div>
         <ul>
           <li><span>Keys</span><span>Sky Villa · Remington · Winchester</span></li>
           <li><span>Revenue lines</span><span>Rooms · F&amp;B · game drives</span></li>
-          <li><span>Period revenue</span><span>%%MAR_REV%%</span></li>
+          <li><span>Period revenue</span><span>R1,132,558</span></li>
           <li><span class="flag">Winchester Suite</span><span class="flag">un-activated · upside</span></li>
         </ul>
         <div class="links">
-          <a href="%%URL_BOOKING%%" target="_blank" rel="noopener">Booking.com ↗</a>
-          <a href="%%URL_ACTIVITIES%%" target="_blank" rel="noopener">Tours &amp; activities ↗</a>
+          <a href="https://www.booking.com/hotel/za/african-bush-backpackers.en-gb.html" target="_blank" rel="noopener">Booking.com ↗</a>
+          <a href="https://dreyer10-crypto.github.io/african-sky-villas/" target="_blank" rel="noopener">Tours &amp; activities ↗</a>
         </div>
       </div>
     </article>
@@ -284,19 +284,19 @@
         <h3>Beachside Escape</h3>
         <p class="addr">Flat Agi, Seaside Village, 1 Cormorant Avenue, Big Bay — Atlantic-seaboard apartment in the Seaside Village / Eden on the Bay precinct.</p>
         <div class="valbox">
-          <div><div class="vk">Acquired</div><div class="vv">%%BB_ACQ%%</div></div>
-          <div><div class="vk">Valued</div><div class="vv">%%BB_VAL%%</div></div>
-          <div><div class="vk">Uplift</div><div class="vv up">+%%BB_UPLIFT%%</div></div>
+          <div><div class="vk">Acquired</div><div class="vv">R2.4m</div></div>
+          <div><div class="vk">Valued</div><div class="vv">R3.5m</div></div>
+          <div><div class="vk">Uplift</div><div class="vv up">+46%</div></div>
         </div>
         <ul>
           <li><span>Current use</span><span>Long-term let → Oct 2026</span></li>
-          <li><span>Rent income (period)</span><span>%%BB_REV%%</span></li>
-          <li><span>Precinct comp (3-bed)</span><span>%%COMP_SHORT%% · under offer</span></li>
+          <li><span>Rent income (period)</span><span>R91,291</span></li>
+          <li><span>Precinct comp (3-bed)</span><span>R4.7m · under offer</span></li>
           <li><span class="flag">Post-Oct</span><span class="flag">short-stay conversion</span></li>
         </ul>
         <div class="links">
-          <a href="%%URL_AIRBNB%%" target="_blank" rel="noopener">Airbnb ↗</a>
-          <a href="%%URL_COMP%%" target="_blank" rel="noopener">Area comp ↗</a>
+          <a href="https://www.airbnb.co.uk/rooms/1616569044541717654" target="_blank" rel="noopener">Airbnb ↗</a>
+          <a href="https://www.privateproperty.co.za/for-sale/western-cape/cape-town/blouberg/big-bay/T5452320" target="_blank" rel="noopener">Area comp ↗</a>
         </div>
       </div>
     </article>
@@ -309,23 +309,23 @@
   <div class="valgrid">
     <div class="barvis">
       <div class="barrow prop-mar">
-        <div class="lab"><span>Marloth Park lodge</span><b>%%MAR_ACQ%% → %%MAR_VAL%%</b></div>
-        <div class="track"><div class="val" style="width:%%MAR_VAL_W%%%"></div><div class="cost" style="width:%%MAR_COST_W%%%"></div></div>
+        <div class="lab"><span>Marloth Park lodge</span><b>R2.6m → R4.5m</b></div>
+        <div class="track"><div class="val" style="width:100.0%"></div><div class="cost" style="width:57.8%"></div></div>
       </div>
       <div class="barrow prop-bb">
-        <div class="lab"><span>Big Bay apartment</span><b>%%BB_ACQ%% → %%BB_VAL%%</b></div>
-        <div class="track"><div class="val" style="width:%%BB_VAL_W%%%"></div><div class="cost" style="width:%%BB_COST_W%%%"></div></div>
+        <div class="lab"><span>Big Bay apartment</span><b>R2.4m → R3.5m</b></div>
+        <div class="track"><div class="val" style="width:77.8%"></div><div class="cost" style="width:53.3%"></div></div>
       </div>
       <div class="barrow">
-        <div class="lab"><span><b>Portfolio</b></span><b>%%PORT_COST%% → %%PORT_VAL%% · +%%PORT_UPLIFT%%</b></div>
-        <div class="track"><div class="val" style="width:100%;background:var(--brass);opacity:.32"></div><div class="cost" style="width:%%PORT_COST_W%%%;background:var(--brass)"></div></div>
+        <div class="lab"><span><b>Portfolio</b></span><b>R5.0m → R8.0m · +60%</b></div>
+        <div class="track"><div class="val" style="width:100%;background:var(--brass);opacity:.32"></div><div class="cost" style="width:62.5%;background:var(--brass)"></div></div>
       </div>
       <p style="font-size:12px;color:var(--muted);margin:14px 0 0;font-family:'JetBrains Mono',monospace">Solid = acquisition cost · faded = indicative valuation</p>
     </div>
     <div class="comp">
       <p class="eyebrow" style="margin-bottom:4px">Market evidence · Big Bay</p>
-      <p class="quote">A 3-bed, 120m² Seaside Village apartment in the same Big Bay precinct is on the market at %%COMP_FULL%% — now under offer.</p>
-      <p class="src">Source: Private Property, listing T5452320 (listed Apr 2026), an income-producing Airbnb in the Seaside Village / Eden on the Bay node. Supports the R3.5m estimate on African Sky's Big Bay unit as conservative relative to the precinct. <a href="%%URL_COMP%%" target="_blank" rel="noopener">View listing ↗</a></p>
+      <p class="quote">A 3-bed, 120m² Seaside Village apartment in the same Big Bay precinct is on the market at R4,695,000 — now under offer.</p>
+      <p class="src">Source: Private Property, listing T5452320 (listed Apr 2026), an income-producing Airbnb in the Seaside Village / Eden on the Bay node. Supports the R3.5m estimate on African Sky's Big Bay unit as conservative relative to the precinct. <a href="https://www.privateproperty.co.za/for-sale/western-cape/cape-town/blouberg/big-bay/T5452320" target="_blank" rel="noopener">View listing ↗</a></p>
     </div>
   </div>
 </div></section>
@@ -391,27 +391,43 @@
 <section id="notice"><div class="wrap">
   <div class="notice">
     <b>Important notice</b><br>
-    This overview is provided for information only and is <b>not an offer, invitation or solicitation</b> to buy or sell any interest, nor investment, financial, tax or legal advice. Property valuations of %%MAR_VAL%% (Marloth Park) and %%BB_VAL%% (Big Bay) are the owner's <b>indicative estimates</b>, informed by acquisition cost and recent precinct evidence; they are <b>not</b> independent sworn valuations and should be confirmed by a registered valuer before reliance. Financial figures are <b>unaudited management information</b> derived from bank-transaction analysis for the period Sep 2025 – Jun 2026 and remain subject to verification, including a pending VAT-registration review. The market comparable is a third-party listing and is not a valuation of these assets. Recipients must make their own enquiries and obtain independent professional advice. © 2026 African Sky (Pty) Ltd. Prepared by PI Advertising Holding Co.
+    This overview is provided for information only and is <b>not an offer, invitation or solicitation</b> to buy or sell any interest, nor investment, financial, tax or legal advice. Property valuations of R4.5m (Marloth Park) and R3.5m (Big Bay) are the owner's <b>indicative estimates</b>, informed by acquisition cost and recent precinct evidence; they are <b>not</b> independent sworn valuations and should be confirmed by a registered valuer before reliance. Financial figures are <b>unaudited management information</b> derived from bank-transaction analysis for the period Sep 2025 – Jun 2026 and remain subject to verification, including a pending VAT-registration review. The market comparable is a third-party listing and is not a valuation of these assets. Recipients must make their own enquiries and obtain independent professional advice. © 2026 African Sky (Pty) Ltd. Prepared by PI Advertising Holding Co.
   </div>
 </div></section>
 
 <footer><div class="wrap">
   <div>
     <div class="fb">African Sky Villas</div>
-    <div style="font-size:13px;margin-top:6px">Marloth Park · Big Bay · <a href="%%URL_ACTIVITIES%%" target="_blank" rel="noopener">tours &amp; activities ↗</a></div>
+    <div style="font-size:13px;margin-top:6px">Marloth Park · Big Bay · <a href="https://dreyer10-crypto.github.io/african-sky-villas/" target="_blank" rel="noopener">tours &amp; activities ↗</a></div>
   </div>
   <div class="meta">PROPERTY PORTFOLIO · INVESTOR OVERVIEW · v1<br>INDICATIVE · UNAUDITED · PRIVATE &amp; CONFIDENTIAL<br>DATA: Sep 2025 – Jun 2026 · reconciled bank record</div>
 </div></footer>
 
 <script>
 // ---------- data ----------
-const REV = %%REV_DATA%%;
+const REV = [
+  {m:'Sep 25', mar:0, bb:0, oth:0},
+  {m:'Oct 25', mar:101558, bb:0, oth:0},
+  {m:'Nov 25', mar:114164, bb:0, oth:6915},
+  {m:'Dec 25', mar:24380, bb:0, oth:0},
+  {m:'Jan 26', mar:207960, bb:0, oth:28359},
+  {m:'Feb 26', mar:203274, bb:0, oth:15991},
+  {m:'Mar 26', mar:97278, bb:42545, oth:4331},
+  {m:'Apr 26', mar:198221, bb:24373, oth:9966},
+  {m:'May 26', mar:122011, bb:24373, oth:39912},
+  {m:'Jun 26', mar:63712, bb:0, oth:4400}
+];
 const COL = {mar:getCss('--bush'), bb:getCss('--coast'), oth:getCss('--brass')};
 function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
 const zar = n => 'R'+Math.round(n).toLocaleString('en-ZA');
 
 // ---------- channels ----------
-const CHAN = %%CHAN_DATA%%;
+const CHAN = [
+  {n:"Booking.com", v:681276, c:getCss('--coast')},
+  {n:"iKhokha card (F&B / safari)", v:451281, c:getCss('--bush')},
+  {n:"Other direct / EFT", v:109874, c:getCss('--brass')},
+  {n:"Big Bay rent", v:91291, c:getCss('--coast-2')}
+];
 (function(){
   const max = Math.max(...CHAN.map(c=>c.v)), tot = CHAN.reduce((s,c)=>s+c.v,0);
   document.getElementById('channels').innerHTML = CHAN.map(c=>`
