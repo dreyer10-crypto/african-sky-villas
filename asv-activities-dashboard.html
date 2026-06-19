@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>African Sky Villas — Activities Operations</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+:root{
+  --bg:#0d0a06; --bg2:#16110a; --panel:#1c1610; --panel2:#241c12;
+  --line:rgba(212,162,76,0.14); --line2:rgba(212,162,76,0.28);
+  --gold:#d4a24c; --gold-soft:#e4bd74; --cream:#f4ece0; --bone:#c9bca8;
+  --muted:rgba(244,236,224,0.42); --muted2:rgba(244,236,224,0.62);
+  --green:#5aa86f; --red:#c45a4a; --blue:#5a8bb0; --wa:#25D366;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--cream);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12% 0%,rgba(212,162,76,0.06),transparent 42%),radial-gradient(circle at 88% 8%,rgba(90,139,176,0.05),transparent 40%);background-attachment:fixed;}
+::selection{background:var(--gold);color:var(--bg);}
+.nav{background:rgba(13,10,6,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line2);display:flex;align-items:center;position:sticky;top:0;z-index:100;}
+.nav-logo{padding:14px 22px;display:flex;align-items:center;gap:12px;border-right:1px solid var(--line);}
+.nav-logo .mark{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--bg2);flex-shrink:0;}
+.nav-logo .txt{font-family:'Fraunces',serif;font-size:15px;letter-spacing:0.04em;white-space:nowrap;}
+.nav-logo .txt b{color:var(--gold);font-weight:600;}
+.nav-tabs{display:flex;flex:1;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{padding:18px 16px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-tab:hover{color:var(--cream);}
+.page{display:none;padding:30px 26px 60px;max-width:1180px;margin:0 auto;animation:fade .4s ease;}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.page-head{margin-bottom:24px;}
+.page-eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px;}
+.page-title{font-family:'Fraunces',serif;font-size:30px;font-weight:500;letter-spacing:-0.01em;}
+.page-title em{font-style:italic;color:var(--gold-soft);}
+.page-sub{color:var(--muted2);font-size:14px;margin-top:6px;max-width:640px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;margin-bottom:18px;}
+.panel-head{font-family:'Fraunces',serif;font-size:17px;margin-bottom:4px;}
+.panel-sub{color:var(--muted);font-size:12.5px;margin-bottom:16px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px;}
+.stat{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden;}
+.stat::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:0.6;}
+.stat.g::after{background:var(--green);}.stat.r::after{background:var(--red);}.stat.b::after{background:var(--blue);}
+.stat-label{font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600;}
+.stat-val{font-family:'Fraunces',serif;font-size:27px;font-weight:500;line-height:1;}
+.stat-sub{font-size:11px;color:var(--gold);margin-top:6px;}
+.alert{padding:12px 15px;border-radius:8px;font-size:13px;margin-bottom:12px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+.alert .ico{flex-shrink:0;font-size:15px;}
+.alert-warn{background:rgba(212,162,76,0.09);border:1px solid rgba(212,162,76,0.28);color:var(--gold-soft);}
+.alert-danger{background:rgba(196,90,74,0.1);border:1px solid rgba(196,90,74,0.32);color:#e08a7a;}
+.alert-info{background:rgba(90,139,176,0.1);border:1px solid rgba(90,139,176,0.3);color:#8fb6d4;}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead{background:var(--panel2);}
+th{padding:12px 13px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:700;white-space:nowrap;}
+td{padding:12px 13px;border-top:1px solid var(--line);color:var(--bone);vertical-align:middle;}
+tr:hover td{background:rgba(212,162,76,0.03);}
+td b{color:var(--cream);font-weight:600;}
+.num{font-variant-numeric:tabular-nums;}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+.badge-enq{background:rgba(90,139,176,0.16);color:#8fb6d4;}
+.badge-conf{background:rgba(212,162,76,0.16);color:var(--gold-soft);}
+.badge-paid{background:rgba(90,168,111,0.16);color:#7fc596;}
+.badge-cat{background:rgba(244,236,224,0.08);color:var(--bone);}
+.btn{font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border-radius:6px;cursor:pointer;border:1px solid transparent;font-weight:700;white-space:nowrap;transition:all .18s;display:inline-flex;align-items:center;gap:6px;text-decoration:none;}
+.btn-gold{background:var(--gold);color:var(--bg);}.btn-gold:hover{background:var(--gold-soft);}
+.btn-outline{background:transparent;color:var(--gold);border-color:var(--line2);}.btn-outline:hover{background:rgba(212,162,76,0.08);}
+.btn-wa{background:var(--wa);color:#fff;}.btn-wa:hover{filter:brightness(1.1);}
+.btn-sm{padding:6px 11px;font-size:10px;}
+.btn-row{display:flex;gap:7px;flex-wrap:wrap;}
+.cal-month{margin-bottom:24px;}
+.cal-month h3{font-family:'Fraunces',serif;font-size:18px;color:var(--gold-soft);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+.cal-row{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:8px;transition:background .15s;}
+.cal-row:hover{background:rgba(212,162,76,0.04);}
+.cal-date{font-family:'Fraunces',serif;font-size:14px;color:var(--gold);min-width:54px;text-align:center;line-height:1.2;}
+.cal-date .d{font-size:21px;display:block;}
+.cal-info{flex:1;}
+.cal-info b{color:var(--cream);}
+.cal-info .meta{font-size:12px;color:var(--muted2);}
+.muted{color:var(--muted);}
+.step{display:flex;gap:14px;margin-bottom:16px;}
+.step-num{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;flex-shrink:0;font-size:14px;}
+.step-body b{color:var(--cream);}
+.step-body p{font-size:13px;color:var(--muted2);margin-top:3px;}
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--bone);}
+.check .dot{width:16px;height:16px;border-radius:4px;border:1px solid var(--line2);flex-shrink:0;margin-top:2px;}
+.check.done .dot{background:var(--green);border-color:var(--green);}
+.check.done{color:var(--muted2);}
+.search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.search-bar input{flex:1;min-width:200px;background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:10px 12px;color:var(--cream);font-family:inherit;font-size:14px;}
+.search-bar input:focus{outline:none;border-color:var(--gold);}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:var(--bg);padding:13px 22px;border-radius:8px;font-weight:700;font-size:13px;z-index:200;transition:transform .3s;box-shadow:0 8px 30px rgba(0,0,0,0.4);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.demo-flag{display:inline-block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);border:1px dashed var(--line2);border-radius:5px;padding:3px 8px;margin-left:8px;vertical-align:middle;}
+@media(max-width:640px){.page-title{font-size:24px;}.nav-logo .txt{display:none;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-logo"><div class="mark">🐘</div><div class="txt">African <b>Sky</b> Villas</div></div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button class="nav-tab" onclick="showPage('activities',this)">Activities</button>
+    <button class="nav-tab" onclick="showPage('bookings',this)">Bookings</button>
+    <button class="nav-tab" onclick="showPage('whatsapp',this)">WhatsApp</button>
+    <button class="nav-tab" onclick="showPage('calendar',this)">Calendar</button>
+    <button class="nav-tab" onclick="showPage('automation',this)">Automation</button>
+  </div>
+</nav>
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="page-head">
+    <div class="page-eyebrow">Activities Operations</div>
+    <h1 class="page-title">Welcome back, <em>Dreyer</em><span class="demo-flag">Sample data</span></h1>
+    <p class="page-sub">Live view of every tour &amp; activity booking — enquiry to payment. Figures below are illustrative until the Google Sheet is wired in.</p>
+  </div>
+  <div class="stats" id="kpiStats"></div>
+  <div id="dashAlerts"></div>
+  <div class="panel">
+    <div class="panel-head">Recent enquiries</div>
+    <div class="panel-sub">Newest first — respond within 24 hours to hold the conversion.</div>
+    <div class="table-wrap"><table><thead><tr><th>Guest</th><th>Activity</th><th>Date</th><th>Pax</th><th>Value</th><th>Status</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div class="page" id="page-activities">
+  <div class="page-head">
+    <div class="page-eyebrow">Catalogue</div>
+    <h1 class="page-title">All <em>activities</em></h1>
+    <p class="page-sub">The fourteen experiences, live rates, and how each is performing this period.</p>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>Activity</th><th>Category</th><th>Rate</th><th>Bookings</th><th>Pax</th><th>Revenue</th></tr></thead><tbody id="actRows"></tbody></table></div>
+</div>
+
+<!-- BOOKINGS -->
+<div class="page" id="page-bookings">
+  <div class="page-head">
+    <div class="page-eyebrow">Pipeline</div>
+    <h1 class="page-title">Bookings <em>pipeline</em></h1>
+    <p class="page-sub">Enquiry → confirmed → paid. Generating an invoice or pay link is always a draft-and-approve step.</p>
+  </div>
+  <div class="search-bar"><input id="bkSearch" placeholder="Search guest or activity…" oninput="renderBookings()"></div>
+  <div class="table-wrap"><table><thead><tr><th>Guest</th><th>Activity</th><th>Date</th><th>Pax</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead><tbody id="bkRows"></tbody></table></div>
+</div>
+
+<!-- WHATSAPP -->
+<div class="page" id="page-whatsapp">
+  <div class="page-head">
+    <div class="page-eyebrow">Guest messaging</div>
+    <h1 class="page-title">WhatsApp <em>confirmations</em></h1>
+    <p class="page-sub">Each booking gets a personalised confirmation in the guest's language. Tap to open WhatsApp pre-filled — nothing sends automatically.</p>
+  </div>
+  <div id="waCards"></div>
+</div>
+
+<!-- CALENDAR -->
+<div class="page" id="page-calendar">
+  <div class="page-head">
+    <div class="page-eyebrow">Schedule</div>
+    <h1 class="page-title">Upcoming <em>departures</em></h1>
+    <p class="page-sub">What's running when — so guides and vehicles are never double-booked.</p>
+  </div>
+  <div id="calBody"></div>
+</div>
+
+<!-- AUTOMATION -->
+<div class="page" id="page-automation">
+  <div class="page-head">
+    <div class="page-eyebrow">How it works</div>
+    <h1 class="page-title">The <em>automated</em> flow</h1>
+    <p class="page-sub">Route A — runs entirely inside Google Workspace, Zoho and iKhokha. No new infrastructure, no monthly cost, money steps stay draft-and-approve.</p>
+  </div>
+  <div class="panel">
+    <div class="panel-head">The pipeline, end to end</div>
+    <div class="panel-sub">Each step hands off to the next automatically; the two money steps wait for your approval.</div>
+    <div id="flowSteps"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head">Go-live checklist</div>
+    <div class="panel-sub">What I need from you to switch this dashboard from sample data to live.</div>
+    <div id="checklist"></div>
+  </div>
+  <div class="alert alert-warn" style="margin-top:4px;"><span class="ico">⚠️</span><span><b>Human-approval gates stay on.</b> Invoices and pay links are generated as drafts only — no money moves, and nothing is sent to a guest, without you clicking approve. Tax/cancellation wording stays under the standing compliance hold.</span></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ---- Catalogue: the real 14 activities + corrected rates ----
+const RATE = {
+  'Full-Day Kruger Safari':1500,'Half-Day Morning Safari':1300,'Sunset Bush Braai Safari':2795,
+  'CF Moto Sunset Safari':500,'Thermal Night Drive Safari':750,'Panorama Day Tour':3000,
+  'Eswatini Day Tour':2750,'Maputo Day Tour':3050,'Hlane Rhino Day Tour':2950,
+  'Chimp Eden & Sudwala Caves':2500,'Komati Tiger Fishing — Half Day':1150,
+  'Komati Tiger Fishing — Full Day':1450,'Komati Sunset Cruise':995,'Private Airport Transfer — KMIA':1700
+};
+const CAT = {
+  'Full-Day Kruger Safari':'Safari','Half-Day Morning Safari':'Safari','Sunset Bush Braai Safari':'Safari',
+  'CF Moto Sunset Safari':'Safari','Thermal Night Drive Safari':'Safari','Panorama Day Tour':'Day Tour',
+  'Eswatini Day Tour':'Day Tour','Maputo Day Tour':'Day Tour','Hlane Rhino Day Tour':'Day Tour',
+  'Chimp Eden & Sudwala Caves':'Day Tour','Komati Tiger Fishing — Half Day':'River',
+  'Komati Tiger Fishing — Full Day':'River','Komati Sunset Cruise':'River','Private Airport Transfer — KMIA':'Transfer'
+};
+const PERVEHICLE = {'Private Airport Transfer — KMIA':true};
+
+// ---- Sample bookings (replaced by the live Sheet once wired) ----
+const GREET = {en:'Hi',nl:'Hallo',fr:'Bonjour',de:'Hallo',pt:'Olá',es:'Hola',it:'Ciao'};
+const bookings = [
+  {g:'Katja Müller',lang:'de',ph:'491791002149',act:'Full-Day Kruger Safari',date:'2026-07-12',pax:2,status:'enquiry'},
+  {g:'Eric Dubois',lang:'fr',ph:'352661785606',act:'Panorama Day Tour',date:'2026-07-18',pax:4,status:'confirmed'},
+  {g:'Renate Schmidt',lang:'de',ph:'491702259047',act:'Maputo Day Tour',date:'2026-08-02',pax:2,status:'paid'},
+  {g:'Natalia Souza',lang:'pt',ph:'5511985724230',act:'Sunset Bush Braai Safari',date:'2026-07-22',pax:2,status:'confirmed'},
+  {g:'Jan de Vries',lang:'nl',ph:'31643747494',act:'Komati Tiger Fishing — Full Day',date:'2026-08-10',pax:3,status:'enquiry'},
+  {g:'Henry Adams',lang:'en',ph:'27723148788',act:'Hlane Rhino Day Tour',date:'2026-07-30',pax:2,status:'paid'},
+  {g:'Marieke Bakker',lang:'nl',ph:'31618242478',act:'CF Moto Sunset Safari',date:'2026-07-15',pax:2,status:'confirmed'},
+  {g:'Angelique Martin',lang:'fr',ph:'33695853153',act:'Eswatini Day Tour',date:'2026-08-05',pax:2,status:'enquiry'},
+  {g:'Marcel Janssen',lang:'nl',ph:'31611748807',act:'Thermal Night Drive Safari',date:'2026-07-20',pax:4,status:'paid'},
+  {g:'Joana Costa',lang:'pt',ph:'351969221319',act:'Komati Sunset Cruise',date:'2026-08-12',pax:2,status:'confirmed'},
+  {g:'Karl Weber',lang:'de',ph:'491729164654',act:'Private Airport Transfer — KMIA',date:'2026-07-11',pax:2,status:'paid'},
+  {g:'Mark Visser',lang:'nl',ph:'31642038026',act:'Chimp Eden & Sudwala Caves',date:'2026-08-15',pax:2,status:'enquiry'}
+];
+bookings.forEach(b=>{ b.value = PERVEHICLE[b.act] ? RATE[b.act] : RATE[b.act]*b.pax; });
+
+const ZAR = n => 'R'+n.toLocaleString('en-ZA');
+const niceDate = s => { const d=new Date(s+'T00:00'); return d.toLocaleDateString('en-ZA',{weekday:'short',day:'numeric',month:'short'}); };
+const STBADGE = {enquiry:['badge-enq','Enquiry'],confirmed:['badge-conf','Confirmed'],paid:['badge-paid','Paid']};
+
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+// ---- KPIs ----
+function renderKPIs(){
+  const enq=bookings.filter(b=>b.status==='enquiry').length;
+  const conf=bookings.filter(b=>b.status==='confirmed').length;
+  const paid=bookings.filter(b=>b.status==='paid');
+  const awaiting=bookings.filter(b=>b.status==='confirmed').reduce((s,b)=>s+b.value,0);
+  const rev=paid.reduce((s,b)=>s+b.value,0);
+  const conv=Math.round(paid.length/bookings.length*100);
+  // top activity by revenue
+  const byAct={}; bookings.forEach(b=>byAct[b.act]=(byAct[b.act]||0)+b.value);
+  const top=Object.entries(byAct).sort((a,b)=>b[1]-a[1])[0][0];
+  document.getElementById('kpiStats').innerHTML = [
+    ['New enquiries',enq,'awaiting reply','b'],
+    ['Confirmed',conf,ZAR(awaiting)+' to collect','' ],
+    ['Paid',paid.length,'this period','g'],
+    ['Confirmed revenue',ZAR(rev),'banked','g'],
+    ['Conversion',conv+'%','enquiry → paid',''],
+    ['Top earner',top.split(' — ')[0],ZAR(byAct[top]),'']
+  ].map(([l,v,s,c])=>`<div class="stat ${c}"><div class="stat-label">${l}</div><div class="stat-val">${v}</div><div class="stat-sub">${s}</div></div>`).join('');
+}
+function renderAlerts(){
+  const enq=bookings.filter(b=>b.status==='enquiry');
+  const dueSoon=bookings.filter(b=>b.status==='confirmed');
+  document.getElementById('dashAlerts').innerHTML =
+    `<div class="alert alert-danger"><span class="ico">⏱</span><span><b>${enq.length} enquiries awaiting reply.</b> Each one cools fast — confirm availability and send the deposit link to lock them in.</span></div>`+
+    `<div class="alert alert-info"><span class="ico">💳</span><span><b>${dueSoon.length} confirmed bookings awaiting payment</b> (${ZAR(dueSoon.reduce((s,b)=>s+b.value,0))}). Balance is due 30 days before the activity date.</span></div>`;
+}
+function renderRecent(){
+  document.getElementById('recentRows').innerHTML = bookings.slice().sort((a,b)=>a.date<b.date?-1:1).slice(0,6).map(b=>{
+    const [cls,lab]=STBADGE[b.status];
+    return `<tr><td><b>${b.g}</b></td><td>${b.act}</td><td class="num">${niceDate(b.date)}</td><td class="num">${b.pax}</td><td class="num">${ZAR(b.value)}</td><td><span class="badge ${cls}">${lab}</span></td></tr>`;
+  }).join('');
+}
+// ---- Activities table ----
+function renderActivities(){
+  const rows = Object.keys(RATE).map(name=>{
+    const bk=bookings.filter(b=>b.act===name);
+    const pax=bk.reduce((s,b)=>s+b.pax,0);
+    const rev=bk.reduce((s,b)=>s+b.value,0);
+    return {name,cat:CAT[name],rate:RATE[name],n:bk.length,pax,rev};
+  }).sort((a,b)=>b.rev-a.rev);
+  document.getElementById('actRows').innerHTML = rows.map(r=>
+    `<tr><td><b>${r.name}</b></td><td><span class="badge badge-cat">${r.cat}</span></td><td class="num">${ZAR(r.rate)}${PERVEHICLE[r.name]?' <span class="muted">/veh</span>':' <span class="muted">pp</span>'}</td><td class="num">${r.n}</td><td class="num">${r.pax}</td><td class="num"><b>${ZAR(r.rev)}</b></td></tr>`
+  ).join('');
+}
+// ---- Bookings pipeline ----
+function renderBookings(){
+  const q=(document.getElementById('bkSearch').value||'').toLowerCase();
+  const list=bookings.filter(b=>(b.g+' '+b.act).toLowerCase().includes(q)).sort((a,b)=>a.date<b.date?-1:1);
+  document.getElementById('bkRows').innerHTML = list.map((b,i)=>{
+    const [cls,lab]=STBADGE[b.status];
+    const next = b.status==='enquiry'?`<button class="btn btn-outline btn-sm" onclick="toast('Marked confirmed — generate invoice next')">Confirm</button>`
+      : b.status==='confirmed'?`<button class="btn btn-gold btn-sm" onclick="toast('Draft invoice + iKhokha link queued for approval')">Invoice</button>`
+      : `<span class="muted" style="font-size:11px;">Complete</span>`;
+    return `<tr><td><b>${b.g}</b></td><td>${b.act}</td><td class="num">${niceDate(b.date)}</td><td class="num">${b.pax}</td><td class="num">${ZAR(b.value)}</td><td><span class="badge ${cls}">${lab}</span></td><td><div class="btn-row"><a class="btn btn-wa btn-sm" target="_blank" href="${waLink(b)}">WhatsApp</a>${next}</div></td></tr>`;
+  }).join('');
+}
+// ---- WhatsApp ----
+function waText(b){
+  const hi=GREET[b.lang]||'Hi';
+  return `${hi} ${b.g.split(' ')[0]}! Your ${b.act} on ${niceDate(b.date)} for ${b.pax} is confirmed with African Sky Villas. We'll send your secure payment link shortly. — Dreyer`;
+}
+function waLink(b){ return 'https://wa.me/'+b.ph+'?text='+encodeURIComponent(waText(b)); }
+function renderWA(){
+  document.getElementById('waCards').innerHTML = bookings.map(b=>
+    `<div class="panel" style="padding:16px 18px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:240px;"><div style="font-family:'Fraunces',serif;font-size:16px;color:var(--cream);">${b.g} <span class="badge badge-cat" style="margin-left:6px;">${b.lang.toUpperCase()}</span></div>
+      <div style="font-size:12.5px;color:var(--muted2);margin-top:4px;">${b.act} · ${niceDate(b.date)} · ${b.pax} pax · ${ZAR(b.value)}</div>
+      <div style="font-size:12px;color:var(--bone);margin-top:8px;border-left:2px solid var(--line2);padding-left:10px;">${waText(b)}</div></div>
+      <a class="btn btn-wa" target="_blank" href="${waLink(b)}">Open WhatsApp</a></div></div>`
+  ).join('');
+}
+// ---- Calendar ----
+function renderCalendar(){
+  const months={};
+  bookings.slice().sort((a,b)=>a.date<b.date?-1:1).forEach(b=>{
+    const d=new Date(b.date+'T00:00'); const key=d.toLocaleDateString('en-ZA',{month:'long',year:'numeric'});
+    (months[key]=months[key]||[]).push(b);
+  });
+  document.getElementById('calBody').innerHTML = Object.entries(months).map(([m,list])=>
+    `<div class="cal-month"><h3>${m} · ${list.length} departures</h3>`+list.map(b=>{
+      const d=new Date(b.date+'T00:00');
+      return `<div class="cal-row"><div class="cal-date"><span class="d">${d.getDate()}</span>${d.toLocaleDateString('en-ZA',{weekday:'short'})}</div>
+      <div class="cal-info"><b>${b.act}</b><div class="meta">${b.g} · ${b.pax} pax · ${ZAR(b.value)} · <span class="badge ${STBADGE[b.status][0]}">${STBADGE[b.status][1]}</span></div></div></div>`;
+    }).join('')+`</div>`
+  ).join('');
+}
+// ---- Automation flow + checklist ----
+function renderAutomation(){
+  const steps=[
+    ['Enquiry captured','Guest submits the tours-site form → a new row lands in the Google Sheet (already live).'],
+    ['Triage','The new booking appears here automatically with its value calculated from the rate card.'],
+    ['Confirm availability','You click Confirm; an Apps Script drafts the guest\'s WhatsApp message in their language.'],
+    ['Invoice + pay link','On approval, a Zoho draft invoice and an iKhokha payment link are generated — never charged automatically.'],
+    ['Payment reconciled','iKhokha marks the booking Paid; the row and KPIs update; the departure shows on the calendar.']
+  ];
+  document.getElementById('flowSteps').innerHTML = steps.map((s,i)=>
+    `<div class="step"><div class="step-num">${i+1}</div><div class="step-body"><b>${s[0]}</b><p>${s[1]}</p></div></div>`).join('');
+  const items=[
+    ['Google Apps Script Web App URL (the one the tours form already posts to)',true],
+    ['Read access to the bookings Google Sheet (share with the ops account)',false],
+    ['Zoho Books API connection — to draft invoices',false],
+    ['iKhokha payment-link method confirmed (API or manual link paste)',false],
+    ['WhatsApp number(s) for outbound confirmations',true],
+    ['Sign-off on deposit %, cancellation wording (compliance hold) before any guest-facing send',false]
+  ];
+  document.getElementById('checklist').innerHTML = items.map(([t,done])=>
+    `<div class="check ${done?'done':''}"><div class="dot"></div><div>${t}${done?' <span class="muted">— in place</span>':''}</div></div>`).join('');
+}
+
+renderKPIs();renderAlerts();renderRecent();renderActivities();renderBookings();renderWA();renderCalendar();renderAutomation();
+</script>
+</body>
+</html>
