@@ -1195,7 +1195,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, tiers: { 2: 2495, 3: 1895, 4: 1795 }, img: "images/private-safari.jpg", pdf: "pdfs/kruger-safaris.pdf",
+    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, tiers: { 2: 2495, 3: 1895, 4: 1795 }, img: "images/private-safari.jpg", pdf: null,
     name: { en: "Private Full-Day Kruger Safari", nl: "Privé hele dag Kruger Safari", fr: "Safari Kruger privé — journée complète", de: "Private Ganztags-Kruger-Safari", pt: "Safári Kruger privado — dia inteiro", es: "Safari Kruger privado — día completo" },
     tag: { en: "Private Full Day", nl: "Privé hele dag", fr: "Privé journée", de: "Privat Ganztags", pt: "Privado dia inteiro", es: "Privado día completo" },
     capacity: { en: "Private · 2–4 guests", nl: "Privé · 2–4 gasten", fr: "Privé · 2–4 invités", de: "Privat · 2–4 Gäste", pt: "Privado · 2–4 hóspedes", es: "Privado · 2–4 invitados" },
@@ -1223,7 +1223,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001214001", category: "safari", duration: "Sunrise or sunset · ±3 hrs", price: 950, img: "images/slow-safari.png", pdf: null,
+    id: "6461940000001214001", category: "safari", duration: "Sunrise or sunset · ±3 hrs", price: 950, img: "images/slow-safari.png", imgFit: "contain", pdf: null,
     name: { en: "Slow Safari — Marloth Park", nl: "Slow Safari — Marloth Park", fr: "Slow Safari — Marloth Park", de: "Slow Safari — Marloth Park", pt: "Slow Safari — Marloth Park", es: "Slow Safari — Marloth Park" },
     tag: { en: "SLOWfari", nl: "SLOWfari", fr: "SLOWfari", de: "SLOWfari", pt: "SLOWfari", es: "SLOWfari" },
     capacity: { en: "Min 4 guests", nl: "Min 4 gasten", fr: "Min 4 invités", de: "Min. 4 Gäste", pt: "Mín 4 hóspedes", es: "Mín 4 invitados" },
@@ -1293,7 +1293,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001205001", category: "day-tour", duration: "6:30am – 5pm", price: 2750, img: "images/eswatini-hut.png", pdf: "pdfs/eswatini.pdf",
+    id: "6461940000001205001", category: "day-tour", duration: "6:30am – 5pm", price: 3000, img: "images/eswatini-hut.png", pdf: "pdfs/eswatini.pdf",
     name: { en: "Eswatini Day Tour", nl: "Eswatini dagtocht", fr: "Excursion en Eswatini", de: "Eswatini-Tagestour", pt: "Excursão Eswatini", es: "Excursión a Esuatini" },
     tag: { en: "Cross-Border", nl: "Grensoverschrijdend", fr: "Transfrontalier", de: "Grenzüberschreitend", pt: "Transfronteiriço", es: "Transfronterizo" },
     capacity: { en: "Min 2 guests", nl: "Min 2 gasten", fr: "Min 2 invités", de: "Min. 2 Gäste", pt: "Mín 2 hóspedes", es: "Mín 2 invitados" },
@@ -1307,7 +1307,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001206001", category: "day-tour", duration: "6:30am – 5pm", price: 3050, img: "images/maputo.png", pdf: "pdfs/maputo.pdf",
+    id: "6461940000001206001", category: "day-tour", duration: "6:30am – 5pm", price: 3000, img: "images/maputo.png", pdf: "pdfs/maputo.pdf",
     name: { en: "Maputo Day Tour", nl: "Maputo dagtocht", fr: "Excursion à Maputo", de: "Maputo-Tagestour", pt: "Excursão a Maputo", es: "Excursión a Maputo" },
     tag: { en: "Cross-Border", nl: "Grensoverschrijdend", fr: "Transfrontalier", de: "Grenzüberschreitend", pt: "Transfronteiriço", es: "Transfronterizo" },
     capacity: { en: "Passport + visa required", nl: "Paspoort + visum vereist", fr: "Passeport + visa requis", de: "Reisepass + Visum erforderlich", pt: "Passaporte + visto necessários", es: "Pasaporte + visado requeridos" },
@@ -1321,7 +1321,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001207001", category: "day-tour", duration: "8am – 4pm", price: 2950, img: "images/hlane-rhino.jpg", pdf: "pdfs/hlane.pdf",
+    id: "6461940000001207001", category: "day-tour", duration: "8am – 4pm", price: 3000, img: "images/hlane-rhino.jpg", pdf: "pdfs/hlane.pdf",
     name: { en: "Hlane Rhino Day Tour", nl: "Hlane Neushoorn dagtocht", fr: "Excursion Hlane Rhinocéros", de: "Hlane Nashorn-Tagestour", pt: "Excursão Hlane Rinoceronte", es: "Excursión Hlane Rinoceronte" },
     tag: { en: "Eswatini", nl: "Eswatini", fr: "Eswatini", de: "Eswatini", pt: "Eswatini", es: "Esuatini" },
     capacity: { en: "Passport required", nl: "Paspoort vereist", fr: "Passeport requis", de: "Reisepass erforderlich", pt: "Passaporte necessário", es: "Pasaporte requerido" },
@@ -1589,7 +1589,7 @@ function renderActivities(filter) {
     card.innerHTML = `
       <div class="activity-img">
         <span class="activity-tag">${tag}</span>
-        <img src="${a.img}" alt="${name}" loading="lazy" onerror="this.dataset.broken='1'; this.style.opacity='0';">
+        <img src="${a.img}" alt="${name}" loading="lazy"${a.imgFit ? ` style="object-fit:${a.imgFit}"` : ''} onerror="this.dataset.broken='1'; this.style.opacity='0';">
         <div class="img-fallback">${name}</div>
       </div>
       <div class="activity-body">
