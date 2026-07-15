@@ -263,6 +263,7 @@ section { padding: 7rem 2.5rem; position: relative; }
 .activity-price small { font-family: 'Manrope', sans-serif; font-size: 0.7rem; color: var(--taupe); font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 0.4rem; }
 .book-btn { background: var(--espresso); color: var(--bone); border: none; padding: 0.7rem 1.3rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; transition: background 0.2s; font-family: inherit; }
 .book-btn:hover { background: var(--terracotta); }
+.price-note { margin-top: 2rem; text-align: center; font-size: 0.82rem; font-style: italic; color: var(--taupe); letter-spacing: 0.01em; }
 
 /* ---- Booking ---- */
 .booking { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%); position: relative; }
@@ -534,7 +535,7 @@ footer a:hover { color: var(--bone); }
   <div class="hero-content">
     <span class="hero-eyebrow" data-i18n="hero.eyebrow">Marloth Park · Kruger · Mpumalanga</span>
     <h1 class="display" data-i18n="hero.titleHtml">Your African <em>adventure</em> awaits.</h1>
-    <p class="tagline" data-i18n="hero.tagline">From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of sixteen unforgettable experiences, all bookable in one place.</p>
+    <p class="tagline" data-i18n="hero.tagline">From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of seventeen unforgettable experiences, all bookable in one place.</p>
     <div class="hero-actions">
       <a href="#activities" class="btn btn-primary"><span data-i18n="hero.btnBrowse">Browse Activities</span> <span class="btn-arrow">→</span></a>
       <a href="#booking" class="btn btn-ghost" data-i18n="hero.btnBook">Book Now</a>
@@ -571,7 +572,7 @@ footer a:hover { color: var(--bone); }
       </div>
     </div>
     <div class="stats">
-      <div class="stat"><span class="stat-num">16</span><div class="stat-label" data-i18n="stats.experiences">Curated Experiences</div></div>
+      <div class="stat"><span class="stat-num">17</span><div class="stat-label" data-i18n="stats.experiences">Curated Experiences</div></div>
       <div class="stat"><span class="stat-num">3</span><div class="stat-label" data-i18n="stats.countries">Countries Covered</div></div>
       <div class="stat"><span class="stat-num">365</span><div class="stat-label" data-i18n="stats.days">Days a Year</div></div>
       <div class="stat"><span class="stat-num">100%</span><div class="stat-label" data-i18n="stats.local">Locally Operated</div></div>
@@ -585,7 +586,7 @@ footer a:hover { color: var(--bone); }
     <div class="section-head">
       <div>
         <span class="eyebrow" data-i18n="activities.eyebrow">Tours & Activities 2026</span>
-        <h2 class="display" data-i18n="activities.titleHtml">Sixteen ways to <em>fall in love</em> with the bush.</h2>
+        <h2 class="display" data-i18n="activities.titleHtml">Seventeen ways to <em>fall in love</em> with the bush.</h2>
       </div>
       <p class="lead" data-i18n="activities.lead">Filter by category, tap a card to see the full itinerary, and book directly below. All rates are per person in South African Rand.</p>
     </div>
@@ -599,6 +600,7 @@ footer a:hover { color: var(--bone); }
     </div>
 
     <div class="activity-grid" id="activityGrid"></div>
+    <p class="price-note" data-i18n="activities.priceNote">Please note: all rates are subject to change should our suppliers' rates increase.</p>
   </div>
 </section>
 
@@ -800,7 +802,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Your African<br><em>adventure</em> awaits.',
-      tagline: "From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of sixteen unforgettable experiences, all bookable in one place.",
+      tagline: "From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of seventeen unforgettable experiences, all bookable in one place.",
       btnBrowse: "Browse Activities", btnBook: "Book Now"
     },
     intro: {
@@ -812,10 +814,10 @@ const translations = {
     stats: { experiences: "Curated Experiences", countries: "Countries Covered", days: "Days a Year", local: "Locally Operated" },
     activities: {
       eyebrow: "Tours & Activities 2026",
-      titleHtml: 'Sixteen ways to <em>fall in love</em> with the bush.',
+      titleHtml: 'Seventeen ways to <em>fall in love</em> with the bush.',
       lead: "Filter by category, tap a card to see the full itinerary, and book directly below. All rates are per person in South African Rand.",
       filterAll: "All", filterSafari: "Safaris", filterDayTour: "Day Tours", filterRiver: "River Adventures", filterTransfer: "Transfers",
-      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)"
+      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)", priceNote: "Please note: all rates are subject to change should our suppliers' rates increase."
     },
     booking: {
       eyebrow: "Reserve Your Spot",
@@ -851,7 +853,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Jouw Afrikaanse<br><em>avontuur</em> wacht.',
-      tagline: "Van ochtendsafari's in het Kruger tot zonsondergangcruises op de Komati — een gecureerde collectie van zestien onvergetelijke ervaringen, allemaal op één plek te boeken.",
+      tagline: "Van ochtendsafari's in het Kruger tot zonsondergangcruises op de Komati — een gecureerde collectie van zeventien onvergetelijke ervaringen, allemaal op één plek te boeken.",
       btnBrowse: "Bekijk activiteiten", btnBook: "Boek nu"
     },
     intro: {
@@ -863,10 +865,10 @@ const translations = {
     stats: { experiences: "Gecureerde ervaringen", countries: "Landen", days: "Dagen per jaar", local: "Lokaal beheerd" },
     activities: {
       eyebrow: "Tours & Activiteiten 2026",
-      titleHtml: 'Zestien manieren om <em>verliefd te worden</em> op de bush.',
+      titleHtml: 'Zeventien manieren om <em>verliefd te worden</em> op de bush.',
       lead: "Filter op categorie, tik op een kaart voor het volledige programma, en boek direct hieronder. Alle tarieven zijn per persoon in Zuid-Afrikaanse Rand.",
       filterAll: "Alle", filterSafari: "Safari's", filterDayTour: "Dagtochten", filterRiver: "Rivieravonturen", filterTransfer: "Transfers",
-      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)"
+      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)", priceNote: "Let op: alle tarieven kunnen wijzigen als de tarieven van onze leveranciers stijgen."
     },
     booking: {
       eyebrow: "Reserveer je plek",
@@ -902,7 +904,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Votre <em>aventure</em><br>africaine vous attend.',
-      tagline: "Des safaris à l'aube dans le Kruger aux croisières au coucher du soleil sur le Komati — une collection sélectionnée de seize expériences inoubliables, toutes réservables en un seul endroit.",
+      tagline: "Des safaris à l'aube dans le Kruger aux croisières au coucher du soleil sur le Komati — une collection sélectionnée de dix-sept expériences inoubliables, toutes réservables en un seul endroit.",
       btnBrowse: "Voir les activités", btnBook: "Réserver"
     },
     intro: {
@@ -914,10 +916,10 @@ const translations = {
     stats: { experiences: "Expériences sélectionnées", countries: "Pays couverts", days: "Jours par an", local: "Géré localement" },
     activities: {
       eyebrow: "Tours & Activités 2026",
-      titleHtml: 'Seize façons de <em>tomber amoureux</em> de la brousse.',
+      titleHtml: 'Dix-sept façons de <em>tomber amoureux</em> de la brousse.',
       lead: "Filtrez par catégorie, appuyez sur une carte pour voir l'itinéraire complet, et réservez directement ci-dessous. Tous les tarifs sont par personne en Rand sud-africain.",
       filterAll: "Toutes", filterSafari: "Safaris", filterDayTour: "Excursions", filterRiver: "Aventures fluviales", filterTransfer: "Transferts",
-      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)"
+      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)", priceNote: "Remarque : tous les tarifs sont susceptibles de changer si les tarifs de nos prestataires augmentent."
     },
     booking: {
       eyebrow: "Réservez votre place",
@@ -953,7 +955,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Dein afrikanisches<br><em>Abenteuer</em> wartet.',
-      tagline: "Von Morgensafaris im Kruger bis zu Sonnenuntergangs-Kreuzfahrten auf dem Komati — eine kuratierte Auswahl von sechzehn unvergesslichen Erlebnissen, alle an einem Ort buchbar.",
+      tagline: "Von Morgensafaris im Kruger bis zu Sonnenuntergangs-Kreuzfahrten auf dem Komati — eine kuratierte Auswahl von siebzehn unvergesslichen Erlebnissen, alle an einem Ort buchbar.",
       btnBrowse: "Aktivitäten entdecken", btnBook: "Jetzt buchen"
     },
     intro: {
@@ -965,10 +967,10 @@ const translations = {
     stats: { experiences: "Kuratierte Erlebnisse", countries: "Länder", days: "Tage im Jahr", local: "Lokal geführt" },
     activities: {
       eyebrow: "Touren & Aktivitäten 2026",
-      titleHtml: 'Sechzehn Wege, sich in den Busch <em>zu verlieben</em>.',
+      titleHtml: 'Siebzehn Wege, sich in den Busch <em>zu verlieben</em>.',
       lead: "Filtere nach Kategorie, tippe auf eine Karte für das volle Programm und buche direkt unten. Alle Preise pro Person in südafrikanischen Rand.",
       filterAll: "Alle", filterSafari: "Safaris", filterDayTour: "Tagestouren", filterRiver: "Flussabenteuer", filterTransfer: "Transfers",
-      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)"
+      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)", priceNote: "Hinweis: Alle Preise können sich ändern, falls die Preise unserer Anbieter steigen."
     },
     booking: {
       eyebrow: "Sichere dir deinen Platz",
@@ -1004,7 +1006,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'A sua <em>aventura</em><br>africana espera.',
-      tagline: "De safáris ao amanhecer no Kruger a cruzeiros ao pôr do sol no Komati — uma coleção selecionada de dezasseis experiências inesquecíveis, todas reserváveis num só lugar.",
+      tagline: "De safáris ao amanhecer no Kruger a cruzeiros ao pôr do sol no Komati — uma coleção selecionada de dezassete experiências inesquecíveis, todas reserváveis num só lugar.",
       btnBrowse: "Ver atividades", btnBook: "Reservar agora"
     },
     intro: {
@@ -1016,10 +1018,10 @@ const translations = {
     stats: { experiences: "Experiências selecionadas", countries: "Países", days: "Dias por ano", local: "Operação local" },
     activities: {
       eyebrow: "Tours & Atividades 2026",
-      titleHtml: 'Dezasseis maneiras de se <em>apaixonar</em> pelo bush.',
+      titleHtml: 'Dezassete maneiras de se <em>apaixonar</em> pelo bush.',
       lead: "Filtre por categoria, toque num cartão para ver o itinerário completo, e reserve diretamente abaixo. Todos os valores são por pessoa em Rand sul-africano.",
       filterAll: "Todas", filterSafari: "Safáris", filterDayTour: "Excursões", filterRiver: "Aventuras fluviais", filterTransfer: "Transferes",
-      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)"
+      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)", priceNote: "Nota: todas as tarifas estão sujeitas a alteração caso as tarifas dos nossos fornecedores aumentem."
     },
     booking: {
       eyebrow: "Reserve o seu lugar",
@@ -1055,7 +1057,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Tu <em>aventura</em><br>africana te espera.',
-      tagline: "Desde safaris al amanecer en el Kruger hasta cruceros al atardecer en el Komati — una colección seleccionada de dieciséis experiencias inolvidables, todas reservables en un solo lugar.",
+      tagline: "Desde safaris al amanecer en el Kruger hasta cruceros al atardecer en el Komati — una colección seleccionada de diecisiete experiencias inolvidables, todas reservables en un solo lugar.",
       btnBrowse: "Ver actividades", btnBook: "Reservar ahora"
     },
     intro: {
@@ -1067,10 +1069,10 @@ const translations = {
     stats: { experiences: "Experiencias seleccionadas", countries: "Países", days: "Días al año", local: "Gestión local" },
     activities: {
       eyebrow: "Tours y actividades 2026",
-      titleHtml: 'Dieciséis formas de <em>enamorarte</em> de la sabana.',
+      titleHtml: 'Diecisiete formas de <em>enamorarte</em> de la sabana.',
       lead: "Filtra por categoría, toca una tarjeta para ver el itinerario completo, y reserva directamente abajo. Todas las tarifas son por persona en Rand sudafricano.",
       filterAll: "Todas", filterSafari: "Safaris", filterDayTour: "Excursiones", filterRiver: "Aventuras fluviales", filterTransfer: "Traslados",
-      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)"
+      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)", priceNote: "Nota: todas las tarifas están sujetas a cambios si aumentan las tarifas de nuestros proveedores."
     },
     booking: {
       eyebrow: "Reserva tu lugar",
@@ -1106,7 +1108,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'La tua <em>avventura</em><br>africana ti aspetta.',
-      tagline: "Dai safari all'alba nel Kruger alle crociere al tramonto sul Komati — una raccolta selezionata di sedici esperienze indimenticabili, tutte prenotabili in un unico posto.",
+      tagline: "Dai safari all'alba nel Kruger alle crociere al tramonto sul Komati — una raccolta selezionata di diciassette esperienze indimenticabili, tutte prenotabili in un unico posto.",
       btnBrowse: "Scopri le attività", btnBook: "Prenota ora"
     },
     intro: {
@@ -1118,10 +1120,10 @@ const translations = {
     stats: { experiences: "Esperienze selezionate", countries: "Paesi coperti", days: "Giorni all'anno", local: "Gestito localmente" },
     activities: {
       eyebrow: "Tour e Attività 2026",
-      titleHtml: 'Sedici modi per <em>innamorarsi</em> della savana.',
+      titleHtml: 'Diciassette modi per <em>innamorarsi</em> della savana.',
       lead: "Filtra per categoria, tocca una scheda per vedere l'itinerario completo e prenota direttamente qui sotto. Tutte le tariffe sono per persona in Rand sudafricani.",
       filterAll: "Tutte", filterSafari: "Safari", filterDayTour: "Escursioni", filterRiver: "Avventure sul fiume", filterTransfer: "Trasferimenti",
-      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)"
+      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)", priceNote: "Nota: tutte le tariffe sono soggette a modifiche in caso di aumento delle tariffe dei nostri fornitori."
     },
     booking: {
       eyebrow: "Prenota il tuo posto",
@@ -1187,7 +1189,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, img: "images/private-safari.webp", pdf: "pdfs/kruger-safaris.pdf",
+    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, img: "images/private-safari.png", pdf: "pdfs/kruger-safaris.pdf",
     name: { en: "Private Full-Day Kruger Safari", nl: "Privé hele dag Kruger Safari", fr: "Safari Kruger privé — journée complète", de: "Private Ganztags-Kruger-Safari", pt: "Safári Kruger privado — dia inteiro", es: "Safari Kruger privado — día completo" },
     tag: { en: "Private Full Day", nl: "Privé hele dag", fr: "Privé journée", de: "Privat Ganztags", pt: "Privado dia inteiro", es: "Privado día completo" },
     capacity: { en: "Private · 2–4 guests", nl: "Privé · 2–4 gasten", fr: "Privé · 2–4 invités", de: "Privat · 2–4 Gäste", pt: "Privado · 2–4 hóspedes", es: "Privado · 2–4 invitados" },
@@ -1201,7 +1203,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001214001", category: "safari", duration: "Sunrise or sunset · ±3 hrs", price: 795, img: "images/slow-safari.jpg", pdf: null,
+    id: "6461940000001214001", category: "safari", duration: "Sunrise or sunset · ±3 hrs", price: 950, img: "images/slow-safari.png", pdf: null,
     name: { en: "Slow Safari — Marloth Park", nl: "Slow Safari — Marloth Park", fr: "Slow Safari — Marloth Park", de: "Slow Safari — Marloth Park", pt: "Slow Safari — Marloth Park", es: "Slow Safari — Marloth Park" },
     tag: { en: "SLOWfari", nl: "SLOWfari", fr: "SLOWfari", de: "SLOWfari", pt: "SLOWfari", es: "SLOWfari" },
     capacity: { en: "Min 4 guests", nl: "Min 4 gasten", fr: "Min 4 invités", de: "Min. 4 Gäste", pt: "Mín 4 hóspedes", es: "Mín 4 invitados" },
@@ -1254,6 +1256,20 @@ const activities = [
       de: "Nachttiere in Marloth Park mit modernster Wärmebildkamera-Technologie. Sieh, was Scheinwerfer niemals zeigen konnten.",
       pt: "Vida selvagem noturna em Marloth Park com tecnologia de câmara térmica de última geração. Veja o que os holofotes nunca conseguiram mostrar.",
       es: "Vida silvestre nocturna en Marloth Park con tecnología de cámara térmica de última generación. Mira lo que los focos nunca pudieron mostrar."
+    }
+  },
+  {
+    id: "6461940000001215001", category: "safari", duration: "1h 30min", price: 950, img: "images/horse-riding.png", pdf: null,
+    name: { en: "Bushveld Horseback Outride", nl: "Bushveld-outride te paard", fr: "Balade à cheval dans le bushveld", de: "Bushveld-Ausritt zu Pferd", pt: "Passeio a cavalo no bushveld", es: "Cabalgata por el bushveld" },
+    tag: { en: "Horse Safari", nl: "Paardensafari", fr: "Safari à cheval", de: "Pferdesafari", pt: "Safári a cavalo", es: "Safari a caballo" },
+    capacity: { en: "All riding levels", nl: "Alle rijniveaus", fr: "Tous niveaux", de: "Alle Reitlevel", pt: "Todos os níveis", es: "Todos los niveles" },
+    desc: {
+      en: "Experience the beauty of the bushveld on horseback. Ride along the Kruger fence line, cross open plains, and take in stunning views and close wildlife encounters.",
+      nl: "Ervaar de schoonheid van de bushveld te paard. Rijd langs de Kruger-hekgrens, doorkruis open vlaktes en geniet van prachtige uitzichten en ontmoetingen met wilde dieren.",
+      fr: "Découvrez la beauté du bushveld à cheval. Longez la clôture du Kruger, traversez les plaines ouvertes et profitez de vues magnifiques et de rencontres avec la faune.",
+      de: "Erlebe die Schönheit des Bushvelds zu Pferd. Reite entlang des Kruger-Zauns, durchquere offene Ebenen und genieße atemberaubende Ausblicke und Begegnungen mit Wildtieren.",
+      pt: "Descubra a beleza do bushveld a cavalo. Cavalgue ao longo da vedação do Kruger, atravesse planícies abertas e desfrute de vistas deslumbrantes e encontros com a vida selvagem.",
+      es: "Descubre la belleza del bushveld a caballo. Cabalga a lo largo de la valla del Kruger, cruza llanuras abiertas y disfruta de vistas impresionantes y encuentros con la fauna."
     }
   },
   {
