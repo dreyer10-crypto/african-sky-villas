@@ -327,6 +327,11 @@ section { padding: 7rem 2.5rem; position: relative; }
 }
 .activity-row .row-remove:hover { background: var(--terracotta); color: var(--bone); border-color: var(--terracotta); }
 .activity-row[data-row="0"] .row-remove { visibility: hidden; pointer-events: none; }
+.activity-row .row-price {
+  grid-column: 1 / -1; font-size: 0.8rem; font-weight: 600;
+  color: var(--terracotta); letter-spacing: 0.01em; margin-top: 0.15rem;
+}
+.activity-row .row-price:empty { display: none; }
 .add-activity-btn {
   display: inline-flex; align-items: center; gap: 0.4rem;
   background: transparent; border: 1px dashed var(--terracotta);
@@ -817,7 +822,7 @@ const translations = {
       titleHtml: 'Seventeen ways to <em>fall in love</em> with the bush.',
       lead: "Filter by category, tap a card to see the full itinerary, and book directly below. All rates are per person in South African Rand.",
       filterAll: "All", filterSafari: "Safaris", filterDayTour: "Day Tours", filterRiver: "River Adventures", filterTransfer: "Transfers",
-      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)", priceNote: "Please note: all rates are subject to change should our suppliers' rates increase."
+      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)", priceNote: "Please note: all rates are subject to change should our suppliers' rates increase.", priceFrom: "from"
     },
     booking: {
       eyebrow: "Reserve Your Spot",
@@ -868,7 +873,7 @@ const translations = {
       titleHtml: 'Zeventien manieren om <em>verliefd te worden</em> op de bush.',
       lead: "Filter op categorie, tik op een kaart voor het volledige programma, en boek direct hieronder. Alle tarieven zijn per persoon in Zuid-Afrikaanse Rand.",
       filterAll: "Alle", filterSafari: "Safari's", filterDayTour: "Dagtochten", filterRiver: "Rivieravonturen", filterTransfer: "Transfers",
-      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)", priceNote: "Let op: alle tarieven kunnen wijzigen als de tarieven van onze leveranciers stijgen."
+      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)", priceNote: "Let op: alle tarieven kunnen wijzigen als de tarieven van onze leveranciers stijgen.", priceFrom: "vanaf"
     },
     booking: {
       eyebrow: "Reserveer je plek",
@@ -919,7 +924,7 @@ const translations = {
       titleHtml: 'Dix-sept façons de <em>tomber amoureux</em> de la brousse.',
       lead: "Filtrez par catégorie, appuyez sur une carte pour voir l'itinéraire complet, et réservez directement ci-dessous. Tous les tarifs sont par personne en Rand sud-africain.",
       filterAll: "Toutes", filterSafari: "Safaris", filterDayTour: "Excursions", filterRiver: "Aventures fluviales", filterTransfer: "Transferts",
-      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)", priceNote: "Remarque : tous les tarifs sont susceptibles de changer si les tarifs de nos prestataires augmentent."
+      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)", priceNote: "Remarque : tous les tarifs sont susceptibles de changer si les tarifs de nos prestataires augmentent.", priceFrom: "à partir de"
     },
     booking: {
       eyebrow: "Réservez votre place",
@@ -970,7 +975,7 @@ const translations = {
       titleHtml: 'Siebzehn Wege, sich in den Busch <em>zu verlieben</em>.',
       lead: "Filtere nach Kategorie, tippe auf eine Karte für das volle Programm und buche direkt unten. Alle Preise pro Person in südafrikanischen Rand.",
       filterAll: "Alle", filterSafari: "Safaris", filterDayTour: "Tagestouren", filterRiver: "Flussabenteuer", filterTransfer: "Transfers",
-      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)", priceNote: "Hinweis: Alle Preise können sich ändern, falls die Preise unserer Anbieter steigen."
+      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)", priceNote: "Hinweis: Alle Preise können sich ändern, falls die Preise unserer Anbieter steigen.", priceFrom: "ab"
     },
     booking: {
       eyebrow: "Sichere dir deinen Platz",
@@ -1021,7 +1026,7 @@ const translations = {
       titleHtml: 'Dezassete maneiras de se <em>apaixonar</em> pelo bush.',
       lead: "Filtre por categoria, toque num cartão para ver o itinerário completo, e reserve diretamente abaixo. Todos os valores são por pessoa em Rand sul-africano.",
       filterAll: "Todas", filterSafari: "Safáris", filterDayTour: "Excursões", filterRiver: "Aventuras fluviais", filterTransfer: "Transferes",
-      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)", priceNote: "Nota: todas as tarifas estão sujeitas a alteração caso as tarifas dos nossos fornecedores aumentem."
+      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)", priceNote: "Nota: todas as tarifas estão sujeitas a alteração caso as tarifas dos nossos fornecedores aumentem.", priceFrom: "desde"
     },
     booking: {
       eyebrow: "Reserve o seu lugar",
@@ -1072,7 +1077,7 @@ const translations = {
       titleHtml: 'Diecisiete formas de <em>enamorarte</em> de la sabana.',
       lead: "Filtra por categoría, toca una tarjeta para ver el itinerario completo, y reserva directamente abajo. Todas las tarifas son por persona en Rand sudafricano.",
       filterAll: "Todas", filterSafari: "Safaris", filterDayTour: "Excursiones", filterRiver: "Aventuras fluviales", filterTransfer: "Traslados",
-      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)", priceNote: "Nota: todas las tarifas están sujetas a cambios si aumentan las tarifas de nuestros proveedores."
+      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)", priceNote: "Nota: todas las tarifas están sujetas a cambios si aumentan las tarifas de nuestros proveedores.", priceFrom: "desde"
     },
     booking: {
       eyebrow: "Reserva tu lugar",
@@ -1123,7 +1128,7 @@ const translations = {
       titleHtml: 'Diciassette modi per <em>innamorarsi</em> della savana.',
       lead: "Filtra per categoria, tocca una scheda per vedere l'itinerario completo e prenota direttamente qui sotto. Tutte le tariffe sono per persona in Rand sudafricani.",
       filterAll: "Tutte", filterSafari: "Safari", filterDayTour: "Escursioni", filterRiver: "Avventure sul fiume", filterTransfer: "Trasferimenti",
-      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)", priceNote: "Nota: tutte le tariffe sono soggette a modifiche in caso di aumento delle tariffe dei nostri fornitori."
+      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)", priceNote: "Nota: tutte le tariffe sono soggette a modifiche in caso di aumento delle tariffe dei nostri fornitori.", priceFrom: "da"
     },
     booking: {
       eyebrow: "Prenota il tuo posto",
@@ -1189,7 +1194,7 @@ const activities = [
     }
   },
   {
-    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, img: "images/private-safari.png", pdf: "pdfs/kruger-safaris.pdf",
+    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, tiers: { 2: 2495, 3: 1895, 4: 1795 }, img: "images/private-safari.png", pdf: "pdfs/kruger-safaris.pdf",
     name: { en: "Private Full-Day Kruger Safari", nl: "Privé hele dag Kruger Safari", fr: "Safari Kruger privé — journée complète", de: "Private Ganztags-Kruger-Safari", pt: "Safári Kruger privado — dia inteiro", es: "Safari Kruger privado — día completo" },
     tag: { en: "Private Full Day", nl: "Privé hele dag", fr: "Privé journée", de: "Privat Ganztags", pt: "Privado dia inteiro", es: "Privado día completo" },
     capacity: { en: "Private · 2–4 guests", nl: "Privé · 2–4 gasten", fr: "Privé · 2–4 invités", de: "Privat · 2–4 Gäste", pt: "Privado · 2–4 hóspedes", es: "Privado · 2–4 invitados" },
@@ -1466,13 +1471,37 @@ const grid = document.getElementById('activityGrid');
 const activityRowsEl = document.getElementById('activityRows');
 let currentFilter = 'all';
 
+// ---- Tiered per-person pricing ----
+// Some tours (e.g. the private safari) charge a different per-person rate
+// depending on group size. `tiers` maps guest-count -> per-person rate.
+function priceFor(tour, guests) {
+  if (!tour) return null;
+  if (!tour.tiers) return tour.price;
+  const keys = Object.keys(tour.tiers).map(Number).sort((a, b) => a - b);
+  let g = parseInt(guests, 10);
+  if (!g || g < 1) g = keys[0];
+  if (g <= keys[0]) return tour.tiers[keys[0]];
+  if (g >= keys[keys.length - 1]) return tour.tiers[keys[keys.length - 1]];
+  for (const k of keys) { if (g <= k) return tour.tiers[k]; }
+  return tour.tiers[keys[keys.length - 1]];
+}
+function minTierPrice(tour) {
+  if (!tour) return null;
+  return tour.tiers ? Math.min(...Object.values(tour.tiers)) : tour.price;
+}
+// Headline price for a tour: "from R1,795" when tiered, else "R1,795".
+function priceHeadline(tour) {
+  const p = minTierPrice(tour).toLocaleString();
+  return tour.tiers ? `${t('activities.priceFrom')} R${p}` : `R${p}`;
+}
+
 // Build an <option> list as innerHTML for any row's select
 function buildActivityOptions(selectedId) {
   let html = `<option value="">${t('form.activityPlaceholder')}</option>`;
   activities.forEach(a => {
     const sel = a.id === selectedId ? ' selected' : '';
     const name = a.name[currentLang] || a.name.en;
-    html += `<option value="${a.id}"${sel}>${name} — R${a.price.toLocaleString()} pp</option>`;
+    html += `<option value="${a.id}"${sel}>${name} — ${priceHeadline(a)} pp</option>`;
   });
   return html;
 }
@@ -1494,6 +1523,7 @@ function addActivityRow(preselectedId) {
       <input type="number" class="row-guests" min="1" max="20" value="2" inputmode="numeric" required>
     </label>
     <button type="button" class="row-remove" aria-label="${t('form.removeActivity')}" title="${t('form.removeActivity')}">×</button>
+    <div class="row-price" data-row-price aria-live="polite"></div>
   `;
   activityRowsEl.appendChild(row);
   row.querySelector('.row-remove').addEventListener('click', () => {
@@ -1501,6 +1531,24 @@ function addActivityRow(preselectedId) {
     // Re-index data-row attrs so the first row still hides its remove button
     Array.from(activityRowsEl.children).forEach((r, i) => { r.dataset.row = String(i); });
   });
+  row.querySelector('.row-activity').addEventListener('change', () => updateRowPrice(row));
+  row.querySelector('.row-guests').addEventListener('input', () => updateRowPrice(row));
+  updateRowPrice(row);
+}
+
+// Update the live "R… per person × guests = R…" line for one booking row.
+// For tiered tours this applies the correct per-person rate for the guest count.
+function updateRowPrice(row) {
+  const el = row.querySelector('[data-row-price]');
+  if (!el) return;
+  const tour = activities.find(a => a.id === row.querySelector('.row-activity').value);
+  if (!tour) { el.textContent = ''; return; }
+  const g = parseInt(row.querySelector('.row-guests').value, 10) || 0;
+  const pp = priceFor(tour, g);
+  const perPerson = t('activities.perPerson');
+  el.textContent = g > 0
+    ? `R${pp.toLocaleString()} ${perPerson} × ${g} = R${(pp * g).toLocaleString()}`
+    : `R${pp.toLocaleString()} ${perPerson}`;
 }
 
 function refreshAllRowOptions() {
@@ -1517,6 +1565,7 @@ function refreshAllRowOptions() {
     const k = el.dataset.field;
     if (k) el.textContent = t('form.' + k);
   });
+  Array.from(activityRowsEl.querySelectorAll('.activity-row')).forEach(r => updateRowPrice(r));
 }
 
 // Backwards-compatible alias used by setLanguage()
@@ -1554,7 +1603,7 @@ function renderActivities(filter) {
           ${t('activities.viewBrochure')}
         </a>` : ''}
         <div class="activity-foot">
-          <div class="activity-price">R${a.price.toLocaleString()} <small>${t('activities.perPerson')}</small></div>
+          <div class="activity-price">${priceHeadline(a)} <small>${t('activities.perPerson')}</small></div>
           <button class="book-btn" data-activity="${a.id}">${t('activities.bookBtn')}</button>
         </div>
       </div>
@@ -1571,6 +1620,7 @@ function renderActivities(filter) {
       const emptyRow = Array.from(activityRowsEl.querySelectorAll('.row-activity')).find(s => !s.value);
       if (emptyRow) {
         emptyRow.value = id;
+        updateRowPrice(emptyRow.closest('.activity-row'));
       } else {
         addActivityRow(id);
       }
@@ -1649,12 +1699,13 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     const sel = r.querySelector('.row-activity');
     const id = sel.value;
     const tour = activities.find(a => a.id === id);
+    const guests = r.querySelector('.row-guests').value;
     return {
       tour_id: id,
       tour_name: tour ? (tour.name[currentLang] || tour.name.en) : '',
-      price: tour ? tour.price : null,
+      price: tour ? priceFor(tour, guests) : null,
       date: r.querySelector('.row-date').value,
-      guests: r.querySelector('.row-guests').value
+      guests: guests
     };
   }).filter(it => it.tour_id);
 
