@@ -263,6 +263,7 @@ section { padding: 7rem 2.5rem; position: relative; }
 .activity-price small { font-family: 'Manrope', sans-serif; font-size: 0.7rem; color: var(--taupe); font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 0.4rem; }
 .book-btn { background: var(--espresso); color: var(--bone); border: none; padding: 0.7rem 1.3rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; transition: background 0.2s; font-family: inherit; }
 .book-btn:hover { background: var(--terracotta); }
+.price-note { margin-top: 2rem; text-align: center; font-size: 0.82rem; font-style: italic; color: var(--taupe); letter-spacing: 0.01em; }
 
 /* ---- Booking ---- */
 .booking { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%); position: relative; }
@@ -326,6 +327,11 @@ section { padding: 7rem 2.5rem; position: relative; }
 }
 .activity-row .row-remove:hover { background: var(--terracotta); color: var(--bone); border-color: var(--terracotta); }
 .activity-row[data-row="0"] .row-remove { visibility: hidden; pointer-events: none; }
+.activity-row .row-price {
+  grid-column: 1 / -1; font-size: 0.8rem; font-weight: 600;
+  color: var(--terracotta); letter-spacing: 0.01em; margin-top: 0.15rem;
+}
+.activity-row .row-price:empty { display: none; }
 .add-activity-btn {
   display: inline-flex; align-items: center; gap: 0.4rem;
   background: transparent; border: 1px dashed var(--terracotta);
@@ -534,7 +540,7 @@ footer a:hover { color: var(--bone); }
   <div class="hero-content">
     <span class="hero-eyebrow" data-i18n="hero.eyebrow">Marloth Park · Kruger · Mpumalanga</span>
     <h1 class="display" data-i18n="hero.titleHtml">Your African <em>adventure</em> awaits.</h1>
-    <p class="tagline" data-i18n="hero.tagline">From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of fourteen unforgettable experiences, all bookable in one place.</p>
+    <p class="tagline" data-i18n="hero.tagline">From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of seventeen unforgettable experiences, all bookable in one place.</p>
     <div class="hero-actions">
       <a href="#activities" class="btn btn-primary"><span data-i18n="hero.btnBrowse">Browse Activities</span> <span class="btn-arrow">→</span></a>
       <a href="#booking" class="btn btn-ghost" data-i18n="hero.btnBook">Book Now</a>
@@ -571,7 +577,7 @@ footer a:hover { color: var(--bone); }
       </div>
     </div>
     <div class="stats">
-      <div class="stat"><span class="stat-num">14</span><div class="stat-label" data-i18n="stats.experiences">Curated Experiences</div></div>
+      <div class="stat"><span class="stat-num">17</span><div class="stat-label" data-i18n="stats.experiences">Curated Experiences</div></div>
       <div class="stat"><span class="stat-num">3</span><div class="stat-label" data-i18n="stats.countries">Countries Covered</div></div>
       <div class="stat"><span class="stat-num">365</span><div class="stat-label" data-i18n="stats.days">Days a Year</div></div>
       <div class="stat"><span class="stat-num">100%</span><div class="stat-label" data-i18n="stats.local">Locally Operated</div></div>
@@ -585,7 +591,7 @@ footer a:hover { color: var(--bone); }
     <div class="section-head">
       <div>
         <span class="eyebrow" data-i18n="activities.eyebrow">Tours & Activities 2026</span>
-        <h2 class="display" data-i18n="activities.titleHtml">Fourteen ways to <em>fall in love</em> with the bush.</h2>
+        <h2 class="display" data-i18n="activities.titleHtml">Seventeen ways to <em>fall in love</em> with the bush.</h2>
       </div>
       <p class="lead" data-i18n="activities.lead">Filter by category, tap a card to see the full itinerary, and book directly below. All rates are per person in South African Rand.</p>
     </div>
@@ -599,6 +605,7 @@ footer a:hover { color: var(--bone); }
     </div>
 
     <div class="activity-grid" id="activityGrid"></div>
+    <p class="price-note" data-i18n="activities.priceNote">Please note: all rates are subject to change should our suppliers' rates increase.</p>
   </div>
 </section>
 
@@ -800,7 +807,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Your African<br><em>adventure</em> awaits.',
-      tagline: "From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of fourteen unforgettable experiences, all bookable in one place.",
+      tagline: "From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of seventeen unforgettable experiences, all bookable in one place.",
       btnBrowse: "Browse Activities", btnBook: "Book Now"
     },
     intro: {
@@ -812,10 +819,10 @@ const translations = {
     stats: { experiences: "Curated Experiences", countries: "Countries Covered", days: "Days a Year", local: "Locally Operated" },
     activities: {
       eyebrow: "Tours & Activities 2026",
-      titleHtml: 'Fourteen ways to <em>fall in love</em> with the bush.',
+      titleHtml: 'Seventeen ways to <em>fall in love</em> with the bush.',
       lead: "Filter by category, tap a card to see the full itinerary, and book directly below. All rates are per person in South African Rand.",
       filterAll: "All", filterSafari: "Safaris", filterDayTour: "Day Tours", filterRiver: "River Adventures", filterTransfer: "Transfers",
-      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)"
+      perPerson: "/ person", bookBtn: "Book →", viewBrochure: "View full brochure (PDF)", priceNote: "Please note: all rates are subject to change should our suppliers' rates increase.", priceFrom: "from"
     },
     booking: {
       eyebrow: "Reserve Your Spot",
@@ -851,7 +858,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Jouw Afrikaanse<br><em>avontuur</em> wacht.',
-      tagline: "Van ochtendsafari's in het Kruger tot zonsondergangcruises op de Komati — een gecureerde collectie van veertien onvergetelijke ervaringen, allemaal op één plek te boeken.",
+      tagline: "Van ochtendsafari's in het Kruger tot zonsondergangcruises op de Komati — een gecureerde collectie van zeventien onvergetelijke ervaringen, allemaal op één plek te boeken.",
       btnBrowse: "Bekijk activiteiten", btnBook: "Boek nu"
     },
     intro: {
@@ -863,10 +870,10 @@ const translations = {
     stats: { experiences: "Gecureerde ervaringen", countries: "Landen", days: "Dagen per jaar", local: "Lokaal beheerd" },
     activities: {
       eyebrow: "Tours & Activiteiten 2026",
-      titleHtml: 'Veertien manieren om <em>verliefd te worden</em> op de bush.',
+      titleHtml: 'Zeventien manieren om <em>verliefd te worden</em> op de bush.',
       lead: "Filter op categorie, tik op een kaart voor het volledige programma, en boek direct hieronder. Alle tarieven zijn per persoon in Zuid-Afrikaanse Rand.",
       filterAll: "Alle", filterSafari: "Safari's", filterDayTour: "Dagtochten", filterRiver: "Rivieravonturen", filterTransfer: "Transfers",
-      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)"
+      perPerson: "/ persoon", bookBtn: "Boek →", viewBrochure: "Bekijk volledige brochure (PDF)", priceNote: "Let op: alle tarieven kunnen wijzigen als de tarieven van onze leveranciers stijgen.", priceFrom: "vanaf"
     },
     booking: {
       eyebrow: "Reserveer je plek",
@@ -902,7 +909,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Votre <em>aventure</em><br>africaine vous attend.',
-      tagline: "Des safaris à l'aube dans le Kruger aux croisières au coucher du soleil sur le Komati — une collection sélectionnée de quatorze expériences inoubliables, toutes réservables en un seul endroit.",
+      tagline: "Des safaris à l'aube dans le Kruger aux croisières au coucher du soleil sur le Komati — une collection sélectionnée de dix-sept expériences inoubliables, toutes réservables en un seul endroit.",
       btnBrowse: "Voir les activités", btnBook: "Réserver"
     },
     intro: {
@@ -914,10 +921,10 @@ const translations = {
     stats: { experiences: "Expériences sélectionnées", countries: "Pays couverts", days: "Jours par an", local: "Géré localement" },
     activities: {
       eyebrow: "Tours & Activités 2026",
-      titleHtml: 'Quatorze façons de <em>tomber amoureux</em> de la brousse.',
+      titleHtml: 'Dix-sept façons de <em>tomber amoureux</em> de la brousse.',
       lead: "Filtrez par catégorie, appuyez sur une carte pour voir l'itinéraire complet, et réservez directement ci-dessous. Tous les tarifs sont par personne en Rand sud-africain.",
       filterAll: "Toutes", filterSafari: "Safaris", filterDayTour: "Excursions", filterRiver: "Aventures fluviales", filterTransfer: "Transferts",
-      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)"
+      perPerson: "/ personne", bookBtn: "Réserver →", viewBrochure: "Voir la brochure complète (PDF)", priceNote: "Remarque : tous les tarifs sont susceptibles de changer si les tarifs de nos prestataires augmentent.", priceFrom: "à partir de"
     },
     booking: {
       eyebrow: "Réservez votre place",
@@ -953,7 +960,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Dein afrikanisches<br><em>Abenteuer</em> wartet.',
-      tagline: "Von Morgensafaris im Kruger bis zu Sonnenuntergangs-Kreuzfahrten auf dem Komati — eine kuratierte Auswahl von vierzehn unvergesslichen Erlebnissen, alle an einem Ort buchbar.",
+      tagline: "Von Morgensafaris im Kruger bis zu Sonnenuntergangs-Kreuzfahrten auf dem Komati — eine kuratierte Auswahl von siebzehn unvergesslichen Erlebnissen, alle an einem Ort buchbar.",
       btnBrowse: "Aktivitäten entdecken", btnBook: "Jetzt buchen"
     },
     intro: {
@@ -965,10 +972,10 @@ const translations = {
     stats: { experiences: "Kuratierte Erlebnisse", countries: "Länder", days: "Tage im Jahr", local: "Lokal geführt" },
     activities: {
       eyebrow: "Touren & Aktivitäten 2026",
-      titleHtml: 'Vierzehn Wege, sich in den Busch <em>zu verlieben</em>.',
+      titleHtml: 'Siebzehn Wege, sich in den Busch <em>zu verlieben</em>.',
       lead: "Filtere nach Kategorie, tippe auf eine Karte für das volle Programm und buche direkt unten. Alle Preise pro Person in südafrikanischen Rand.",
       filterAll: "Alle", filterSafari: "Safaris", filterDayTour: "Tagestouren", filterRiver: "Flussabenteuer", filterTransfer: "Transfers",
-      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)"
+      perPerson: "/ Person", bookBtn: "Buchen →", viewBrochure: "Vollständige Broschüre ansehen (PDF)", priceNote: "Hinweis: Alle Preise können sich ändern, falls die Preise unserer Anbieter steigen.", priceFrom: "ab"
     },
     booking: {
       eyebrow: "Sichere dir deinen Platz",
@@ -1004,7 +1011,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'A sua <em>aventura</em><br>africana espera.',
-      tagline: "De safáris ao amanhecer no Kruger a cruzeiros ao pôr do sol no Komati — uma coleção selecionada de catorze experiências inesquecíveis, todas reserváveis num só lugar.",
+      tagline: "De safáris ao amanhecer no Kruger a cruzeiros ao pôr do sol no Komati — uma coleção selecionada de dezassete experiências inesquecíveis, todas reserváveis num só lugar.",
       btnBrowse: "Ver atividades", btnBook: "Reservar agora"
     },
     intro: {
@@ -1016,10 +1023,10 @@ const translations = {
     stats: { experiences: "Experiências selecionadas", countries: "Países", days: "Dias por ano", local: "Operação local" },
     activities: {
       eyebrow: "Tours & Atividades 2026",
-      titleHtml: 'Catorze maneiras de se <em>apaixonar</em> pelo bush.',
+      titleHtml: 'Dezassete maneiras de se <em>apaixonar</em> pelo bush.',
       lead: "Filtre por categoria, toque num cartão para ver o itinerário completo, e reserve diretamente abaixo. Todos os valores são por pessoa em Rand sul-africano.",
       filterAll: "Todas", filterSafari: "Safáris", filterDayTour: "Excursões", filterRiver: "Aventuras fluviais", filterTransfer: "Transferes",
-      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)"
+      perPerson: "/ pessoa", bookBtn: "Reservar →", viewBrochure: "Ver brochura completa (PDF)", priceNote: "Nota: todas as tarifas estão sujeitas a alteração caso as tarifas dos nossos fornecedores aumentem.", priceFrom: "desde"
     },
     booking: {
       eyebrow: "Reserve o seu lugar",
@@ -1055,7 +1062,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Tu <em>aventura</em><br>africana te espera.',
-      tagline: "Desde safaris al amanecer en el Kruger hasta cruceros al atardecer en el Komati — una colección seleccionada de catorce experiencias inolvidables, todas reservables en un solo lugar.",
+      tagline: "Desde safaris al amanecer en el Kruger hasta cruceros al atardecer en el Komati — una colección seleccionada de diecisiete experiencias inolvidables, todas reservables en un solo lugar.",
       btnBrowse: "Ver actividades", btnBook: "Reservar ahora"
     },
     intro: {
@@ -1067,10 +1074,10 @@ const translations = {
     stats: { experiences: "Experiencias seleccionadas", countries: "Países", days: "Días al año", local: "Gestión local" },
     activities: {
       eyebrow: "Tours y actividades 2026",
-      titleHtml: 'Catorce formas de <em>enamorarte</em> de la sabana.',
+      titleHtml: 'Diecisiete formas de <em>enamorarte</em> de la sabana.',
       lead: "Filtra por categoría, toca una tarjeta para ver el itinerario completo, y reserva directamente abajo. Todas las tarifas son por persona en Rand sudafricano.",
       filterAll: "Todas", filterSafari: "Safaris", filterDayTour: "Excursiones", filterRiver: "Aventuras fluviales", filterTransfer: "Traslados",
-      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)"
+      perPerson: "/ persona", bookBtn: "Reservar →", viewBrochure: "Ver folleto completo (PDF)", priceNote: "Nota: todas las tarifas están sujetas a cambios si aumentan las tarifas de nuestros proveedores.", priceFrom: "desde"
     },
     booking: {
       eyebrow: "Reserva tu lugar",
@@ -1106,7 +1113,7 @@ const translations = {
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'La tua <em>avventura</em><br>africana ti aspetta.',
-      tagline: "Dai safari all'alba nel Kruger alle crociere al tramonto sul Komati — una raccolta selezionata di quattordici esperienze indimenticabili, tutte prenotabili in un unico posto.",
+      tagline: "Dai safari all'alba nel Kruger alle crociere al tramonto sul Komati — una raccolta selezionata di diciassette esperienze indimenticabili, tutte prenotabili in un unico posto.",
       btnBrowse: "Scopri le attività", btnBook: "Prenota ora"
     },
     intro: {
@@ -1118,10 +1125,10 @@ const translations = {
     stats: { experiences: "Esperienze selezionate", countries: "Paesi coperti", days: "Giorni all'anno", local: "Gestito localmente" },
     activities: {
       eyebrow: "Tour e Attività 2026",
-      titleHtml: 'Quattordici modi per <em>innamorarsi</em> della savana.',
+      titleHtml: 'Diciassette modi per <em>innamorarsi</em> della savana.',
       lead: "Filtra per categoria, tocca una scheda per vedere l'itinerario completo e prenota direttamente qui sotto. Tutte le tariffe sono per persona in Rand sudafricani.",
       filterAll: "Tutte", filterSafari: "Safari", filterDayTour: "Escursioni", filterRiver: "Avventure sul fiume", filterTransfer: "Trasferimenti",
-      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)"
+      perPerson: "/ persona", bookBtn: "Prenota →", viewBrochure: "Vedi la brochure completa (PDF)", priceNote: "Nota: tutte le tariffe sono soggette a modifiche in caso di aumento delle tariffe dei nostri fornitori.", priceFrom: "da"
     },
     booking: {
       eyebrow: "Prenota il tuo posto",
@@ -1187,6 +1194,34 @@ const activities = [
     }
   },
   {
+    id: "6461940000001213001", category: "safari", duration: "Full day · ±9 hrs", price: 1795, tiers: { 2: 2495, 3: 1895, 4: 1795 }, img: "images/private-safari.png", pdf: "pdfs/kruger-safaris.pdf",
+    name: { en: "Private Full-Day Kruger Safari", nl: "Privé hele dag Kruger Safari", fr: "Safari Kruger privé — journée complète", de: "Private Ganztags-Kruger-Safari", pt: "Safári Kruger privado — dia inteiro", es: "Safari Kruger privado — día completo" },
+    tag: { en: "Private Full Day", nl: "Privé hele dag", fr: "Privé journée", de: "Privat Ganztags", pt: "Privado dia inteiro", es: "Privado día completo" },
+    capacity: { en: "Private · 2–4 guests", nl: "Privé · 2–4 gasten", fr: "Privé · 2–4 invités", de: "Privat · 2–4 Gäste", pt: "Privado · 2–4 hóspedes", es: "Privado · 2–4 invitados" },
+    desc: {
+      en: "Your own private open-vehicle Big 5 safari in the Kruger — no sharing, just your group. Per-person rate by group size: 2 guests R2,495 · 3 guests R1,895 · 4 guests R1,795. Excludes SANParks conservation fee, payable in cash or card at the Kruger gate on arrival — R602 per adult, R300 per child (2–11).",
+      nl: "Je eigen privé Big 5-safari in een open voertuig in het Kruger — geen delen, alleen jouw groep. Prijs per persoon naar groepsgrootte: 2 gasten R2 495 · 3 gasten R1 895 · 4 gasten R1 795. Exclusief SANParks-natuurbehoudsheffing, te betalen in contanten of met kaart bij de Kruger-poort bij aankomst — R602 per volwassene, R300 per kind (2–11).",
+      fr: "Votre propre safari privé Big 5 en véhicule ouvert dans le Kruger — sans partage, rien que votre groupe. Tarif par personne selon la taille du groupe : 2 personnes 2 495 R · 3 personnes 1 895 R · 4 personnes 1 795 R. Hors frais de conservation SANParks, payables en espèces ou par carte à la porte du Kruger à l'arrivée — 602 R par adulte, 300 R par enfant (2–11 ans).",
+      de: "Deine eigene private Big-5-Safari im offenen Fahrzeug im Kruger — kein Teilen, nur deine Gruppe. Preis pro Person je nach Gruppengröße: 2 Gäste 2 495 R · 3 Gäste 1 895 R · 4 Gäste 1 795 R. Zzgl. SANParks-Naturschutzgebühr, bei Ankunft am Kruger-Tor in bar oder mit Karte zu zahlen — 602 R pro Erwachsenem, 300 R pro Kind (2–11).",
+      pt: "O seu próprio safári privado Big 5 em veículo aberto no Kruger — sem partilha, só o seu grupo. Preço por pessoa consoante o tamanho do grupo: 2 hóspedes R2 495 · 3 hóspedes R1 895 · 4 hóspedes R1 795. Exclui a taxa de conservação SANParks, a pagar em dinheiro ou cartão no portão do Kruger à chegada — R602 por adulto, R300 por criança (2–11).",
+      es: "Tu propio safari privado Big 5 en vehículo abierto en el Kruger — sin compartir, solo tu grupo. Precio por persona según el tamaño del grupo: 2 personas R2 495 · 3 personas R1 895 · 4 personas R1 795. No incluye la tarifa de conservación SANParks, pagadera en efectivo o con tarjeta en la puerta del Kruger a la llegada — R602 por adulto, R300 por niño (2–11)."
+    }
+  },
+  {
+    id: "6461940000001214001", category: "safari", duration: "Sunrise or sunset · ±3 hrs", price: 950, img: "images/slow-safari.png", pdf: null,
+    name: { en: "Slow Safari — Marloth Park", nl: "Slow Safari — Marloth Park", fr: "Slow Safari — Marloth Park", de: "Slow Safari — Marloth Park", pt: "Slow Safari — Marloth Park", es: "Slow Safari — Marloth Park" },
+    tag: { en: "SLOWfari", nl: "SLOWfari", fr: "SLOWfari", de: "SLOWfari", pt: "SLOWfari", es: "SLOWfari" },
+    capacity: { en: "Min 4 guests", nl: "Min 4 gasten", fr: "Min 4 invités", de: "Min. 4 Gäste", pt: "Mín 4 hóspedes", es: "Mín 4 invitados" },
+    desc: {
+      en: "A relaxed 'SLOWfari' inside Marloth Park at sunrise or sunset — a scenic drive along the Crocodile River with access to exclusive routes other operators can't reach. Expert local guide, drinks and snacks included. Excludes conservation fees.",
+      nl: "Een ontspannen 'SLOWfari' in Marloth Park bij zonsopgang of zonsondergang — een schilderachtige rit langs de Krokodilrivier met toegang tot exclusieve routes die andere aanbieders niet kunnen bereiken. Deskundige lokale gids, drankjes en snacks inbegrepen. Exclusief natuurbehoudsheffingen.",
+      fr: "Un « SLOWfari » tranquille dans Marloth Park au lever ou au coucher du soleil — une route pittoresque le long de la rivière Crocodile avec accès à des itinéraires exclusifs inaccessibles aux autres opérateurs. Guide local expert, boissons et collations inclus. Hors frais de conservation.",
+      de: "Eine entspannte „SLOWfari“ im Marloth Park bei Sonnenauf- oder -untergang — eine malerische Fahrt entlang des Crocodile River mit Zugang zu exklusiven Routen, die andere Anbieter nicht erreichen. Erfahrener lokaler Guide, Getränke und Snacks inklusive. Zzgl. Naturschutzgebühren.",
+      pt: "Um 'SLOWfari' tranquilo dentro do Marloth Park ao nascer ou pôr do sol — um passeio cénico ao longo do Rio Crocodile com acesso a rotas exclusivas que outros operadores não alcançam. Guia local especializado, bebidas e snacks incluídos. Exclui taxas de conservação.",
+      es: "Un 'SLOWfari' relajado dentro de Marloth Park al amanecer o al atardecer — un recorrido escénico a lo largo del río Crocodile con acceso a rutas exclusivas que otros operadores no alcanzan. Guía local experto, bebidas y aperitivos incluidos. No incluye tarifas de conservación."
+    }
+  },
+  {
     id: "6461940000001202001", category: "safari", duration: "14:50 – 21:30", price: 2795, img: "images/bush-braai.jpg", pdf: "pdfs/bush-braai.pdf",
     name: { en: "Sunset Bush Braai Safari", nl: "Sunset Bush Braai Safari", fr: "Safari Bush Braai au coucher du soleil", de: "Sunset Bush Braai Safari", pt: "Safári Bush Braai ao pôr do sol", es: "Safari Bush Braai al atardecer" },
     tag: { en: "Signature", nl: "Signature", fr: "Signature", de: "Signature", pt: "Signature", es: "Signature" },
@@ -1226,6 +1261,20 @@ const activities = [
       de: "Nachttiere in Marloth Park mit modernster Wärmebildkamera-Technologie. Sieh, was Scheinwerfer niemals zeigen konnten.",
       pt: "Vida selvagem noturna em Marloth Park com tecnologia de câmara térmica de última geração. Veja o que os holofotes nunca conseguiram mostrar.",
       es: "Vida silvestre nocturna en Marloth Park con tecnología de cámara térmica de última generación. Mira lo que los focos nunca pudieron mostrar."
+    }
+  },
+  {
+    id: "6461940000001215001", category: "safari", duration: "1h 30min", price: 950, img: "images/horse-riding.png", pdf: null,
+    name: { en: "Bushveld Horseback Outride", nl: "Bushveld-outride te paard", fr: "Balade à cheval dans le bushveld", de: "Bushveld-Ausritt zu Pferd", pt: "Passeio a cavalo no bushveld", es: "Cabalgata por el bushveld" },
+    tag: { en: "Horse Safari", nl: "Paardensafari", fr: "Safari à cheval", de: "Pferdesafari", pt: "Safári a cavalo", es: "Safari a caballo" },
+    capacity: { en: "All riding levels", nl: "Alle rijniveaus", fr: "Tous niveaux", de: "Alle Reitlevel", pt: "Todos os níveis", es: "Todos los niveles" },
+    desc: {
+      en: "Experience the beauty of the bushveld on horseback. Ride along the Kruger fence line, cross open plains, and take in stunning views and close wildlife encounters.",
+      nl: "Ervaar de schoonheid van de bushveld te paard. Rijd langs de Kruger-hekgrens, doorkruis open vlaktes en geniet van prachtige uitzichten en ontmoetingen met wilde dieren.",
+      fr: "Découvrez la beauté du bushveld à cheval. Longez la clôture du Kruger, traversez les plaines ouvertes et profitez de vues magnifiques et de rencontres avec la faune.",
+      de: "Erlebe die Schönheit des Bushvelds zu Pferd. Reite entlang des Kruger-Zauns, durchquere offene Ebenen und genieße atemberaubende Ausblicke und Begegnungen mit Wildtieren.",
+      pt: "Descubra a beleza do bushveld a cavalo. Cavalgue ao longo da vedação do Kruger, atravesse planícies abertas e desfrute de vistas deslumbrantes e encontros com a vida selvagem.",
+      es: "Descubre la belleza del bushveld a caballo. Cabalga a lo largo de la valla del Kruger, cruza llanuras abiertas y disfruta de vistas impresionantes y encuentros con la fauna."
     }
   },
   {
@@ -1422,13 +1471,37 @@ const grid = document.getElementById('activityGrid');
 const activityRowsEl = document.getElementById('activityRows');
 let currentFilter = 'all';
 
+// ---- Tiered per-person pricing ----
+// Some tours (e.g. the private safari) charge a different per-person rate
+// depending on group size. `tiers` maps guest-count -> per-person rate.
+function priceFor(tour, guests) {
+  if (!tour) return null;
+  if (!tour.tiers) return tour.price;
+  const keys = Object.keys(tour.tiers).map(Number).sort((a, b) => a - b);
+  let g = parseInt(guests, 10);
+  if (!g || g < 1) g = keys[0];
+  if (g <= keys[0]) return tour.tiers[keys[0]];
+  if (g >= keys[keys.length - 1]) return tour.tiers[keys[keys.length - 1]];
+  for (const k of keys) { if (g <= k) return tour.tiers[k]; }
+  return tour.tiers[keys[keys.length - 1]];
+}
+function minTierPrice(tour) {
+  if (!tour) return null;
+  return tour.tiers ? Math.min(...Object.values(tour.tiers)) : tour.price;
+}
+// Headline price for a tour: "from R1,795" when tiered, else "R1,795".
+function priceHeadline(tour) {
+  const p = minTierPrice(tour).toLocaleString();
+  return tour.tiers ? `${t('activities.priceFrom')} R${p}` : `R${p}`;
+}
+
 // Build an <option> list as innerHTML for any row's select
 function buildActivityOptions(selectedId) {
   let html = `<option value="">${t('form.activityPlaceholder')}</option>`;
   activities.forEach(a => {
     const sel = a.id === selectedId ? ' selected' : '';
     const name = a.name[currentLang] || a.name.en;
-    html += `<option value="${a.id}"${sel}>${name} — R${a.price.toLocaleString()} pp</option>`;
+    html += `<option value="${a.id}"${sel}>${name} — ${priceHeadline(a)} pp</option>`;
   });
   return html;
 }
@@ -1450,6 +1523,7 @@ function addActivityRow(preselectedId) {
       <input type="number" class="row-guests" min="1" max="20" value="2" inputmode="numeric" required>
     </label>
     <button type="button" class="row-remove" aria-label="${t('form.removeActivity')}" title="${t('form.removeActivity')}">×</button>
+    <div class="row-price" data-row-price aria-live="polite"></div>
   `;
   activityRowsEl.appendChild(row);
   row.querySelector('.row-remove').addEventListener('click', () => {
@@ -1457,6 +1531,24 @@ function addActivityRow(preselectedId) {
     // Re-index data-row attrs so the first row still hides its remove button
     Array.from(activityRowsEl.children).forEach((r, i) => { r.dataset.row = String(i); });
   });
+  row.querySelector('.row-activity').addEventListener('change', () => updateRowPrice(row));
+  row.querySelector('.row-guests').addEventListener('input', () => updateRowPrice(row));
+  updateRowPrice(row);
+}
+
+// Update the live "R… per person × guests = R…" line for one booking row.
+// For tiered tours this applies the correct per-person rate for the guest count.
+function updateRowPrice(row) {
+  const el = row.querySelector('[data-row-price]');
+  if (!el) return;
+  const tour = activities.find(a => a.id === row.querySelector('.row-activity').value);
+  if (!tour) { el.textContent = ''; return; }
+  const g = parseInt(row.querySelector('.row-guests').value, 10) || 0;
+  const pp = priceFor(tour, g);
+  const perPerson = t('activities.perPerson');
+  el.textContent = g > 0
+    ? `R${pp.toLocaleString()} ${perPerson} × ${g} = R${(pp * g).toLocaleString()}`
+    : `R${pp.toLocaleString()} ${perPerson}`;
 }
 
 function refreshAllRowOptions() {
@@ -1473,6 +1565,7 @@ function refreshAllRowOptions() {
     const k = el.dataset.field;
     if (k) el.textContent = t('form.' + k);
   });
+  Array.from(activityRowsEl.querySelectorAll('.activity-row')).forEach(r => updateRowPrice(r));
 }
 
 // Backwards-compatible alias used by setLanguage()
@@ -1510,7 +1603,7 @@ function renderActivities(filter) {
           ${t('activities.viewBrochure')}
         </a>` : ''}
         <div class="activity-foot">
-          <div class="activity-price">R${a.price.toLocaleString()} <small>${t('activities.perPerson')}</small></div>
+          <div class="activity-price">${priceHeadline(a)} <small>${t('activities.perPerson')}</small></div>
           <button class="book-btn" data-activity="${a.id}">${t('activities.bookBtn')}</button>
         </div>
       </div>
@@ -1527,6 +1620,7 @@ function renderActivities(filter) {
       const emptyRow = Array.from(activityRowsEl.querySelectorAll('.row-activity')).find(s => !s.value);
       if (emptyRow) {
         emptyRow.value = id;
+        updateRowPrice(emptyRow.closest('.activity-row'));
       } else {
         addActivityRow(id);
       }
@@ -1605,12 +1699,13 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     const sel = r.querySelector('.row-activity');
     const id = sel.value;
     const tour = activities.find(a => a.id === id);
+    const guests = r.querySelector('.row-guests').value;
     return {
       tour_id: id,
       tour_name: tour ? (tour.name[currentLang] || tour.name.en) : '',
-      price: tour ? tour.price : null,
+      price: tour ? priceFor(tour, guests) : null,
       date: r.querySelector('.row-date').value,
-      guests: r.querySelector('.row-guests').value
+      guests: guests
     };
   }).filter(it => it.tour_id);
 
