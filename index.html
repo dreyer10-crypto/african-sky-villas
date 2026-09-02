@@ -358,6 +358,15 @@ section { padding: 7rem 2.5rem; position: relative; }
 .form-success { display: none; padding: 1.5rem; background: rgba(196, 77, 44, 0.08); border-left: 3px solid var(--terracotta); border-radius: 4px; margin-bottom: 1.5rem; }
 .form-success.show { display: block; }
 .form-success strong { color: var(--terracotta); }
+.zambia-cta { display: none; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, #C44D2C 0%, #1A1006 100%); color: #FBF6EE; padding: 1.6rem 1.75rem; }
+.zambia-cta.show { display: flex; }
+.zambia-cta-text { flex: 1; min-width: 220px; }
+.zambia-eyebrow { display: block; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #D89B3A; margin-bottom: 0.4rem; font-weight: 600; }
+.zambia-cta h4 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.4rem; margin: 0 0 0.4rem; color: #FBF6EE; }
+.zambia-cta p { font-size: 0.9rem; line-height: 1.55; margin: 0; color: rgba(251,246,238,0.9); }
+.zambia-btn { flex-shrink: 0; display: inline-block; background: #D89B3A; color: #1A1006; font-weight: 700; text-decoration: none; padding: 0.85rem 1.5rem; border-radius: 999px; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s, transform 0.2s; }
+.zambia-btn:hover { background: #FBF6EE; transform: translateY(-1px); }
+@media (max-width: 560px) { .zambia-cta { flex-direction: column; align-items: stretch; padding: 1.4rem; } .zambia-btn { text-align: center; width: 100%; } }
 
 /* ---- Footer ---- */
 footer { background: var(--espresso); color: var(--cream); padding: 5rem 2.5rem 2.5rem; }
@@ -628,6 +637,14 @@ footer a:hover { color: var(--bone); }
         <h3 data-i18n="form.title">Book an activity</h3>
         <p class="form-sub" data-i18n="form.sub">We'll respond within 24 hours.</p>
         <div class="form-success" id="successMsg" data-i18n="form.success"><strong>Thank you!</strong> Your booking request has been sent.</div>
+        <div class="zambia-cta" id="zambiaCta">
+          <div class="zambia-cta-text">
+            <span class="zambia-eyebrow" data-i18n="zambia.eyebrow">Part of the African Sky Collection</span>
+            <h4 data-i18n="zambia.title">Now explore Zambia</h4>
+            <p data-i18n="zambia.desc">Booked with us? Discover Thorn Tree — our private bush manor on the edge of Victoria Falls. Rooms, guided experiences and easy booking, all in one place.</p>
+          </div>
+          <a href="thorntree.html" target="_blank" rel="noopener" class="zambia-btn" data-i18n="zambia.btn">Explore Zambia &#8594;</a>
+        </div>
         <form id="bookingForm" novalidate>
           <div class="form-row">
             <div class="form-field"><label for="firstName" data-i18n="form.firstName">First Name</label><input type="text" id="firstName" name="firstName" required></div>
@@ -844,6 +861,12 @@ const translations = {
       note: "No payment is taken now. We'll send you a secure link after confirming availability.",
       activities: "Activities", addActivity: "Add another activity", removeActivity: "Remove this activity",
       submitting: "Sending…", errorMsg: 'Sorry, something went wrong. Please try again or WhatsApp us at +27 76 209 5334.'
+    },
+    zambia: {
+      eyebrow: "Part of the African Sky Collection",
+      title: "Now explore Zambia",
+      desc: "Booked with us? Discover Thorn Tree — our private bush manor on the edge of Victoria Falls. Rooms, guided experiences and easy booking, all in one place.",
+      btn: "Explore Zambia →"
     },
     footer: {
       brandDesc: "Curated tours and activities from the heart of Marloth Park — gateway to the Kruger, Eswatini and Mozambique.",
@@ -1833,6 +1856,8 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     document.getElementById('bookingForm').style.display = 'none';
     const success = document.getElementById('successMsg');
     success.style.display = 'block';
+    const zc = document.getElementById('zambiaCta');
+    if (zc) zc.classList.add('show');
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     track('booking_submit', {
