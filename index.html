@@ -366,6 +366,15 @@ section { padding: 7rem 2.5rem; position: relative; }
 .zambia-cta p { font-size: 0.9rem; line-height: 1.55; margin: 0; color: rgba(251,246,238,0.9); }
 .zambia-btn { flex-shrink: 0; display: inline-block; background: #D89B3A; color: #1A1006; font-weight: 700; text-decoration: none; padding: 0.85rem 1.5rem; border-radius: 999px; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s, transform 0.2s; }
 .zambia-btn:hover { background: #FBF6EE; transform: translateY(-1px); }
+.zambia-band { position: relative; padding: 6rem 1.5rem; background: #1A1006 center/cover no-repeat; background-image: url('images/thorntree-zambia.jpg'); display: flex; justify-content: center; overflow: hidden; }
+.zambia-band-overlay { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(26,16,6,0.88) 0%, rgba(26,16,6,0.55) 55%, rgba(154,58,31,0.5) 100%); }
+.zambia-band-inner { position: relative; max-width: 720px; text-align: center; color: #FBF6EE; }
+.zambia-band-eyebrow { display: block; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber-soft); font-weight: 600; margin-bottom: 1rem; }
+.zambia-band-title { color: #FBF6EE; margin-bottom: 1rem; }
+.zambia-band-lead { font-size: 1.05rem; line-height: 1.6; color: rgba(251,246,238,0.9); margin: 0 auto 2rem; max-width: 560px; }
+.zambia-band-btn { display: inline-block; background: var(--amber); color: var(--espresso); font-weight: 700; text-decoration: none; padding: 1rem 2rem; border-radius: 999px; font-size: 1rem; transition: background 0.2s, transform 0.2s; }
+.zambia-band-btn:hover { background: #FBF6EE; transform: translateY(-2px); }
+@media (max-width: 560px) { .zambia-band { padding: 4rem 1.25rem; } .zambia-band-btn { width: 100%; text-align: center; } }
 @media (max-width: 560px) { .zambia-cta { flex-direction: column; align-items: stretch; padding: 1.4rem; } .zambia-btn { text-align: center; width: 100%; } }
 
 /* ---- Footer ---- */
@@ -520,6 +529,7 @@ footer a:hover { color: var(--bone); }
     <li class="hide-mobile"><a href="#activities" data-i18n="nav.activities">Activities</a></li>
     <li class="hide-mobile"><a href="#booking" data-i18n="nav.booking">Booking</a></li>
     <li class="hide-mobile"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    <li class="hide-mobile"><a href="#zambia" data-i18n="nav.thorntree">Thorn Tree</a></li>
     <li class="hide-mobile"><a href="https://www.africanskyvillas.com/" target="_blank" rel="noopener" class="nav-link-external" data-i18n="nav.mainSite">Main Site</a></li>
     <li>
       <div class="lang-switcher" id="langSwitcher">
@@ -615,6 +625,17 @@ footer a:hover { color: var(--bone); }
 
     <div class="activity-grid" id="activityGrid"></div>
     <p class="price-note" data-i18n="activities.priceNote">Please note: all rates are subject to change should our suppliers' rates increase.</p>
+  </div>
+</section>
+
+<!-- ===== EXPLORE ZAMBIA (Thorn Tree) ===== -->
+<section class="zambia-band" id="zambia">
+  <div class="zambia-band-overlay"></div>
+  <div class="container zambia-band-inner">
+    <span class="zambia-band-eyebrow" data-i18n="zambiaBand.eyebrow">Part of the African Sky Collection</span>
+    <h2 class="display zambia-band-title" data-i18n="zambiaBand.title">Now explore Thorn Tree, Zambia</h2>
+    <p class="zambia-band-lead" data-i18n="zambiaBand.lead">A private five-bedroom bush manor on the edge of Victoria Falls. Browse the rooms, guided experiences and easy online booking — all part of your African Sky journey.</p>
+    <a href="thorntree.html" target="_blank" rel="noopener" class="zambia-band-btn" data-i18n="zambiaBand.btn">Browse Thorn Tree &#8594;</a>
   </div>
 </section>
 
@@ -821,7 +842,13 @@ function initCookieConsent() {
 // ============================
 const translations = {
   en: {
-    nav: { activities: "Activities", booking: "Booking", contact: "Contact", mainSite: "Main Site", bookTour: "Book a Tour" },
+    nav: { activities: "Activities", booking: "Booking", contact: "Contact", mainSite: "Main Site", bookTour: "Book a Tour", thorntree: "Thorn Tree" },
+    zambiaBand: {
+      eyebrow: "Part of the African Sky Collection",
+      title: "Now explore Thorn Tree, Zambia",
+      lead: "A private five-bedroom bush manor on the edge of Victoria Falls. Browse the rooms, guided experiences and easy online booking — all part of your African Sky journey.",
+      btn: "Browse Thorn Tree →"
+    },
     hero: {
       eyebrow: "Marloth Park · Kruger · Mpumalanga",
       titleHtml: 'Your African<br><em>adventure</em> awaits.',
