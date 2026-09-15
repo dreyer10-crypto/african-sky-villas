@@ -145,6 +145,21 @@
   .mobmenu{display:none;flex-direction:column;background:var(--bone);border-bottom:1px solid var(--line);padding:8px 24px 16px}
   .mobmenu a{padding:12px 0;text-decoration:none;font-weight:600;border-bottom:1px solid var(--line-soft);color:var(--charcoal)}
   .mobmenu.open{display:flex}
+
+  /* language switcher */
+  .lang-switcher{position:relative}
+  .topnav .lang-trigger{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-family:inherit;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--espresso);cursor:pointer;transition:border-color .2s}
+  .topnav .lang-trigger:hover{border-color:var(--terracotta)}
+  .lang-trigger .chev{font-size:.7em;opacity:.7;transition:transform .2s}
+  .lang-switcher.open .lang-trigger .chev{transform:rotate(180deg)}
+  .lang-menu{position:absolute;top:calc(100% + .5rem);right:0;background:var(--bone);border:1px solid var(--line);border-radius:10px;padding:.4rem;min-width:180px;box-shadow:0 14px 40px rgba(26,16,6,.16);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:200}
+  .lang-switcher.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .lang-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.6rem .8rem;background:transparent;border:0;border-radius:6px;font-family:inherit;font-size:.9rem;color:var(--espresso);cursor:pointer;text-align:left;transition:background .15s}
+  .lang-menu button:hover{background:var(--cream)}
+  .lang-menu button.active{background:var(--cream-deep);color:var(--terracotta);font-weight:600}
+  .lang-menu .lang-code{font-size:.7rem;letter-spacing:.14em;color:var(--taupe);font-weight:500}
+  .lang-menu button.active .lang-code{color:var(--terracotta)}
+  @media(max-width:860px){.topnav .lang-switcher{margin-left:auto}.lang-menu{max-width:calc(100vw - 2rem)}}
 </style>
 </head>
 <body>
@@ -153,18 +168,32 @@
   <div class="row">
     <a class="brand" href="index.html"><img src="images/logo.jpg" alt="African Sky"><b>African Sky <span>Beachside</span></b></a>
     <div class="navlinks">
-      <a href="#apartment">The Apartment</a>
-      <a href="#experiences">Cape Town Experiences</a>
-      <a href="african-sky-villas-tours-and-activities.html">Marloth Park ↗</a>
-      <a href="#book" class="navcta">Enquire</a>
+      <a href="#apartment" data-i18n="nav.apartment">The Apartment</a>
+      <a href="#experiences" data-i18n="nav.experiences">Cape Town Experiences</a>
+      <a href="african-sky-villas-tours-and-activities.html" data-i18n="nav.marloth">Marloth Park ↗</a>
+      <a href="#book" class="navcta" data-i18n="nav.enquire">Enquire</a>
+    </div>
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-trigger" id="langTrigger" aria-label="Choose language" aria-expanded="false">
+        <span id="langCurrent">EN</span><span class="chev">▾</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button data-lang="en" role="menuitem"><span>English</span><span class="lang-code">EN</span></button>
+        <button data-lang="nl" role="menuitem"><span>Nederlands</span><span class="lang-code">NL</span></button>
+        <button data-lang="fr" role="menuitem"><span>Français</span><span class="lang-code">FR</span></button>
+        <button data-lang="de" role="menuitem"><span>Deutsch</span><span class="lang-code">DE</span></button>
+        <button data-lang="pt" role="menuitem"><span>Português</span><span class="lang-code">PT</span></button>
+        <button data-lang="es" role="menuitem"><span>Español</span><span class="lang-code">ES</span></button>
+        <button data-lang="it" role="menuitem"><span>Italiano</span><span class="lang-code">IT</span></button>
+      </div>
     </div>
     <button class="hamb" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">☰</button>
   </div>
   <div class="mobmenu" id="mm">
-    <a href="#apartment">The Apartment</a>
-    <a href="#experiences">Cape Town Experiences</a>
-    <a href="african-sky-villas-tours-and-activities.html">Marloth Park Tours ↗</a>
-    <a href="#book">Enquire</a>
+    <a href="#apartment" data-i18n="nav.apartment">The Apartment</a>
+    <a href="#experiences" data-i18n="nav.experiences">Cape Town Experiences</a>
+    <a href="african-sky-villas-tours-and-activities.html" data-i18n="nav.marlothMobile">Marloth Park Tours ↗</a>
+    <a href="#book" data-i18n="nav.enquire">Enquire</a>
   </div>
 </nav>
 
@@ -177,13 +206,13 @@
       <a href="african-sky-beachside-escape.html" class="prop-tab active" aria-current="page">Beachside Escape <small>Big Bay · Cape Town</small></a>
       <a href="thorntree.html" class="prop-tab">Thorn Tree House <small>Victoria Falls · Zambia</small></a>
     </nav>
-    <span class="eyebrow">Big Bay · Blouberg · Cape Town</span>
-    <h1>African Sky <em>Beachside</em> Escape</h1>
-    <p>A bright, contemporary self-catering home at Seaside Village — minutes from the white sand of Big Bay, with Table Mountain framed across the bay.</p>
-    <div class="facts"><span><b>3</b> bedrooms</span><span><b>2</b> bathrooms</span><span>Sleeps <b>6</b></span><span>Self-catering</span></div>
+    <span class="eyebrow" data-i18n="hero.eyebrow">Big Bay · Blouberg · Cape Town</span>
+    <h1 data-i18n="hero.titleHtml">African Sky <em>Beachside</em> Escape</h1>
+    <p data-i18n="hero.intro">A bright, contemporary self-catering home at Seaside Village — minutes from the white sand of Big Bay, with Table Mountain framed across the bay.</p>
+    <div class="facts"><span data-i18n="hero.fact1"><b>3</b> bedrooms</span><span data-i18n="hero.fact2"><b>2</b> bathrooms</span><span data-i18n="hero.fact3">Sleeps <b>6</b></span><span data-i18n="hero.fact4">Self-catering</span></div>
     <div class="btns">
-      <a href="#experiences" class="btn primary">Explore Cape Town →</a>
-      <a href="#book" class="btn ghost">Enquire to stay</a>
+      <a href="#experiences" class="btn primary" data-i18n="hero.btnExplore">Explore Cape Town →</a>
+      <a href="#book" class="btn ghost" data-i18n="hero.btnEnquire">Enquire to stay</a>
     </div>
   </div>
 </header>
@@ -192,25 +221,25 @@
 <section id="apartment">
   <div class="wrap apt">
     <div class="copy">
-      <span class="eyebrow">The Apartment</span>
-      <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:12px" class="d">Sea air, open plan, <em style="font-style:italic;color:var(--terracotta)">and space to unwind.</em></h2>
-      <p>Set in the secure Seaside Village complex at Big Bay, the apartment opens into a light-filled, open-plan living, dining and kitchen space that spills onto a private patio. Three restful bedrooms and two full bathrooms make it easy for a family or two couples to settle in for a Cape Town stay.</p>
-      <p>You're a short stroll from Big Bay beach — a favourite for long walks, sundowners and world-class kitesurfing — with Bloubergstrand's restaurants and that postcard Table Mountain view just around the coast.</p>
+      <span class="eyebrow" data-i18n="apt.eyebrow">The Apartment</span>
+      <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:12px" class="d" data-i18n="apt.titleHtml">Sea air, open plan, <em style="font-style:italic;color:var(--terracotta)">and space to unwind.</em></h2>
+      <p data-i18n="apt.para1">Set in the secure Seaside Village complex at Big Bay, the apartment opens into a light-filled, open-plan living, dining and kitchen space that spills onto a private patio. Three restful bedrooms and two full bathrooms make it easy for a family or two couples to settle in for a Cape Town stay.</p>
+      <p data-i18n="apt.para2">You're a short stroll from Big Bay beach — a favourite for long walks, sundowners and world-class kitesurfing — with Bloubergstrand's restaurants and that postcard Table Mountain view just around the coast.</p>
       <div class="specs">
-        <div class="spec"><b>3</b><span>Bedrooms</span></div>
-        <div class="spec"><b>2</b><span>Bathrooms</span></div>
-        <div class="spec"><b>6</b><span>Guests</span></div>
-        <div class="spec"><b>★</b><span>Big Bay</span></div>
+        <div class="spec"><b>3</b><span data-i18n="apt.specBedrooms">Bedrooms</span></div>
+        <div class="spec"><b>2</b><span data-i18n="apt.specBathrooms">Bathrooms</span></div>
+        <div class="spec"><b>6</b><span data-i18n="apt.specGuests">Guests</span></div>
+        <div class="spec"><b>★</b><span data-i18n="apt.specBigBay">Big Bay</span></div>
       </div>
       <ul class="amen">
-        <li>Full self-catering kitchen</li>
-        <li>Open-plan living &amp; dining</li>
-        <li>Private patio &amp; braai</li>
-        <li>Secure complex parking</li>
-        <li>Smart TV &amp; Wi-Fi</li>
-        <li>Walk to Big Bay beach</li>
-        <li>Table Mountain views nearby</li>
-        <li>Restaurants a short drive</li>
+        <li data-i18n="apt.am1">Full self-catering kitchen</li>
+        <li data-i18n="apt.am2">Open-plan living &amp; dining</li>
+        <li data-i18n="apt.am3">Private patio &amp; braai</li>
+        <li data-i18n="apt.am4">Secure complex parking</li>
+        <li data-i18n="apt.am5">Smart TV &amp; Wi-Fi</li>
+        <li data-i18n="apt.am6">Walk to Big Bay beach</li>
+        <li data-i18n="apt.am7">Table Mountain views nearby</li>
+        <li data-i18n="apt.am8">Restaurants a short drive</li>
       </ul>
     </div>
     <div class="side">
@@ -237,87 +266,207 @@
 <section class="exp" id="experiences">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Tours &amp; Activities · Western Cape</span>
-      <h2>Your Cape Town, <em>curated.</em></h2>
-      <p class="lead">The city, the peninsula, the Winelands and the ocean — a hand-picked collection of the Cape's best experiences, bookable through African Sky alongside your stay. Prices are indicative "from" rates per adult.</p>
+      <span class="eyebrow" data-i18n="exp.eyebrow">Tours &amp; Activities · Western Cape</span>
+      <h2 data-i18n="exp.titleHtml">Your Cape Town, <em>curated.</em></h2>
+      <p class="lead" data-i18n="exp.lead">The city, the peninsula, the Winelands and the ocean — a hand-picked collection of the Cape's best experiences, bookable through African Sky alongside your stay. Prices are indicative "from" rates per adult.</p>
     </div>
 
-    <div class="catlabel"><h3>City &amp; Peninsula</h3><span class="ln"></span><span class="ct">Table Mountain · Cape Point · Robben Island</span></div>
+    <div class="catlabel"><h3 data-i18n="exp.catCityTitle">City &amp; Peninsula</h3><span class="ln"></span><span class="ct" data-i18n="exp.catCitySub">Table Mountain · Cape Point · Robben Island</span></div>
     <div class="cards" id="cat-city"></div>
 
-    <div class="catlabel"><h3>Winelands &amp; Wine</h3><span class="ln"></span><span class="ct">Stellenbosch · Franschhoek · Paarl</span></div>
+    <div class="catlabel"><h3 data-i18n="exp.catWineTitle">Winelands &amp; Wine</h3><span class="ln"></span><span class="ct" data-i18n="exp.catWineSub">Stellenbosch · Franschhoek · Paarl</span></div>
     <div class="cards" id="cat-wine"></div>
 
-    <div class="catlabel"><h3>Ocean, Beach &amp; Adventure</h3><span class="ln"></span><span class="ct">Whales · sharks · sunset sails</span></div>
+    <div class="catlabel"><h3 data-i18n="exp.catOceanTitle">Ocean, Beach &amp; Adventure</h3><span class="ln"></span><span class="ct" data-i18n="exp.catOceanSub">Whales · sharks · sunset sails</span></div>
     <div class="cards" id="cat-ocean"></div>
 
-    <p class="pricenote"><b>Please note:</b> prices are indicative "from" rates per adult, shown in US$ with an approximate Rand conversion, and can change with season, availability and group size. African Sky will confirm a tailored quotation for every experience you choose.</p>
+    <p class="pricenote" data-i18n="exp.pricenote"><b>Please note:</b> prices are indicative "from" rates per adult, shown in US$ with an approximate Rand conversion, and can change with season, availability and group size. African Sky will confirm a tailored quotation for every experience you choose.</p>
   </div>
 </section>
 
 <!-- BOOK -->
 <section class="enquire" id="book">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--amber-soft)">Reserve your Cape stay</span>
-    <h2 style="margin-top:12px">Let's plan your Beachside Escape.</h2>
-    <p>Tell us your dates and which experiences call to you — we'll build the whole Cape Town trip, the apartment and your days out, around you.</p>
+    <span class="eyebrow" style="color:var(--amber-soft)" data-i18n="book.eyebrow">Reserve your Cape stay</span>
+    <h2 style="margin-top:12px" data-i18n="book.title">Let's plan your Beachside Escape.</h2>
+    <p data-i18n="book.lead">Tell us your dates and which experiences call to you — we'll build the whole Cape Town trip, the apartment and your days out, around you.</p>
     <div class="btns">
-      <a class="btn amber" href="mailto:reservations@africansky.travel?subject=Beachside%20Escape%20enquiry">Enquire by email</a>
-      <a class="btn ghost" href="https://wa.me/27762095334?text=Hi%20African%20Sky%2C%20I%27d%20like%20to%20enquire%20about%20the%20Beachside%20Escape%20in%20Big%20Bay." target="_blank" rel="noopener">WhatsApp us</a>
-      <a class="btn dark" href="https://www.airbnb.co.uk/rooms/1616569044541717654" target="_blank" rel="noopener">View on Airbnb</a>
+      <a class="btn amber" href="mailto:reservations@africansky.travel?subject=Beachside%20Escape%20enquiry" data-i18n="book.btnEmail">Enquire by email</a>
+      <a class="btn ghost" href="https://wa.me/27762095334?text=Hi%20African%20Sky%2C%20I%27d%20like%20to%20enquire%20about%20the%20Beachside%20Escape%20in%20Big%20Bay." target="_blank" rel="noopener" data-i18n="book.btnWhatsapp">WhatsApp us</a>
+      <a class="btn dark" href="https://www.airbnb.co.uk/rooms/1616569044541717654" target="_blank" rel="noopener" data-i18n="book.btnAirbnb">View on Airbnb</a>
     </div>
-    <div class="contactline"><b>Email</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334</div>
+    <div class="contactline" data-i18n="book.contactline"><b>Email</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334</div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <b>African Sky</b> — Beachside Escape, Big Bay · Cape Town &nbsp;|&nbsp; Part of the African Sky Collection: Marloth Park · Big Bay · Victoria Falls<br>
+    <span data-i18n="footer.line1"><b>African Sky</b> — Beachside Escape, Big Bay · Cape Town &nbsp;|&nbsp; Part of the African Sky Collection: Marloth Park · Big Bay · Victoria Falls</span><br>
     africansky.travel · africanskyvillas.com<br>
-    <span style="opacity:.7">Cape Town experience photography via Unsplash</span>
+    <span style="opacity:.7" data-i18n="footer.photo">Cape Town experience photography via Unsplash</span>
   </div>
 </footer>
 
 <script>
   var USD=18.7;
   function zar(u){var v=Math.round(u*USD/10)*10;return "R"+v.toLocaleString('en-ZA')}
+
+  // ============================
+  // TRANSLATIONS (UI strings)
+  // ============================
+  var DICT={
+    en:{
+      nav:{apartment:"The Apartment",experiences:"Cape Town Experiences",marloth:"Marloth Park ↗",marlothMobile:"Marloth Park Tours ↗",enquire:"Enquire"},
+      hero:{eyebrow:"Big Bay · Blouberg · Cape Town",titleHtml:"African Sky <em>Beachside</em> Escape",intro:"A bright, contemporary self-catering home at Seaside Village — minutes from the white sand of Big Bay, with Table Mountain framed across the bay.",fact1:"<b>3</b> bedrooms",fact2:"<b>2</b> bathrooms",fact3:"Sleeps <b>6</b>",fact4:"Self-catering",btnExplore:"Explore Cape Town →",btnEnquire:"Enquire to stay"},
+      apt:{eyebrow:"The Apartment",titleHtml:"Sea air, open plan, <em style='font-style:italic;color:var(--terracotta)'>and space to unwind.</em>",para1:"Set in the secure Seaside Village complex at Big Bay, the apartment opens into a light-filled, open-plan living, dining and kitchen space that spills onto a private patio. Three restful bedrooms and two full bathrooms make it easy for a family or two couples to settle in for a Cape Town stay.",para2:"You're a short stroll from Big Bay beach — a favourite for long walks, sundowners and world-class kitesurfing — with Bloubergstrand's restaurants and that postcard Table Mountain view just around the coast.",specBedrooms:"Bedrooms",specBathrooms:"Bathrooms",specGuests:"Guests",specBigBay:"Big Bay",am1:"Full self-catering kitchen",am2:"Open-plan living &amp; dining",am3:"Private patio &amp; braai",am4:"Secure complex parking",am5:"Smart TV &amp; Wi-Fi",am6:"Walk to Big Bay beach",am7:"Table Mountain views nearby",am8:"Restaurants a short drive"},
+      exp:{eyebrow:"Tours &amp; Activities · Western Cape",titleHtml:"Your Cape Town, <em>curated.</em>",lead:"The city, the peninsula, the Winelands and the ocean — a hand-picked collection of the Cape's best experiences, bookable through African Sky alongside your stay. Prices are indicative “from” rates per adult.",catCityTitle:"City &amp; Peninsula",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Winelands &amp; Wine",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Ocean, Beach &amp; Adventure",catOceanSub:"Whales · sharks · sunset sails",pricenote:"<b>Please note:</b> prices are indicative “from” rates per adult, shown in US$ with an approximate Rand conversion, and can change with season, availability and group size. African Sky will confirm a tailored quotation for every experience you choose."},
+      book:{eyebrow:"Reserve your Cape stay",title:"Let's plan your Beachside Escape.",lead:"Tell us your dates and which experiences call to you — we'll build the whole Cape Town trip, the apartment and your days out, around you.",btnEmail:"Enquire by email",btnWhatsapp:"WhatsApp us",btnAirbnb:"View on Airbnb",contactline:"<b>Email</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Cape Town &nbsp;|&nbsp; Part of the African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Cape Town experience photography via Unsplash"},
+      ui:{from:"from",pp:"pp"}
+    },
+    nl:{
+      nav:{apartment:"Het appartement",experiences:"Kaapstad-ervaringen",marloth:"Marloth Park ↗",marlothMobile:"Marloth Park Tours ↗",enquire:"Aanvragen"},
+      hero:{eyebrow:"Big Bay · Blouberg · Kaapstad",titleHtml:"African Sky <em>Beachside</em> Verblijf",intro:"Een licht, eigentijds vakantiehuis met zelfverzorging in Seaside Village — op enkele minuten van het witte zand van Big Bay, met de Tafelberg aan de overkant van de baai.",fact1:"<b>3</b> slaapkamers",fact2:"<b>2</b> badkamers",fact3:"Slaapt <b>6</b>",fact4:"Zelfverzorging",btnExplore:"Ontdek Kaapstad →",btnEnquire:"Vraag een verblijf aan"},
+      apt:{eyebrow:"Het appartement",titleHtml:"Zeelucht, open ruimte, <em style='font-style:italic;color:var(--terracotta)'>en plek om te ontspannen.</em>",para1:"Gelegen in het beveiligde Seaside Village-complex in Big Bay, opent het appartement in een lichte, open woon-, eet- en keukenruimte die uitkomt op een privéterras. Drie rustige slaapkamers en twee volledige badkamers maken het gemakkelijk voor een gezin of twee stellen om neer te strijken voor een verblijf in Kaapstad.",para2:"Je wandelt in enkele minuten naar het strand van Big Bay — geliefd voor lange wandelingen, sundowners en kitesurfen van wereldklasse — met de restaurants van Bloubergstrand en dat ansichtkaartuitzicht op de Tafelberg net om de hoek.",specBedrooms:"Slaapkamers",specBathrooms:"Badkamers",specGuests:"Gasten",specBigBay:"Big Bay",am1:"Volledig ingerichte keuken",am2:"Open woon- &amp; eetruimte",am3:"Privéterras &amp; braai",am4:"Beveiligd parkeren in complex",am5:"Smart-tv &amp; wifi",am6:"Lopen naar strand Big Bay",am7:"Tafelberg-uitzicht dichtbij",am8:"Restaurants op korte rijafstand"},
+      exp:{eyebrow:"Tours &amp; Activiteiten · West-Kaap",titleHtml:"Jouw Kaapstad, <em>samengesteld.</em>",lead:"De stad, het schiereiland, de Wijnlanden en de oceaan — een zorgvuldig gekozen collectie van de beste ervaringen van de Kaap, te boeken via African Sky naast je verblijf. Prijzen zijn indicatieve “vanaf”-tarieven per volwassene.",catCityTitle:"Stad &amp; Schiereiland",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Wijnlanden &amp; Wijn",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Oceaan, Strand &amp; Avontuur",catOceanSub:"Walvissen · haaien · zonsondergangstochten",pricenote:"<b>Let op:</b> prijzen zijn indicatieve “vanaf”-tarieven per volwassene, weergegeven in US$ met een geschatte omrekening naar Rand, en kunnen wijzigen met seizoen, beschikbaarheid en groepsgrootte. African Sky bevestigt een op maat gemaakte offerte voor elke ervaring die je kiest."},
+      book:{eyebrow:"Reserveer je verblijf in de Kaap",title:"Laten we je Beachside Escape plannen.",lead:"Vertel ons je data en welke ervaringen je aanspreken — we bouwen de hele Kaapstad-reis, het appartement en je uitstapjes, rondom jou.",btnEmail:"Aanvragen per e-mail",btnWhatsapp:"WhatsApp ons",btnAirbnb:"Bekijk op Airbnb",contactline:"<b>E-mail</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Kaapstad &nbsp;|&nbsp; Onderdeel van de African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Fotografie van Kaapstad-ervaringen via Unsplash"},
+      ui:{from:"vanaf",pp:"pp"}
+    },
+    fr:{
+      nav:{apartment:"L'appartement",experiences:"Expériences au Cap",marloth:"Marloth Park ↗",marlothMobile:"Circuits de Marloth Park ↗",enquire:"Demander"},
+      hero:{eyebrow:"Big Bay · Blouberg · Le Cap",titleHtml:"African Sky <em>Beachside</em> Évasion",intro:"Une maison contemporaine et lumineuse en location indépendante à Seaside Village — à quelques minutes du sable blanc de Big Bay, avec la Montagne de la Table se dessinant de l'autre côté de la baie.",fact1:"<b>3</b> chambres",fact2:"<b>2</b> salles de bain",fact3:"Couche <b>6</b>",fact4:"En autonomie",btnExplore:"Explorer Le Cap →",btnEnquire:"Demander un séjour"},
+      apt:{eyebrow:"L'appartement",titleHtml:"Air marin, espace ouvert, <em style='font-style:italic;color:var(--terracotta)'>et de la place pour se détendre.</em>",para1:"Situé dans le complexe sécurisé de Seaside Village à Big Bay, l'appartement s'ouvre sur un espace de vie, salle à manger et cuisine ouvert et baigné de lumière, qui donne sur une terrasse privée. Trois chambres reposantes et deux salles de bain complètes permettent à une famille ou à deux couples de s'installer pour un séjour au Cap.",para2:"Vous êtes à quelques pas de la plage de Big Bay — prisée pour les longues promenades, les apéritifs au coucher du soleil et le kitesurf de classe mondiale — avec les restaurants de Bloubergstrand et cette vue de carte postale sur la Montagne de la Table juste au bord de la côte.",specBedrooms:"Chambres",specBathrooms:"Salles de bain",specGuests:"Voyageurs",specBigBay:"Big Bay",am1:"Cuisine entièrement équipée",am2:"Séjour &amp; salle à manger ouverts",am3:"Terrasse privée &amp; braai",am4:"Parking sécurisé dans le complexe",am5:"Smart TV &amp; Wi-Fi",am6:"À pied de la plage de Big Bay",am7:"Vue sur la Montagne de la Table à proximité",am8:"Restaurants à quelques minutes en voiture"},
+      exp:{eyebrow:"Tours &amp; Activités · Cap-Occidental",titleHtml:"Votre Cap, <em>sur mesure.</em>",lead:"La ville, la péninsule, les Winelands et l'océan — une sélection soignée des meilleures expériences du Cap, réservables via African Sky en complément de votre séjour. Les prix sont des tarifs indicatifs « à partir de » par adulte.",catCityTitle:"Ville &amp; Péninsule",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Winelands &amp; Vin",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Océan, Plage &amp; Aventure",catOceanSub:"Baleines · requins · sorties au coucher du soleil",pricenote:"<b>À noter :</b> les prix sont des tarifs indicatifs « à partir de » par adulte, affichés en US$ avec une conversion approximative en Rand, et peuvent varier selon la saison, la disponibilité et la taille du groupe. African Sky confirmera un devis personnalisé pour chaque expérience que vous choisissez."},
+      book:{eyebrow:"Réservez votre séjour au Cap",title:"Planifions votre Beachside Escape.",lead:"Dites-nous vos dates et les expériences qui vous tentent — nous construirons tout le voyage au Cap, l'appartement et vos sorties, autour de vous.",btnEmail:"Demander par e-mail",btnWhatsapp:"WhatsApp",btnAirbnb:"Voir sur Airbnb",contactline:"<b>E-mail</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Le Cap &nbsp;|&nbsp; Fait partie de l'African Sky Collection : Marloth Park · Big Bay · Victoria Falls",photo:"Photographie des expériences du Cap via Unsplash"},
+      ui:{from:"à partir de",pp:"/pers."}
+    },
+    de:{
+      nav:{apartment:"Das Apartment",experiences:"Kapstadt-Erlebnisse",marloth:"Marloth Park ↗",marlothMobile:"Marloth Park Touren ↗",enquire:"Anfragen"},
+      hero:{eyebrow:"Big Bay · Blouberg · Kapstadt",titleHtml:"African Sky <em>Beachside</em> Refugium",intro:"Ein helles, modernes Selbstversorger-Zuhause im Seaside Village — nur Minuten vom weißen Sand von Big Bay entfernt, mit dem Tafelberg auf der anderen Seite der Bucht.",fact1:"<b>3</b> Schlafzimmer",fact2:"<b>2</b> Badezimmer",fact3:"Schläft <b>6</b>",fact4:"Selbstverpflegung",btnExplore:"Kapstadt entdecken →",btnEnquire:"Aufenthalt anfragen"},
+      apt:{eyebrow:"Das Apartment",titleHtml:"Meeresluft, offener Raum, <em style='font-style:italic;color:var(--terracotta)'>und Platz zum Entspannen.</em>",para1:"Im gesicherten Seaside-Village-Komplex in Big Bay gelegen, öffnet sich das Apartment in einen lichtdurchfluteten, offenen Wohn-, Ess- und Küchenbereich, der auf eine private Terrasse führt. Drei ruhige Schlafzimmer und zwei komplette Badezimmer machen es einer Familie oder zwei Paaren leicht, sich für einen Kapstadt-Aufenthalt einzurichten.",para2:"Sie sind nur einen kurzen Spaziergang vom Strand von Big Bay entfernt — beliebt für lange Spaziergänge, Sundowner und Weltklasse-Kitesurfen — mit den Restaurants von Bloubergstrand und diesem postkartenreifen Tafelberg-Blick gleich um die Küste.",specBedrooms:"Schlafzimmer",specBathrooms:"Badezimmer",specGuests:"Gäste",specBigBay:"Big Bay",am1:"Voll ausgestattete Küche",am2:"Offener Wohn- &amp; Essbereich",am3:"Private Terrasse &amp; Braai",am4:"Sicheres Parken im Komplex",am5:"Smart-TV &amp; WLAN",am6:"Zu Fuß zum Strand von Big Bay",am7:"Tafelberg-Blick in der Nähe",am8:"Restaurants in kurzer Fahrt"},
+      exp:{eyebrow:"Touren &amp; Aktivitäten · Westkap",titleHtml:"Ihr Kapstadt, <em>kuratiert.</em>",lead:"Die Stadt, die Halbinsel, die Weinländer und der Ozean — eine handverlesene Auswahl der besten Erlebnisse des Kaps, buchbar über African Sky ergänzend zu Ihrem Aufenthalt. Preise sind unverbindliche „ab“-Tarife pro Erwachsenem.",catCityTitle:"Stadt &amp; Halbinsel",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Weinländer &amp; Wein",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Ozean, Strand &amp; Abenteuer",catOceanSub:"Wale · Haie · Sonnenuntergangstörns",pricenote:"<b>Bitte beachten:</b> Preise sind unverbindliche „ab“-Tarife pro Erwachsenem, angegeben in US$ mit ungefährer Umrechnung in Rand, und können je nach Saison, Verfügbarkeit und Gruppengröße variieren. African Sky bestätigt für jedes gewählte Erlebnis ein maßgeschneidertes Angebot."},
+      book:{eyebrow:"Reservieren Sie Ihren Kap-Aufenthalt",title:"Planen wir Ihren Beachside Escape.",lead:"Nennen Sie uns Ihre Daten und welche Erlebnisse Sie reizen — wir gestalten die ganze Kapstadt-Reise, das Apartment und Ihre Ausflüge rund um Sie.",btnEmail:"Per E-Mail anfragen",btnWhatsapp:"WhatsApp",btnAirbnb:"Auf Airbnb ansehen",contactline:"<b>E-Mail</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Kapstadt &nbsp;|&nbsp; Teil der African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Fotografie der Kapstadt-Erlebnisse via Unsplash"},
+      ui:{from:"ab",pp:"p.P."}
+    },
+    pt:{
+      nav:{apartment:"O apartamento",experiences:"Experiências na Cidade do Cabo",marloth:"Marloth Park ↗",marlothMobile:"Passeios em Marloth Park ↗",enquire:"Consultar"},
+      hero:{eyebrow:"Big Bay · Blouberg · Cidade do Cabo",titleHtml:"African Sky <em>Beachside</em> Refúgio",intro:"Uma casa contemporânea e luminosa, com cozinha própria, em Seaside Village — a minutos da areia branca de Big Bay, com a Table Mountain emoldurada do outro lado da baía.",fact1:"<b>3</b> quartos",fact2:"<b>2</b> casas de banho",fact3:"Aloja <b>6</b>",fact4:"Cozinha própria",btnExplore:"Explorar a Cidade do Cabo →",btnEnquire:"Consultar estadia"},
+      apt:{eyebrow:"O apartamento",titleHtml:"Ar do mar, espaço aberto, <em style='font-style:italic;color:var(--terracotta)'>e lugar para descansar.</em>",para1:"Situado no complexo seguro de Seaside Village, em Big Bay, o apartamento abre-se para um espaço integrado de sala, jantar e cozinha cheio de luz, que dá para um pátio privado. Três quartos tranquilos e duas casas de banho completas facilitam a acomodação de uma família ou dois casais para uma estadia na Cidade do Cabo.",para2:"Está a poucos passos da praia de Big Bay — uma favorita para longos passeios, sundowners e kitesurf de classe mundial — com os restaurantes de Bloubergstrand e aquela vista de postal da Table Mountain logo ali na costa.",specBedrooms:"Quartos",specBathrooms:"Casas de banho",specGuests:"Hóspedes",specBigBay:"Big Bay",am1:"Cozinha totalmente equipada",am2:"Sala &amp; jantar integrados",am3:"Pátio privado &amp; braai",am4:"Estacionamento seguro no complexo",am5:"Smart TV &amp; Wi-Fi",am6:"A pé até à praia de Big Bay",am7:"Vista da Table Mountain por perto",am8:"Restaurantes a curta distância de carro"},
+      exp:{eyebrow:"Tours &amp; Atividades · Cabo Ocidental",titleHtml:"A sua Cidade do Cabo, <em>selecionada.</em>",lead:"A cidade, a península, as Winelands e o oceano — uma coleção criteriosa das melhores experiências do Cabo, reserváveis através da African Sky junto da sua estadia. Os preços são tarifas indicativas “a partir de” por adulto.",catCityTitle:"Cidade &amp; Península",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Winelands &amp; Vinho",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Oceano, Praia &amp; Aventura",catOceanSub:"Baleias · tubarões · passeios ao pôr do sol",pricenote:"<b>Nota:</b> os preços são tarifas indicativas “a partir de” por adulto, apresentados em US$ com uma conversão aproximada para Rand, e podem variar consoante a época, a disponibilidade e o tamanho do grupo. A African Sky confirmará um orçamento personalizado para cada experiência que escolher."},
+      book:{eyebrow:"Reserve a sua estadia no Cabo",title:"Vamos planear o seu Beachside Escape.",lead:"Diga-nos as suas datas e que experiências o atraem — montamos toda a viagem à Cidade do Cabo, o apartamento e os seus passeios, à sua volta.",btnEmail:"Consultar por e-mail",btnWhatsapp:"WhatsApp",btnAirbnb:"Ver no Airbnb",contactline:"<b>E-mail</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Cidade do Cabo &nbsp;|&nbsp; Parte da African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Fotografia das experiências da Cidade do Cabo via Unsplash"},
+      ui:{from:"a partir de",pp:"p/ pessoa"}
+    },
+    es:{
+      nav:{apartment:"El apartamento",experiences:"Experiencias en Ciudad del Cabo",marloth:"Marloth Park ↗",marlothMobile:"Tours de Marloth Park ↗",enquire:"Consultar"},
+      hero:{eyebrow:"Big Bay · Blouberg · Ciudad del Cabo",titleHtml:"African Sky <em>Beachside</em> Escapada",intro:"Una casa contemporánea y luminosa con cocina propia en Seaside Village — a minutos de la arena blanca de Big Bay, con la Montaña de la Mesa enmarcada al otro lado de la bahía.",fact1:"<b>3</b> dormitorios",fact2:"<b>2</b> baños",fact3:"Duerme <b>6</b>",fact4:"Cocina propia",btnExplore:"Explorar Ciudad del Cabo →",btnEnquire:"Consultar estancia"},
+      apt:{eyebrow:"El apartamento",titleHtml:"Aire de mar, espacio abierto, <em style='font-style:italic;color:var(--terracotta)'>y sitio para relajarse.</em>",para1:"Ubicado en el seguro complejo Seaside Village de Big Bay, el apartamento se abre a un espacio luminoso y diáfano de salón, comedor y cocina que da a un patio privado. Tres dormitorios tranquilos y dos baños completos permiten que una familia o dos parejas se acomoden para una estancia en Ciudad del Cabo.",para2:"Estás a un breve paseo de la playa de Big Bay — una favorita para largos paseos, sundowners y kitesurf de clase mundial — con los restaurantes de Bloubergstrand y esa vista de postal de la Montaña de la Mesa a la vuelta de la costa.",specBedrooms:"Dormitorios",specBathrooms:"Baños",specGuests:"Huéspedes",specBigBay:"Big Bay",am1:"Cocina totalmente equipada",am2:"Salón &amp; comedor diáfanos",am3:"Patio privado &amp; braai",am4:"Aparcamiento seguro en el complejo",am5:"Smart TV &amp; wifi",am6:"A pie de la playa de Big Bay",am7:"Vistas a la Montaña de la Mesa cerca",am8:"Restaurantes a poca distancia en coche"},
+      exp:{eyebrow:"Tours &amp; Actividades · Cabo Occidental",titleHtml:"Tu Ciudad del Cabo, <em>a medida.</em>",lead:"La ciudad, la península, las Winelands y el océano — una colección seleccionada de las mejores experiencias del Cabo, reservables a través de African Sky junto con tu estancia. Los precios son tarifas indicativas “desde” por adulto.",catCityTitle:"Ciudad &amp; Península",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Winelands &amp; Vino",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Océano, Playa &amp; Aventura",catOceanSub:"Ballenas · tiburones · salidas al atardecer",pricenote:"<b>Ten en cuenta:</b> los precios son tarifas indicativas “desde” por adulto, mostradas en US$ con una conversión aproximada a Rand, y pueden cambiar según la temporada, la disponibilidad y el tamaño del grupo. African Sky confirmará un presupuesto personalizado para cada experiencia que elijas."},
+      book:{eyebrow:"Reserva tu estancia en el Cabo",title:"Planifiquemos tu Beachside Escape.",lead:"Dinos tus fechas y qué experiencias te llaman — montamos todo el viaje a Ciudad del Cabo, el apartamento y tus salidas, a tu medida.",btnEmail:"Consultar por correo",btnWhatsapp:"WhatsApp",btnAirbnb:"Ver en Airbnb",contactline:"<b>Correo</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Ciudad del Cabo &nbsp;|&nbsp; Parte de la African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Fotografía de las experiencias de Ciudad del Cabo vía Unsplash"},
+      ui:{from:"desde",pp:"p/ persona"}
+    },
+    it:{
+      nav:{apartment:"L'appartamento",experiences:"Esperienze a Città del Capo",marloth:"Marloth Park ↗",marlothMobile:"Tour di Marloth Park ↗",enquire:"Richiedi"},
+      hero:{eyebrow:"Big Bay · Blouberg · Città del Capo",titleHtml:"African Sky <em>Beachside</em> Rifugio",intro:"Una casa luminosa e contemporanea con angolo cottura a Seaside Village — a pochi minuti dalla sabbia bianca di Big Bay, con la Table Mountain incorniciata dall'altra parte della baia.",fact1:"<b>3</b> camere",fact2:"<b>2</b> bagni",fact3:"Posti letto <b>6</b>",fact4:"Uso cucina",btnExplore:"Esplora Città del Capo →",btnEnquire:"Richiedi un soggiorno"},
+      apt:{eyebrow:"L'appartamento",titleHtml:"Aria di mare, open space, <em style='font-style:italic;color:var(--terracotta)'>e spazio per rilassarsi.</em>",para1:"Situato nel sicuro complesso Seaside Village di Big Bay, l'appartamento si apre su un ambiente open space luminoso con soggiorno, zona pranzo e cucina che si affaccia su un patio privato. Tre camere tranquille e due bagni completi permettono a una famiglia o a due coppie di sistemarsi comodamente per un soggiorno a Città del Capo.",para2:"Sei a pochi passi dalla spiaggia di Big Bay — amata per lunghe passeggiate, aperitivi al tramonto e kitesurf di livello mondiale — con i ristoranti di Bloubergstrand e quella vista da cartolina sulla Table Mountain appena lungo la costa.",specBedrooms:"Camere",specBathrooms:"Bagni",specGuests:"Ospiti",specBigBay:"Big Bay",am1:"Cucina completamente attrezzata",am2:"Soggiorno &amp; pranzo open space",am3:"Patio privato &amp; braai",am4:"Parcheggio sicuro nel complesso",am5:"Smart TV &amp; Wi-Fi",am6:"A piedi dalla spiaggia di Big Bay",am7:"Vista sulla Table Mountain nelle vicinanze",am8:"Ristoranti a breve distanza in auto"},
+      exp:{eyebrow:"Tour &amp; Attività · Capo Occidentale",titleHtml:"La tua Città del Capo, <em>su misura.</em>",lead:"La città, la penisola, le Winelands e l'oceano — una selezione curata delle migliori esperienze del Capo, prenotabili tramite African Sky insieme al tuo soggiorno. I prezzi sono tariffe indicative “a partire da” per adulto.",catCityTitle:"Città &amp; Penisola",catCitySub:"Table Mountain · Cape Point · Robben Island",catWineTitle:"Winelands &amp; Vino",catWineSub:"Stellenbosch · Franschhoek · Paarl",catOceanTitle:"Oceano, Spiaggia &amp; Avventura",catOceanSub:"Balene · squali · veleggiate al tramonto",pricenote:"<b>Nota bene:</b> i prezzi sono tariffe indicative “a partire da” per adulto, mostrate in US$ con una conversione approssimativa in Rand, e possono variare in base a stagione, disponibilità e dimensione del gruppo. African Sky confermerà un preventivo su misura per ogni esperienza scelta."},
+      book:{eyebrow:"Prenota il tuo soggiorno al Capo",title:"Pianifichiamo il tuo Beachside Escape.",lead:"Dicci le tue date e quali esperienze ti ispirano — costruiamo l'intero viaggio a Città del Capo, l'appartamento e le tue uscite, intorno a te.",btnEmail:"Richiedi via e-mail",btnWhatsapp:"WhatsApp",btnAirbnb:"Guarda su Airbnb",contactline:"<b>E-mail</b> reservations@africansky.travel &nbsp;·&nbsp; <b>WhatsApp</b> +27 76 209 5334"},
+      footer:{line1:"<b>African Sky</b> — Beachside Escape, Big Bay · Città del Capo &nbsp;|&nbsp; Parte dell'African Sky Collection: Marloth Park · Big Bay · Victoria Falls",photo:"Fotografia delle esperienze di Città del Capo via Unsplash"},
+      ui:{from:"da",pp:"a persona"}
+    }
+  };
+
+  var SUPPORTED=['en','nl','fr','de','pt','es','it'];
+  var L='en';
+  try{var s=localStorage.getItem('asv_lang');if(s&&SUPPORTED.indexOf(s)>=0)L=s;}catch(e){}
+
+  function t(path){
+    var parts=path.split('.');
+    var v=DICT[L];
+    for(var i=0;i<parts.length;i++){if(v==null)break;v=v[parts[i]];}
+    if(v==null&&L!=='en'){v=DICT.en;for(var j=0;j<parts.length;j++){if(v==null)break;v=v[parts[j]];}}
+    return v==null?path:v;
+  }
+
+  // ============================
+  // TOURS (per-language n / m)
+  // ============================
   var TOURS={
     city:[
-      {n:"Cape Peninsula: Table Mountain, Boulders &amp; Cape Point",m:"Full day · 9–10 hrs",u:168,img:"tour-tablemountain"},
-      {n:"Cape of Good Hope &amp; Boulders Penguins Day Tour",m:"Full day · 9–10 hrs",u:57,img:"tour-penguins"},
-      {n:"Private: Table Mountain, Cape Point &amp; Penguins",m:"Private · 8–11 hrs",u:67,img:"tour-capepoint"},
-      {n:"City Sightseeing Hop-On Hop-Off + Optional Cruise",m:"Flexible · 2–3 hrs",u:25,img:"tour-citywheel"},
-      {n:"Bo-Kaap &amp; City Highlights Walking Tour",m:"2 hrs · guided",u:42,img:"tour-bokaap"},
-      {n:"Table Mountain Cableway — Flexible Return Ticket",m:"Flexible entry",u:60,img:"tour-cableway"},
-      {n:"Robben Island Ferry Ticket + Ex-Prisoner Guide",m:"Half day · ~4 hrs",u:56,img:"tour-catamaran"},
-      {n:"Robben Island Half-Day Tour (Pre-Booked)",m:"Half day · 3–4 hrs",u:59,img:"tour-aerial"},
-      {n:"Cape Town Helicopter Tour — City Hopper",m:"Scenic flight · 12 min",u:168,img:"tour-helicopter"}
+      {n:{en:"Cape Peninsula: Table Mountain, Boulders &amp; Cape Point",nl:"Kaapse Schiereiland: Table Mountain, Boulders &amp; Cape Point",fr:"Péninsule du Cap : Table Mountain, Boulders &amp; Cape Point",de:"Kap-Halbinsel: Table Mountain, Boulders &amp; Cape Point",pt:"Península do Cabo: Table Mountain, Boulders &amp; Cape Point",es:"Península del Cabo: Table Mountain, Boulders &amp; Cape Point",it:"Penisola del Capo: Table Mountain, Boulders &amp; Cape Point"},m:{en:"Full day · 9–10 hrs",nl:"Hele dag · 9–10 uur",fr:"Journée · 9–10 h",de:"Ganztags · 9–10 Std.",pt:"Dia inteiro · 9–10 h",es:"Día completo · 9–10 h",it:"Giornata intera · 9–10 h"},u:168,img:"tour-tablemountain"},
+      {n:{en:"Cape of Good Hope &amp; Boulders Penguins Day Tour",nl:"Kaap de Goede Hoop &amp; Boulders-pinguïns dagtocht",fr:"Cap de Bonne-Espérance &amp; manchots de Boulders",de:"Kap der Guten Hoffnung &amp; Boulders-Pinguine Tagestour",pt:"Cabo da Boa Esperança &amp; pinguins de Boulders",es:"Cabo de Buena Esperanza &amp; pingüinos de Boulders",it:"Capo di Buona Speranza &amp; pinguini di Boulders"},m:{en:"Full day · 9–10 hrs",nl:"Hele dag · 9–10 uur",fr:"Journée · 9–10 h",de:"Ganztags · 9–10 Std.",pt:"Dia inteiro · 9–10 h",es:"Día completo · 9–10 h",it:"Giornata intera · 9–10 h"},u:57,img:"tour-penguins"},
+      {n:{en:"Private: Table Mountain, Cape Point &amp; Penguins",nl:"Privé: Table Mountain, Cape Point &amp; pinguïns",fr:"Privé : Table Mountain, Cape Point &amp; manchots",de:"Privat: Table Mountain, Cape Point &amp; Pinguine",pt:"Privado: Table Mountain, Cape Point &amp; pinguins",es:"Privado: Table Mountain, Cape Point &amp; pingüinos",it:"Privato: Table Mountain, Cape Point &amp; pinguini"},m:{en:"Private · 8–11 hrs",nl:"Privé · 8–11 uur",fr:"Privé · 8–11 h",de:"Privat · 8–11 Std.",pt:"Privado · 8–11 h",es:"Privado · 8–11 h",it:"Privato · 8–11 h"},u:67,img:"tour-capepoint"},
+      {n:{en:"City Sightseeing Hop-On Hop-Off + Optional Cruise",nl:"City Sightseeing hop-on-hop-off + optionele cruise",fr:"City Sightseeing hop-on hop-off + croisière en option",de:"City Sightseeing Hop-on-Hop-off + optionale Bootsfahrt",pt:"City Sightseeing hop-on hop-off + cruzeiro opcional",es:"City Sightseeing hop-on hop-off + crucero opcional",it:"City Sightseeing hop-on hop-off + crociera opzionale"},m:{en:"Flexible · 2–3 hrs",nl:"Flexibel · 2–3 uur",fr:"Flexible · 2–3 h",de:"Flexibel · 2–3 Std.",pt:"Flexível · 2–3 h",es:"Flexible · 2–3 h",it:"Flessibile · 2–3 h"},u:25,img:"tour-citywheel"},
+      {n:{en:"Bo-Kaap &amp; City Highlights Walking Tour",nl:"Bo-Kaap &amp; hoogtepunten van de stad wandeltour",fr:"Bo-Kaap &amp; temps forts de la ville à pied",de:"Bo-Kaap &amp; Stadthighlights Rundgang",pt:"Bo-Kaap &amp; destaques da cidade a pé",es:"Bo-Kaap &amp; lo mejor de la ciudad a pie",it:"Bo-Kaap &amp; punti salienti della città a piedi"},m:{en:"2 hrs · guided",nl:"2 uur · met gids",fr:"2 h · guidé",de:"2 Std. · geführt",pt:"2 h · guiado",es:"2 h · guiado",it:"2 h · guidato"},u:42,img:"tour-bokaap"},
+      {n:{en:"Table Mountain Cableway — Flexible Return Ticket",nl:"Table Mountain-kabelbaan — flexibel retourticket",fr:"Téléphérique de Table Mountain — billet retour flexible",de:"Table-Mountain-Seilbahn — flexibles Rückfahrticket",pt:"Teleférico da Table Mountain — bilhete de ida e volta flexível",es:"Teleférico de Table Mountain — billete de ida y vuelta flexible",it:"Funivia della Table Mountain — biglietto andata e ritorno flessibile"},m:{en:"Flexible entry",nl:"Flexibele toegang",fr:"Entrée flexible",de:"Flexibler Eintritt",pt:"Entrada flexível",es:"Entrada flexible",it:"Ingresso flessibile"},u:60,img:"tour-cableway"},
+      {n:{en:"Robben Island Ferry Ticket + Ex-Prisoner Guide",nl:"Robben Island-veerticket + gids ex-gevangene",fr:"Ferry Robben Island + guide ancien prisonnier",de:"Robben-Island-Fährticket + Ex-Häftling als Guide",pt:"Bilhete de ferry Robben Island + guia ex-prisioneiro",es:"Billete de ferry Robben Island + guía exprisionero",it:"Biglietto traghetto Robben Island + guida ex detenuto"},m:{en:"Half day · ~4 hrs",nl:"Halve dag · ~4 uur",fr:"Demi-journée · ~4 h",de:"Halbtags · ~4 Std.",pt:"Meio dia · ~4 h",es:"Medio día · ~4 h",it:"Mezza giornata · ~4 h"},u:56,img:"tour-catamaran"},
+      {n:{en:"Robben Island Half-Day Tour (Pre-Booked)",nl:"Robben Island halvedagtour (vooraf geboekt)",fr:"Robben Island demi-journée (préréservé)",de:"Robben Island Halbtagestour (vorgebucht)",pt:"Robben Island meio dia (pré-reservado)",es:"Robben Island medio día (reservado)",it:"Robben Island mezza giornata (prenotato)"},m:{en:"Half day · 3–4 hrs",nl:"Halve dag · 3–4 uur",fr:"Demi-journée · 3–4 h",de:"Halbtags · 3–4 Std.",pt:"Meio dia · 3–4 h",es:"Medio día · 3–4 h",it:"Mezza giornata · 3–4 h"},u:59,img:"tour-aerial"},
+      {n:{en:"Cape Town Helicopter Tour — City Hopper",nl:"Kaapstad helikoptertour — City Hopper",fr:"Tour en hélicoptère du Cap — City Hopper",de:"Kapstadt-Hubschraubertour — City Hopper",pt:"Passeio de helicóptero na Cidade do Cabo — City Hopper",es:"Tour en helicóptero por Ciudad del Cabo — City Hopper",it:"Tour in elicottero di Città del Capo — City Hopper"},m:{en:"Scenic flight · 12 min",nl:"Panoramavlucht · 12 min",fr:"Vol panoramique · 12 min",de:"Rundflug · 12 Min.",pt:"Voo panorâmico · 12 min",es:"Vuelo panorámico · 12 min",it:"Volo panoramico · 12 min"},u:168,img:"tour-helicopter"}
     ],
     wine:[
-      {n:"Winelands Tour: Paarl, Franschhoek &amp; Stellenbosch",m:"Full day · 6+ hrs · 3 estates",u:57,img:"tour-vineyards"},
-      {n:"Uncork the Cape — Stellenbosch Half-Day Wine Tour",m:"Half day · ~5 hrs",u:46,img:"tour-grapes"},
-      {n:"Franschhoek Wine Tram — Full-Day Hop On Hop Off",m:"Full day · 6+ hrs",u:52,img:"tour-tram"},
-      {n:"Stellenbosch Wine Tractor — Hop-On-Hop-Off Tasting",m:"3–10 hrs · flexible",u:25,img:"tour-wine"}
+      {n:{en:"Winelands Tour: Paarl, Franschhoek &amp; Stellenbosch",nl:"Wijnlandentour: Paarl, Franschhoek &amp; Stellenbosch",fr:"Tour des Winelands : Paarl, Franschhoek &amp; Stellenbosch",de:"Weinländer-Tour: Paarl, Franschhoek &amp; Stellenbosch",pt:"Tour das Winelands: Paarl, Franschhoek &amp; Stellenbosch",es:"Tour por las Winelands: Paarl, Franschhoek &amp; Stellenbosch",it:"Tour delle Winelands: Paarl, Franschhoek &amp; Stellenbosch"},m:{en:"Full day · 6+ hrs · 3 estates",nl:"Hele dag · 6+ uur · 3 landgoederen",fr:"Journée · 6+ h · 3 domaines",de:"Ganztags · 6+ Std. · 3 Weingüter",pt:"Dia inteiro · 6+ h · 3 quintas",es:"Día completo · 6+ h · 3 bodegas",it:"Giornata intera · 6+ h · 3 tenute"},u:57,img:"tour-vineyards"},
+      {n:{en:"Uncork the Cape — Stellenbosch Half-Day Wine Tour",nl:"Uncork the Cape — Stellenbosch halvedag wijntour",fr:"Uncork the Cape — demi-journée vin à Stellenbosch",de:"Uncork the Cape — Stellenbosch Halbtags-Weintour",pt:"Uncork the Cape — meio dia de vinho em Stellenbosch",es:"Uncork the Cape — medio día de vino en Stellenbosch",it:"Uncork the Cape — mezza giornata di vino a Stellenbosch"},m:{en:"Half day · ~5 hrs",nl:"Halve dag · ~5 uur",fr:"Demi-journée · ~5 h",de:"Halbtags · ~5 Std.",pt:"Meio dia · ~5 h",es:"Medio día · ~5 h",it:"Mezza giornata · ~5 h"},u:46,img:"tour-grapes"},
+      {n:{en:"Franschhoek Wine Tram — Full-Day Hop On Hop Off",nl:"Franschhoek Wine Tram — hele dag hop-on-hop-off",fr:"Franschhoek Wine Tram — journée hop on hop off",de:"Franschhoek Wine Tram — Ganztags Hop-on-Hop-off",pt:"Franschhoek Wine Tram — dia inteiro hop on hop off",es:"Franschhoek Wine Tram — día completo hop on hop off",it:"Franschhoek Wine Tram — giornata intera hop on hop off"},m:{en:"Full day · 6+ hrs",nl:"Hele dag · 6+ uur",fr:"Journée · 6+ h",de:"Ganztags · 6+ Std.",pt:"Dia inteiro · 6+ h",es:"Día completo · 6+ h",it:"Giornata intera · 6+ h"},u:52,img:"tour-tram"},
+      {n:{en:"Stellenbosch Wine Tractor — Hop-On-Hop-Off Tasting",nl:"Stellenbosch wijntractor — hop-on-hop-off proeverij",fr:"Tracteur viticole de Stellenbosch — dégustation hop-on-hop-off",de:"Stellenbosch Weintraktor — Hop-on-Hop-off-Verkostung",pt:"Trator do vinho de Stellenbosch — degustação hop-on-hop-off",es:"Tractor del vino de Stellenbosch — cata hop-on-hop-off",it:"Trattore del vino di Stellenbosch — degustazione hop-on-hop-off"},m:{en:"3–10 hrs · flexible",nl:"3–10 uur · flexibel",fr:"3–10 h · flexible",de:"3–10 Std. · flexibel",pt:"3–10 h · flexível",es:"3–10 h · flexible",it:"3–10 h · flessibile"},u:25,img:"tour-wine"}
     ],
     ocean:[
-      {n:"Whale Watching Shared Boat Trip (in season)",m:"6+ hrs · seasonal",u:215,img:"tour-whale",ocean:1},
-      {n:"Shark Cage Diving — Shark Explorers",m:"Full day · ~4 hrs on water",u:225,img:"tour-shark",ocean:1},
-      {n:"Atlantic Outlook Sea Kayak Tour",m:"2 hrs · guided paddle",u:38,img:"tour-kayak",ocean:1},
-      {n:"Sunset Champagne Cruise from the V&amp;A",m:"1–2 hrs · sundowner",u:48,img:"tour-coast",ocean:1},
-      {n:"1-Hour Catamaran Cruise, Cape Town",m:"1 hr · V&amp;A Waterfront",u:26,img:"tour-sail",ocean:1},
-      {n:"Atlantis Dunes Quad Bike Adventure + Photo",m:"1 hr · incl. photos",u:31,img:"tour-quad",ocean:1}
+      {n:{en:"Whale Watching Shared Boat Trip (in season)",nl:"Walvissen kijken gedeelde boottocht (in seizoen)",fr:"Observation des baleines en bateau partagé (en saison)",de:"Walbeobachtung Gruppen-Bootstour (saisonal)",pt:"Observação de baleias em barco partilhado (na época)",es:"Avistamiento de ballenas en barco compartido (en temporada)",it:"Avvistamento balene in barca condivisa (in stagione)"},m:{en:"6+ hrs · seasonal",nl:"6+ uur · seizoensgebonden",fr:"6+ h · saisonnier",de:"6+ Std. · saisonal",pt:"6+ h · sazonal",es:"6+ h · de temporada",it:"6+ h · stagionale"},u:215,img:"tour-whale",ocean:1},
+      {n:{en:"Shark Cage Diving — Shark Explorers",nl:"Kooiduiken met haaien — Shark Explorers",fr:"Plongée en cage avec les requins — Shark Explorers",de:"Käfigtauchen mit Haien — Shark Explorers",pt:"Mergulho em jaula com tubarões — Shark Explorers",es:"Buceo en jaula con tiburones — Shark Explorers",it:"Immersione in gabbia con gli squali — Shark Explorers"},m:{en:"Full day · ~4 hrs on water",nl:"Hele dag · ~4 uur op het water",fr:"Journée · ~4 h en mer",de:"Ganztags · ~4 Std. auf dem Wasser",pt:"Dia inteiro · ~4 h na água",es:"Día completo · ~4 h en el agua",it:"Giornata intera · ~4 h in acqua"},u:225,img:"tour-shark",ocean:1},
+      {n:{en:"Atlantic Outlook Sea Kayak Tour",nl:"Atlantic Outlook zeekajaktour",fr:"Kayak de mer Atlantic Outlook",de:"Atlantic Outlook Seekajak-Tour",pt:"Passeio de caiaque no mar Atlantic Outlook",es:"Tour en kayak de mar Atlantic Outlook",it:"Tour in kayak da mare Atlantic Outlook"},m:{en:"2 hrs · guided paddle",nl:"2 uur · peddelen met gids",fr:"2 h · pagaie guidée",de:"2 Std. · geführtes Paddeln",pt:"2 h · remada guiada",es:"2 h · remada guiada",it:"2 h · pagaiata guidata"},u:38,img:"tour-kayak",ocean:1},
+      {n:{en:"Sunset Champagne Cruise from the V&amp;A",nl:"Champagnecruise bij zonsondergang vanaf de V&amp;A",fr:"Croisière champagne au coucher du soleil depuis le V&amp;A",de:"Champagner-Sonnenuntergangsfahrt ab dem V&amp;A",pt:"Cruzeiro de champanhe ao pôr do sol a partir do V&amp;A",es:"Crucero de champán al atardecer desde el V&amp;A",it:"Crociera champagne al tramonto dal V&amp;A"},m:{en:"1–2 hrs · sundowner",nl:"1–2 uur · sundowner",fr:"1–2 h · apéritif",de:"1–2 Std. · Sundowner",pt:"1–2 h · sundowner",es:"1–2 h · atardecer",it:"1–2 h · aperitivo"},u:48,img:"tour-coast",ocean:1},
+      {n:{en:"1-Hour Catamaran Cruise, Cape Town",nl:"Catamarancruise van 1 uur, Kaapstad",fr:"Croisière en catamaran d'1 heure, Le Cap",de:"1-stündige Katamaranfahrt, Kapstadt",pt:"Cruzeiro de catamarã de 1 hora, Cidade do Cabo",es:"Crucero en catamarán de 1 hora, Ciudad del Cabo",it:"Crociera in catamarano di 1 ora, Città del Capo"},m:{en:"1 hr · V&amp;A Waterfront",nl:"1 uur · V&amp;A Waterfront",fr:"1 h · V&amp;A Waterfront",de:"1 Std. · V&amp;A Waterfront",pt:"1 h · V&amp;A Waterfront",es:"1 h · V&amp;A Waterfront",it:"1 h · V&amp;A Waterfront"},u:26,img:"tour-sail",ocean:1},
+      {n:{en:"Atlantis Dunes Quad Bike Adventure + Photo",nl:"Atlantis Dunes quadavontuur + foto",fr:"Quad aux dunes d'Atlantis + photo",de:"Atlantis Dunes Quadbike-Abenteuer + Foto",pt:"Aventura de quad nas Dunas de Atlantis + foto",es:"Aventura en quad por las Dunas de Atlantis + foto",it:"Avventura in quad alle Dune di Atlantis + foto"},m:{en:"1 hr · incl. photos",nl:"1 uur · incl. foto's",fr:"1 h · photos incluses",de:"1 Std. · inkl. Fotos",pt:"1 h · inclui fotos",es:"1 h · incluye fotos",it:"1 h · foto incluse"},u:31,img:"tour-quad",ocean:1}
     ]
   };
+
   function card(t){
+    var name=t.n[L]||t.n.en;
+    var meta=t.m[L]||t.m.en;
     var ph = t.img
       ? '<div class="ph'+(t.ocean?' ocean':'')+'"><img src="images/beachside/'+t.img+'.jpg" alt="" loading="lazy"></div>'
       : '<div class="ph'+(t.ocean?' ocean':'')+'"></div>';
     return '<article class="card">'+ph+
-      '<div class="body"><h4>'+t.n+'</h4><div class="meta"><span>'+t.m+'</span></div>'+
-      '<div class="foot"><span class="from">from</span><span class="price">US$'+t.u+'<small>≈ '+zar(t.u)+' pp</small></span></div></div></article>';
+      '<div class="body"><h4>'+name+'</h4><div class="meta"><span>'+meta+'</span></div>'+
+      '<div class="foot"><span class="from">'+(DICT[L]&&DICT[L].ui?DICT[L].ui.from:DICT.en.ui.from)+'</span><span class="price">US$'+t.u+'<small>≈ '+zar(t.u)+' '+(DICT[L]&&DICT[L].ui?DICT[L].ui.pp:DICT.en.ui.pp)+'</small></span></div></div></article>';
   }
   function fill(id,list){document.getElementById(id).innerHTML=list.map(card).join('')}
-  fill('cat-city',TOURS.city);fill('cat-wine',TOURS.wine);fill('cat-ocean',TOURS.ocean);
+
+  // ============================
+  // Apply translations + render
+  // ============================
+  function applyI18n(){
+    document.querySelectorAll('[data-i18n]').forEach(function(el){el.innerHTML=t(el.getAttribute('data-i18n'));});
+    document.documentElement.lang=L;
+    var lc=document.getElementById('langCurrent');if(lc)lc.textContent=L.toUpperCase();
+    document.querySelectorAll('#langMenu button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===L);});
+    fill('cat-city',TOURS.city);fill('cat-wine',TOURS.wine);fill('cat-ocean',TOURS.ocean);
+  }
+  function setLang(lang){
+    if(SUPPORTED.indexOf(lang)<0)lang='en';
+    L=lang;
+    try{localStorage.setItem('asv_lang',lang);}catch(e){}
+    applyI18n();
+  }
+
+  // ============================
+  // Language switcher UI
+  // ============================
+  var langSwitcher=document.getElementById('langSwitcher');
+  var langTrigger=document.getElementById('langTrigger');
+  var langMenu=document.getElementById('langMenu');
+  langTrigger.addEventListener('click',function(e){e.stopPropagation();langSwitcher.classList.toggle('open');langTrigger.setAttribute('aria-expanded',langSwitcher.classList.contains('open'));});
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'));langSwitcher.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');});
+  });
+  document.addEventListener('click',function(e){if(!langSwitcher.contains(e.target)){langSwitcher.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){langSwitcher.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}});
+
+  // Boot
+  applyI18n();
 </script>
 </body>
 </html>
