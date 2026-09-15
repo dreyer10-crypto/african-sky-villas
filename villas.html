@@ -139,6 +139,13 @@ nav.topnav a:hover { color: var(--terracotta); }
   .hero-logo-bg { right: -12%; opacity: 0.22; }
 }
 .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+.prop-tabs { display: inline-flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 1.85rem; padding: 0.35rem; background: rgba(255,251,243,0.14); border: 1px solid rgba(255,251,243,0.30); border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.prop-tab { display: flex; flex-direction: column; text-decoration: none; color: var(--bone); font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.9rem; line-height: 1.15; padding: 0.5rem 1.15rem; border-radius: 999px; transition: all 0.2s; white-space: nowrap; opacity: 0.9; }
+.prop-tab small { font-weight: 500; font-size: 0.66rem; letter-spacing: 0.02em; opacity: 0.82; }
+.prop-tab:hover { opacity: 1; background: rgba(255,251,243,0.18); }
+.prop-tab.active { background: var(--bone); color: var(--espresso); opacity: 1; }
+.prop-tab.active small { color: var(--terracotta); opacity: 1; }
+@media (max-width: 640px) { .prop-tabs { width: 100%; justify-content: center; } .prop-tab { flex: 1; align-items: center; text-align: center; font-size: 0.82rem; padding: 0.45rem 0.6rem; } }
 .hero h1 { font-size: clamp(3rem, 10vw, 9rem); margin: 1.5rem 0 0.5rem; font-weight: 300; }
 .hero h1 em { font-style: italic; font-weight: 300; color: var(--amber-soft); }
 .hero .tagline {
@@ -531,7 +538,7 @@ footer a:hover { color: var(--bone); }
     <li class="hide-mobile"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     <li class="hide-mobile"><a href="index.html">The Collection</a></li>
     <li class="hide-mobile"><a href="beachside.html">Beachside</a></li>
-    <li class="hide-mobile"><a href="#zambia" data-i18n="nav.thorntree">Thorn Tree</a></li>
+    <li class="hide-mobile"><a href="thorntree.html" data-i18n="nav.thorntree">Thorn Tree</a></li>
     <li class="hide-mobile"><a href="https://www.africanskyvillas.com/" target="_blank" rel="noopener" class="nav-link-external" data-i18n="nav.mainSite">Main Site</a></li>
     <li>
       <div class="lang-switcher" id="langSwitcher">
@@ -559,6 +566,11 @@ footer a:hover { color: var(--bone); }
   <div class="hero-grain"></div>
   <div class="hero-logo-bg" aria-hidden="true"></div>
   <div class="hero-content">
+    <nav class="prop-tabs" aria-label="African Sky Collection properties">
+      <a href="villas.html" class="prop-tab active" aria-current="page">African Sky Villas <small>Marloth · Kruger</small></a>
+      <a href="beachside.html" class="prop-tab">Beachside Escape <small>Big Bay · Cape Town</small></a>
+      <a href="thorntree.html" class="prop-tab">Thorn Tree House <small>Victoria Falls · Zambia</small></a>
+    </nav>
     <span class="hero-eyebrow" data-i18n="hero.eyebrow">Marloth Park · Kruger · Mpumalanga</span>
     <h1 class="display" data-i18n="hero.titleHtml">Your African <em>adventure</em> awaits.</h1>
     <p class="tagline" data-i18n="hero.tagline">From dawn safaris in the Kruger to sunset cruises on the Komati — a curated collection of eighteen unforgettable experiences, all bookable in one place.</p>
