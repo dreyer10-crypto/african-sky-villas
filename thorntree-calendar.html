@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Thorn Tree House — Availability & Bookings</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --ground:#F1E9DB; --surface:#FFFBF3; --surface-2:#F8F1E4; --raised:#FFFFFF;
+    --ink:#241A0E; --ink-soft:#6E5B44; --ink-faint:#9C8A6F;
+    --line:#E2D6C1; --line-soft:#EEE4D3;
+    --accent:#C44D2C; --accent-deep:#9A3A1F; --amber:#D89B3A;
+    --asky:#C44D2C; --asky-soft:#F3D9CF; --thorn:#2E7D6B; --thorn-soft:#CFE6DF;
+    --weekend:#EBE1CE; --today:#FBE7D6;
+    --good:#2E7D6B; --danger:#B33A22;
+    --cellW:46px; --nameW:150px; --headH:56px;
+    --shadow:0 12px 34px rgba(36,26,14,.14);
+    font-family:'Manrope',system-ui,sans-serif;
+  }
+  :root:not([data-theme="light"]){ @media (prefers-color-scheme:dark){
+    --ground:#171009; --surface:#211710; --surface-2:#1B120B; --raised:#2A1E13;
+    --ink:#F6EEDF; --ink-soft:#C7B79E; --ink-faint:#8C7A60;
+    --line:#3A2A1A; --line-soft:#2C2013;
+    --accent:#E0673F; --accent-deep:#C44D2C; --amber:#E3B15C;
+    --asky:#E0673F; --asky-soft:#4A2417; --thorn:#4FB79E; --thorn-soft:#173A32;
+    --weekend:#1B130B; --today:#33210F; --good:#4FB79E; --danger:#E0714F;
+    --shadow:0 14px 40px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#171009; --surface:#211710; --surface-2:#1B120B; --raised:#2A1E13;
+    --ink:#F6EEDF; --ink-soft:#C7B79E; --ink-faint:#8C7A60;
+    --line:#3A2A1A; --line-soft:#2C2013;
+    --accent:#E0673F; --accent-deep:#C44D2C; --amber:#E3B15C;
+    --asky:#E0673F; --asky-soft:#4A2417; --thorn:#4FB79E; --thorn-soft:#173A32;
+    --weekend:#1B130B; --today:#33210F; --good:#4FB79E; --danger:#E0714F;
+    --shadow:0 14px 40px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  [hidden]{display:none!important}
+  .wrap{min-height:100%;display:flex;flex-direction:column}
+  h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:500;margin:0;text-wrap:balance}
+
+  header.top{padding:16px 20px 12px;padding-inline:max(20px,env(safe-area-inset-left));border-bottom:1px solid var(--line);background:var(--surface)}
+  .brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--ground);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;flex:none}
+  .brandtxt h1{font-size:1.28rem;letter-spacing:-.01em;line-height:1.1}
+  .brandtxt .sub{font-size:.82rem;color:var(--ink-soft);margin-top:1px}
+  .brandtxt b{color:var(--accent);font-weight:600}
+  .spacer{flex:1 1 auto}
+  .whoami{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-soft)}
+  select.orgsel{background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 9px;font-size:.82rem;font-weight:600;font-family:inherit}
+  .iconbtn{background:var(--surface-2);border:1px solid var(--line);color:var(--ink);width:38px;height:38px;border-radius:9px;cursor:pointer;display:grid;place-items:center;font-size:1.05rem}
+  .iconbtn:hover{background:var(--line-soft)}
+  .note{margin-top:10px;font-size:.78rem;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line-soft);border-left:3px solid var(--amber);border-radius:6px;padding:8px 12px}
+  .syncbanner{margin-top:10px;font-size:.78rem;border-radius:6px;padding:8px 12px;display:none}
+  .syncbanner.live{display:block;color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);border:1px solid color-mix(in srgb,var(--good) 30%,transparent)}
+  .syncbanner.local{display:block;color:var(--danger);background:color-mix(in srgb,var(--danger) 10%,transparent);border:1px solid color-mix(in srgb,var(--danger) 30%,transparent)}
+  .syncbanner.connecting{display:block;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line)}
+
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 20px;padding-inline:max(20px,env(safe-area-inset-left));background:var(--surface);border-bottom:1px solid var(--line)}
+  .monthnav{display:flex;align-items:center;gap:6px}
+  .monthlabel{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:600;min-width:170px;text-align:center;font-variant-numeric:tabular-nums}
+  .nav{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer;font-size:1rem;display:grid;place-items:center}
+  .nav:hover{background:var(--line-soft)}
+  .btn{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:8px;padding:8px 13px;font-size:.83rem;font-weight:600;cursor:pointer;font-family:inherit}
+  .btn:hover{background:var(--line-soft)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:var(--accent-deep)}
+  .btn.primary:disabled{opacity:.5;cursor:not-allowed}
+  .legend{display:flex;align-items:center;gap:14px;font-size:.78rem;color:var(--ink-soft);flex-wrap:wrap}
+  .lg{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;flex:none}
+  .sw.a{background:var(--asky)} .sw.t{background:var(--thorn)}
+
+  .stats{display:flex;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--line);padding:0 max(8px,env(safe-area-inset-left))}
+  .stat{display:flex;flex-direction:column;gap:2px;padding:11px 18px;border-right:1px solid var(--line-soft)}
+  .stat .v{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .stat .v.occ{color:var(--accent)}
+  .stat .k{font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .stat .sub2{font-size:.65rem;color:var(--ink-faint)}
+  .board{flex:1 1 auto;overflow:auto;background:var(--ground)}
+  .grid{min-width:max-content}
+  .hrow,.row{display:flex;align-items:stretch}
+  .corner,.rowname{width:var(--nameW);flex:none;position:sticky;left:0;z-index:6;border-right:2px solid var(--line);background:var(--surface)}
+  .corner{height:var(--headH);z-index:8;display:flex;align-items:center;padding:0 14px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--line)}
+  .hrow{position:sticky;top:0;z-index:7}
+  .htrack{display:flex;height:var(--headH);border-bottom:1px solid var(--line)}
+  .hcell{width:var(--cellW);flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line-soft);background:var(--surface);font-variant-numeric:tabular-nums}
+  .hcell .dow{font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint)}
+  .hcell .dnum{font-size:.95rem;font-weight:600;line-height:1.1}
+  .hcell.we{background:var(--weekend)}
+  .hcell.today{background:var(--today)}
+  .hcell.today .dnum{color:var(--accent)}
+  .rowname{display:flex;align-items:center;gap:6px;padding:0 8px 0 14px;font-weight:600;font-size:.9rem;border-bottom:1px solid var(--line-soft)}
+  .rowname .rn-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .track{position:relative;height:56px;border-bottom:1px solid var(--line-soft)}
+  .track .cell{position:absolute;top:0;bottom:0;width:var(--cellW);border-right:1px solid var(--line-soft);cursor:pointer}
+  .track .cell.we{background:var(--weekend)}
+  .track .cell.today{background:var(--today)}
+  .track .cell:hover{background:color-mix(in srgb,var(--accent) 9%,transparent)}
+  .row:nth-child(even) .track{background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+  .bar{position:absolute;top:7px;height:42px;border-radius:8px;padding:5px 9px;overflow:hidden;cursor:pointer;color:#fff;z-index:3;display:flex;flex-direction:column;justify-content:center;box-shadow:0 2px 6px rgba(36,26,14,.22);border:1px solid rgba(0,0,0,.08)}
+  .bar:hover{filter:brightness(1.05);z-index:5}
+  .bar.asky{background:linear-gradient(180deg,var(--asky),var(--accent-deep))}
+  .bar.thorn{background:linear-gradient(180deg,var(--thorn),#256153)}
+  .bar .g{font-size:.78rem;font-weight:700;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .m{font-size:.66rem;opacity:.92;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar.clipL{border-top-left-radius:0;border-bottom-left-radius:0}
+  .bar.clipR{border-top-right-radius:0;border-bottom-right-radius:0}
+  .empty{padding:40px 20px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+
+  .scrim{position:fixed;inset:0;background:rgba(20,12,4,.5);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+  .scrim.show{display:flex}
+  .modal{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);width:min(460px,100%);max-height:92vh;overflow:auto}
+  .modal h2{font-size:1.25rem;padding:18px 20px 4px}
+  .modal .msub{padding:0 20px 14px;font-size:.82rem;color:var(--ink-soft)}
+  form{padding:0 20px 20px;display:flex;flex-direction:column;gap:13px}
+  .field label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+  .field input,.field select,.field textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--ink);font:inherit;font-size:.9rem}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+  .two{display:flex;gap:11px}.two>*{flex:1}
+  .rooms-pick{display:flex;flex-wrap:wrap;gap:7px}
+  .rmchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);border-radius:20px;padding:6px 11px;font-size:.82rem;cursor:pointer;user-select:none}
+  .rmchip input{accent-color:var(--accent);margin:0}
+  .rmchip.on{background:var(--asky-soft);border-color:var(--accent);color:var(--ink)}
+  .rmchip.all{font-weight:700}
+  .err{color:var(--danger);font-size:.8rem;font-weight:600;display:none}
+  .err.show{display:block}
+  .actions{display:flex;gap:10px;margin-top:4px}
+  .actions .btn{flex:1;text-align:center;padding:11px}
+  .btn.danger{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 40%,var(--line))}
+  .btn.danger:hover{background:color-mix(in srgb,var(--danger) 12%,transparent)}
+  @media (max-width:520px){ :root{--nameW:118px;--cellW:42px} .brandtxt h1{font-size:1.1rem} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brandrow">
+      <div class="logo">AS</div>
+      <div class="brandtxt">
+        <h1>Thorn Tree House <span style="color:var(--ink-faint);font-weight:400">·</span> <b>African Sky</b></h1>
+        <div class="sub">Shared availability &amp; bookings — Victoria Falls, Zambia</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="whoami">
+        <span>You are</span>
+        <select class="orgsel" id="orgSel" aria-label="Which team are you booking as">
+          <option value="African Sky">African Sky</option>
+          <option value="Thorn Tree">Thorn Tree</option>
+        </select>
+        <button class="iconbtn" id="themeBtn" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
+      </div>
+    </div>
+    <div class="note">Direct bookings only — Thorn Tree is not on Booking.com or Airbnb. Add every enquiry here so both teams see it and no date is sold twice.</div>
+    <div class="syncbanner connecting" id="sync">● Connecting to the shared calendar…</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="monthnav">
+      <button class="nav" id="prev" aria-label="Previous month">‹</button>
+      <div class="monthlabel" id="mlabel">—</div>
+      <button class="nav" id="next" aria-label="Next month">›</button>
+    </div>
+    <button class="btn" id="today">Today</button>
+    <button class="btn primary" id="add">+ Add booking</button>
+    <div class="spacer"></div>
+    <div class="legend">
+      <span class="lg"><span class="sw a"></span>African Sky</span>
+      <span class="lg"><span class="sw t"></span>Thorn Tree</span>
+      <button class="btn" id="editRooms" style="padding:6px 11px">Rooms</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats" aria-live="polite"></div>
+
+  <div class="board" id="board">
+    <div class="empty" id="loading">Loading calendar…</div>
+    <div class="grid" id="grid" hidden></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h2 id="mTitle">Add booking</h2>
+    <div class="msub" id="mSub">Block the dates so the other team sees them instantly.</div>
+    <form id="bform">
+      <div class="field"><label for="fGuest">Guest name</label><input id="fGuest" type="text" placeholder="e.g. Ralf Imhof" required></div>
+      <div class="field"><label>Rooms</label><div class="rooms-pick" id="fRooms"></div></div>
+      <div class="two">
+        <div class="field"><label for="fIn">Check-in</label><input id="fIn" type="date" required></div>
+        <div class="field"><label for="fOut">Check-out</label><input id="fOut" type="date" required></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="fPax">Guests</label><input id="fPax" type="number" min="1" max="30" value="2"></div>
+        <div class="field"><label for="fSrc">Source</label>
+          <select id="fSrc"><option>Direct</option><option>Word of mouth</option><option>Referral</option><option>African Sky website</option><option>Repeat guest</option><option>Other</option></select>
+        </div>
+      </div>
+      <div class="field"><label for="fNotes">Notes (optional)</label><textarea id="fNotes" rows="2" placeholder="Deposit paid, dietary needs, arrival time…"></textarea></div>
+      <div class="err" id="fErr"></div>
+      <div class="actions">
+        <button type="button" class="btn danger" id="fDelete" style="display:none">Delete</button>
+        <button type="button" class="btn" id="fCancel">Cancel</button>
+        <button type="submit" class="btn primary" id="fSave">Save booking</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="scrim" id="roomScrim">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+    <h2 id="rTitle">Rooms</h2>
+    <div class="msub">The bookable units shown as rows. Thorn Tree House sleeps 10 across its bedrooms — rename or add to match how you let it.</div>
+    <form id="rform" onsubmit="return false">
+      <div id="roomList" style="display:flex;flex-direction:column;gap:8px"></div>
+      <button type="button" class="btn" id="addRoom" style="align-self:flex-start">+ Add room</button>
+      <div class="err" id="rErr"></div>
+      <div class="actions">
+        <button type="button" class="btn" id="rCancel">Cancel</button>
+        <button type="button" class="btn primary" id="rSave">Save rooms</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getFirestore, collection, doc, onSnapshot, setDoc, deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+// Firebase web config is public by design — access is governed by Firestore security rules.
+const firebaseConfig = {
+  apiKey: "AIzaSyCDN44pLuad9jMWg9BbVZydVNJa4UiTmus",
+  authDomain: "african-sky-calendar.firebaseapp.com",
+  projectId: "african-sky-calendar",
+  storageBucket: "african-sky-calendar.firebasestorage.app",
+  messagingSenderId: "451269398962",
+  appId: "1:451269398962:web:9575438b33f7944375d4ab",
+  measurementId: "G-KTFED9ML3D"
+};
+
+let db = null;
+try {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+} catch (e) { db = null; }
+
+"use strict";
+var DEFAULT_ROOMS=[{id:"r1",name:"Bedroom 1"},{id:"r2",name:"Bedroom 2"},{id:"r3",name:"Bedroom 3"},{id:"r4",name:"Bedroom 4"},{id:"r5",name:"Bedroom 5"}];
+var state={rooms:[],bookings:[],year:0,month:0,editing:null,roomsLoaded:false,bookingsLoaded:false};
+var byId=function(id){return document.getElementById(id)};
+
+function pad(n){return (n<10?"0":"")+n}
+function ymd(y,m,d){return y+"-"+pad(m+1)+"-"+pad(d)}
+function todayYMD(){var t=new Date();return ymd(t.getFullYear(),t.getMonth(),t.getDate())}
+function toIdx(s){var p=s.split("-");return Math.round(Date.UTC(+p[0],+p[1]-1,+p[2])/86400000)}
+function addDays(s,n){var d=new Date((toIdx(s)+n)*86400000);return ymd(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())}
+function monthDays(y,m){return new Date(Date.UTC(y,m+1,0)).getUTCDate()}
+var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DOW=["Su","Mo","Tu","We","Th","Fr","Sa"];
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function myOrg(){try{return localStorage.getItem("tt_org")||"African Sky"}catch(e){return "African Sky"}}
+function setOrg(v){try{localStorage.setItem("tt_org",v)}catch(e){}}
+
+function overlaps(aIn,aOut,bIn,bOut){return toIdx(aIn)<toIdx(bOut)&&toIdx(bIn)<toIdx(aOut)}
+function conflictFor(rooms,cin,cout,exceptId){
+  for(var i=0;i<state.bookings.length;i++){var b=state.bookings[i];if(b.id===exceptId)continue;
+    if(!overlaps(cin,cout,b.checkIn,b.checkOut))continue;
+    for(var r=0;r<rooms.length;r++){if((b.rooms||[]).indexOf(rooms[r])>=0)return {room:rooms[r],b:b}}}
+  return null;
+}
+
+/* ---------- persistence via Firebase Firestore (realtime, shared) ---------- */
+function sync(kind,msg){var s=byId("sync");s.className="syncbanner "+kind;s.textContent=msg;}
+
+function persistBooking(b){
+  if(!db)return Promise.reject(new Error("offline"));
+  return setDoc(doc(db,"bookings",b.id),b);
+}
+function persistDeleteBooking(id){
+  if(!db)return Promise.reject(new Error("offline"));
+  return deleteDoc(doc(db,"bookings",id));
+}
+function persistRooms(rooms){
+  if(!db)return Promise.reject(new Error("offline"));
+  return setDoc(doc(db,"config","rooms"),{rooms:rooms,updatedAt:new Date().toISOString()});
+}
+
+function renderStats(){
+  var y=state.year,m=state.month,nd=monthDays(y,m);
+  var ms=toIdx(ymd(y,m,1)),me=toIdx(ymd(y,m,nd))+1;
+  var roomN=0,guestN=0,cnt=0,avail=state.rooms.length*nd;
+  for(var i=0;i<state.bookings.length;i++){var b=state.bookings[i];
+    var ov=Math.min(toIdx(b.checkOut),me)-Math.max(toIdx(b.checkIn),ms);
+    if(ov<=0)continue;cnt++;roomN+=((b.rooms||[]).length||0)*ov;guestN+=(b.pax||0)*ov;}
+  var occ=avail>0?Math.round(roomN/avail*100):0;
+  byId("stats").innerHTML=
+    '<div class="stat"><span class="v occ">'+occ+'%</span><span class="k">Occupancy</span><span class="sub2">'+MON[m]+' '+y+'</span></div>'+
+    '<div class="stat"><span class="v">'+roomN+'</span><span class="k">Room-nights</span><span class="sub2">of '+avail+' available</span></div>'+
+    '<div class="stat"><span class="v">'+cnt+'</span><span class="k">Bookings</span></div>'+
+    '<div class="stat"><span class="v">'+guestN+'</span><span class="k">Guest-nights</span></div>';
+}
+function render(){
+  var grid=byId("grid"),loading=byId("loading");
+  byId("mlabel").textContent=MON[state.month]+" "+state.year;
+  renderStats();
+  if(!state.rooms.length){loading.textContent=state.roomsLoaded?"Add a room to begin.":"Loading calendar…";loading.hidden=false;grid.hidden=true;return}
+  loading.hidden=true;grid.hidden=false;
+  var y=state.year,m=state.month,nd=monthDays(y,m);
+  var monthStart=ymd(y,m,1),monthEndExcl=addDays(ymd(y,m,nd),1),tstr=todayYMD();
+  var html='<div class="hrow"><div class="corner">Room</div><div class="htrack">';
+  for(var d=1;d<=nd;d++){var dstr=ymd(y,m,d),dow=new Date(Date.UTC(y,m,d)).getUTCDay();var cls=(dow===0||dow===6)?" we":"";if(dstr===tstr)cls+=" today";
+    html+='<div class="hcell'+cls+'"><span class="dow">'+DOW[dow]+'</span><span class="dnum">'+d+'</span></div>';}
+  html+='</div></div>';
+  for(var ri=0;ri<state.rooms.length;ri++){var room=state.rooms[ri];
+    html+='<div class="row"><div class="rowname"><span class="rn-name">'+esc(room.name)+'</span></div><div class="track">';
+    for(var dd=1;dd<=nd;dd++){var ds=ymd(y,m,dd),dw=new Date(Date.UTC(y,m,dd)).getUTCDay();var cc=(dw===0||dw===6)?" we":"";if(ds===tstr)cc+=" today";
+      html+='<div class="cell'+cc+'" style="left:'+((dd-1)*46)+'px" data-date="'+ds+'" data-room="'+room.id+'"></div>';}
+    for(var bi=0;bi<state.bookings.length;bi++){var b=state.bookings[bi];if((b.rooms||[]).indexOf(room.id)<0)continue;
+      if(!(toIdx(b.checkIn)<toIdx(monthEndExcl)&&toIdx(monthStart)<toIdx(b.checkOut)))continue;
+      var startIdx=toIdx(b.checkIn)-toIdx(monthStart),endIdx=toIdx(b.checkOut)-toIdx(monthStart);
+      var clipL=startIdx<0,clipR=endIdx>nd,L=Math.max(startIdx,0),R=Math.min(endIdx,nd);
+      var left=L*46+3,width=Math.max((R-L)*46-6,40),org=b.bookedBy==="Thorn Tree"?"thorn":"asky";
+      html+='<div class="bar '+org+(clipL?" clipL":"")+(clipR?" clipR":"")+'" style="left:'+left+'px;width:'+width+'px" data-id="'+b.id+'" title="'+esc(b.guest)+' · '+b.checkIn+' → '+b.checkOut+'"><span class="g">'+esc(b.guest)+'</span><span class="m">'+b.pax+' guest'+(b.pax==1?"":"s")+' · '+esc(b.source||"Direct")+'</span></div>';}
+    html+='</div></div>';}
+  grid.innerHTML=html;
+}
+
+function openBooking(booking,presetRoom,presetDate){
+  state.editing=booking?booking.id:null;
+  byId("mTitle").textContent=booking?"Edit booking":"Add booking";
+  byId("fDelete").style.display=booking?"block":"none";
+  byId("fErr").className="err";
+  byId("fGuest").value=booking?booking.guest:"";
+  byId("fPax").value=booking?booking.pax:2;
+  byId("fSrc").value=booking?(booking.source||"Direct"):"Direct";
+  byId("fNotes").value=booking?(booking.notes||""):"";
+  var cin=booking?booking.checkIn:(presetDate||todayYMD());
+  byId("fIn").value=cin;byId("fOut").value=booking?booking.checkOut:addDays(cin,1);
+  buildRoomChips(booking?(booking.rooms||[]).slice():(presetRoom?[presetRoom]:[]));
+  byId("scrim").classList.add("show");
+  setTimeout(function(){byId("fGuest").focus()},30);
+}
+function buildRoomChips(selected){
+  var wrap=byId("fRooms"),h='<label class="rmchip all"><input type="checkbox" id="rmAll"> Whole house</label>';
+  for(var i=0;i<state.rooms.length;i++){var r=state.rooms[i],on=selected.indexOf(r.id)>=0;
+    h+='<label class="rmchip'+(on?" on":"")+'"><input type="checkbox" value="'+r.id+'" '+(on?"checked":"")+'> '+esc(r.name)+'</label>';}
+  wrap.innerHTML=h;
+  wrap.querySelectorAll(".rmchip input").forEach(function(cb){cb.addEventListener("change",function(){
+    if(this.id==="rmAll"){var on=this.checked;wrap.querySelectorAll('.rmchip input[value]').forEach(function(x){x.checked=on;x.closest(".rmchip").classList.toggle("on",on)});}
+    else{this.closest(".rmchip").classList.toggle("on",this.checked);syncAll();}
+  });});
+  syncAll();
+  function syncAll(){var boxes=wrap.querySelectorAll('.rmchip input[value]'),all=boxes.length>0;boxes.forEach(function(x){if(!x.checked)all=false});byId("rmAll").checked=all}
+}
+function pickedRooms(){var out=[];byId("fRooms").querySelectorAll("input[value]").forEach(function(x){if(x.checked)out.push(x.value)});return out}
+
+function saveBooking(e){
+  e.preventDefault();var err=byId("fErr");
+  var guest=byId("fGuest").value.trim(),rooms=pickedRooms(),cin=byId("fIn").value,cout=byId("fOut").value,pax=Math.max(1,parseInt(byId("fPax").value||"1",10));
+  if(!guest)return se("Please enter the guest's name.");
+  if(!rooms.length)return se("Pick at least one room (or Whole house).");
+  if(!cin||!cout)return se("Please set both dates.");
+  if(toIdx(cout)<=toIdx(cin))return se("Check-out must be after check-in.");
+  var clash=conflictFor(rooms,cin,cout,state.editing);
+  if(clash){var rn=(state.rooms.filter(function(r){return r.id===clash.room})[0]||{}).name||clash.room;
+    return se('Double booking: “'+clash.b.guest+'” already has '+rn+' from '+clash.b.checkIn+' to '+clash.b.checkOut+'.');}
+  var existing=state.editing?state.bookings.filter(function(x){return x.id===state.editing})[0]:null;
+  var b={guest:guest,rooms:rooms,checkIn:cin,checkOut:cout,pax:pax,source:byId("fSrc").value,notes:byId("fNotes").value.trim(),bookedBy:myOrg(),updatedAt:new Date().toISOString()};
+  if(state.editing){b.id=state.editing;b.createdAt=(existing&&existing.createdAt)||b.updatedAt;}
+  else{b.id="b"+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);b.createdAt=b.updatedAt;}
+  // optimistic local update; Firestore snapshot will reconcile
+  var idx=-1;for(var i=0;i<state.bookings.length;i++){if(state.bookings[i].id===b.id){idx=i;break}}
+  if(idx>=0)state.bookings[idx]=b;else state.bookings.push(b);
+  render();closeBooking();
+  persistBooking(b).then(function(){
+    sync("live","● Saved — the calendar just updated for everyone with this link.");
+  }).catch(function(){
+    sync("local","⚠ Couldn’t save that booking to the shared calendar — check your connection and try again.");
+  });
+  return true;
+  function se(m){err.textContent=m;err.className="err show";return false}
+}
+function closeBooking(){byId("scrim").classList.remove("show");state.editing=null}
+function deleteBooking(id){
+  state.bookings=state.bookings.filter(function(b){return b.id!==id});render();closeBooking();
+  persistDeleteBooking(id).then(function(){
+    sync("live","● Booking removed for everyone with this link.");
+  }).catch(function(){
+    sync("local","⚠ Couldn’t remove that booking from the shared calendar — please try again.");
+  });
+}
+
+function openRooms(){var list=byId("roomList");list.innerHTML="";state.rooms.forEach(function(r){addRoomRow(r.id,r.name)});byId("rErr").className="err";byId("roomScrim").classList.add("show");}
+function addRoomRow(id,name){var row=document.createElement("div");row.style.cssText="display:flex;gap:8px;align-items:center";
+  row.innerHTML='<input type="text" value="'+esc(name)+'" data-id="'+(id||"")+'" style="flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--ink);font:inherit"><button type="button" class="btn danger" style="padding:8px 11px">✕</button>';
+  row.querySelector("button").addEventListener("click",function(){row.remove()});byId("roomList").appendChild(row);}
+function saveRooms(){var rows=byId("roomList").querySelectorAll("input[type=text]"),out=[];
+  for(var i=0;i<rows.length;i++){var nm=rows[i].value.trim();if(!nm)continue;out.push({id:rows[i].getAttribute("data-id")||("r"+Date.now().toString(36)+i),name:nm});}
+  if(!out.length){byId("rErr").textContent="Keep at least one room.";byId("rErr").className="err show";return;}
+  state.rooms=out;render();byId("roomScrim").classList.remove("show");
+  persistRooms(out).then(function(){
+    sync("live","● Rooms updated for everyone with this link.");
+  }).catch(function(){
+    sync("local","⚠ Couldn’t save the room list to the shared calendar — please try again.");
+  });
+}
+
+function boot(){
+  var t=new Date();state.year=t.getFullYear();state.month=t.getMonth();
+  byId("orgSel").value=myOrg();byId("orgSel").addEventListener("change",function(){setOrg(this.value)});
+  byId("themeBtn").addEventListener("click",function(){var r=document.documentElement,cur=r.getAttribute("data-theme");var mq=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;r.setAttribute("data-theme",(cur?cur==="light":!mq)?"dark":"light");});
+  byId("prev").onclick=function(){state.month--;if(state.month<0){state.month=11;state.year--}render()};
+  byId("next").onclick=function(){state.month++;if(state.month>11){state.month=0;state.year++}render()};
+  byId("today").onclick=function(){var d=new Date();state.year=d.getFullYear();state.month=d.getMonth();render()};
+  byId("add").onclick=function(){openBooking(null)};
+  byId("editRooms").onclick=openRooms;
+  byId("bform").addEventListener("submit",saveBooking);
+  byId("fCancel").onclick=closeBooking;
+  byId("fDelete").onclick=function(){if(state.editing&&confirm("Delete this booking?"))deleteBooking(state.editing)};
+  byId("scrim").addEventListener("mousedown",function(e){if(e.target===this)closeBooking()});
+  byId("addRoom").onclick=function(){addRoomRow("","")};
+  byId("rCancel").onclick=function(){byId("roomScrim").classList.remove("show")};
+  byId("rSave").onclick=saveRooms;
+  byId("roomScrim").addEventListener("mousedown",function(e){if(e.target===this)this.classList.remove("show")});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeBooking();byId("roomScrim").classList.remove("show")}});
+  byId("grid").addEventListener("click",function(e){var bar=e.target.closest(".bar");if(bar){var b=state.bookings.filter(function(x){return x.id===bar.getAttribute("data-id")})[0];if(b)openBooking(b);return;}var cell=e.target.closest(".cell");if(cell)openBooking(null,cell.getAttribute("data-room"),cell.getAttribute("data-date"));});
+  render();
+  connect();
+}
+
+function connect(){
+  if(!db){
+    sync("local","⚠ Live sharing couldn’t start — the calendar can’t reach the shared server right now. Changes won’t be saved.");
+    state.rooms=DEFAULT_ROOMS.slice();state.roomsLoaded=true;render();
+    return;
+  }
+  var firstRooms=true,firstBookings=true,seeded=false;
+  // Rooms config (single doc)
+  onSnapshot(doc(db,"config","rooms"),function(snap){
+    if(snap.exists()&&snap.data().rooms&&snap.data().rooms.length){
+      state.rooms=snap.data().rooms;
+    }else{
+      state.rooms=DEFAULT_ROOMS.slice();
+      // seed the default room list once, so both teams share the same rows
+      if(!seeded){seeded=true;persistRooms(DEFAULT_ROOMS.slice()).catch(function(){});}
+    }
+    state.roomsLoaded=true;render();
+    if(firstRooms){firstRooms=false;markLive();}
+  },function(err){
+    sync("local","⚠ Live sharing error — "+(err&&err.code||"could not read the calendar")+". Changes may not be saved.");
+    if(!state.roomsLoaded){state.rooms=DEFAULT_ROOMS.slice();state.roomsLoaded=true;render();}
+  });
+  // Bookings collection
+  onSnapshot(collection(db,"bookings"),function(qs){
+    var arr=[];qs.forEach(function(d){var v=d.data();v.id=d.id;arr.push(v);});
+    state.bookings=arr;state.bookingsLoaded=true;render();
+    if(firstBookings){firstBookings=false;markLive();}
+  },function(err){
+    sync("local","⚠ Live sharing error — "+(err&&err.code||"could not read bookings")+". Changes may not be saved.");
+  });
+  function markLive(){
+    if(!firstRooms&&!firstBookings){
+      sync("live","● Live shared calendar — when either team saves a booking, this page updates for everyone. Bookmark this link.");
+    }
+  }
+}
+
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+</script>
+</body>
+</html>
