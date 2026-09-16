@@ -114,7 +114,8 @@
   .catlabel:first-of-type{margin-top:34px}
   .catlabel h3{font-size:1.5rem;font-weight:500;white-space:nowrap}
   .catlabel .ln{flex:1;height:1px;background:var(--line)}
-  .catlabel .ct{font-size:.78rem;color:var(--taupe);font-weight:600}
+  .catlabel .ct{font-size:.78rem;color:var(--taupe);font-weight:600;min-width:0}
+  @media(max-width:560px){.catlabel{flex-wrap:wrap;gap:6px 12px}.catlabel .ln{flex:1 1 30px}.catlabel .ct{flex-basis:100%}}
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   @media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:600px){.cards{grid-template-columns:1fr}}
@@ -143,13 +144,14 @@
   .guide tbody tr:nth-child(even){background:var(--cream)}
   .guide .sp{font-weight:600;white-space:nowrap}
   .guide .mon{white-space:nowrap;color:var(--terracotta);font-weight:600}
-  @media(max-width:640px){
+  @media(max-width:760px){
     .guide{border:none}
     .guide thead{display:none}
     .guide tbody,.guide tr,.guide td{display:block;width:100%}
     .guide tr{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;padding:6px 0;background:var(--cream)}
     .guide td{border:none;padding:3px 15px}
-    .guide td::before{content:attr(data-l) " ";font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--taupe);font-weight:700;display:inline-block;min-width:96px}
+    .guide .sp,.guide .mon{white-space:normal}
+    .guide td::before{content:attr(data-l);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--taupe);font-weight:700;display:block}
     .guide td.sp{font-size:1.02rem;padding-top:10px}
     .guide td.sp::before{display:none}
   }
