@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Thorn Tree House — Availability</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0b0b0b">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --ink:#1A1006; --deep:#120C04; --gold:#C8A24B; --cream:#FBF6EE;
+    --terra:#C44D2C; --taupe:#8A7A5E; --line:#2A2012;
+    --open:#3E7C4F; --limited:#C79A3A; --booked:#7A4A3A;
+    --card:#1c150b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--deep);color:var(--cream);-webkit-font-smoothing:antialiased}
+  a{color:var(--gold)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 16px}
+  header.top{padding:22px 0 10px;text-align:center}
+  header.top img{width:64px;height:64px;border-radius:50%;vertical-align:middle}
+  h1{font-family:Georgia,serif;font-size:1.5rem;margin:.5rem 0 .1rem}
+  h1 span{color:var(--terra)}
+  .sub{color:#C9BBA6;font-size:.9rem;margin:0}
+
+  /* access gate */
+  #gate{position:fixed;inset:0;background:var(--deep);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .box{max-width:360px;width:100%;text-align:center}
+  #gate img{width:84px;height:84px;border-radius:50%;margin-bottom:14px}
+  #gate h2{font-family:Georgia,serif;font-size:1.4rem;margin:.2rem 0 .3rem}
+  #gate p{color:#C9BBA6;font-size:.9rem;margin:0 0 18px}
+  #gate input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:#0d0803;color:var(--cream);font-size:1.05rem;text-align:center;letter-spacing:.12em;text-transform:uppercase}
+  #gate button{margin-top:12px;width:100%;padding:14px;border:none;border-radius:12px;background:var(--terra);color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
+  #gate .err{color:#E9A08F;font-size:.85rem;margin-top:10px;min-height:1.1em}
+  #gate .hint{color:var(--taupe);font-size:.78rem;margin-top:16px}
+
+  .bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 6px;flex-wrap:wrap}
+  .bar button{background:var(--card);border:1px solid var(--line);color:var(--cream);border-radius:10px;padding:8px 14px;font-size:.95rem;cursor:pointer}
+  .bar .mlabel{font-family:Georgia,serif;font-size:1.2rem;min-width:180px;text-align:center}
+  .legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px;font-size:.82rem;color:#C9BBA6}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:middle}
+  .cal{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
+  .dow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
+  .dow span{text-align:center;font-size:.72rem;color:var(--taupe);letter-spacing:.08em;text-transform:uppercase}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cell{border-radius:10px;padding:6px 4px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid transparent;min-height:54px;overflow:hidden}
+  .cell.empty{background:transparent}
+  .cell.past{opacity:.33}
+  .cell .d{font-size:.9rem;font-weight:600}
+  .cell .s{font-size:.62rem;letter-spacing:.02em;opacity:.9}
+  .open{background:rgba(62,124,79,.18);border-color:rgba(62,124,79,.5)}
+  .open .d{color:#8FD3A2}
+  .limited{background:rgba(199,154,58,.16);border-color:rgba(199,154,58,.5)}
+  .limited .d{color:#E7C877}
+  .booked{background:rgba(122,74,58,.22);border-color:rgba(122,74,58,.55)}
+  .booked .d{color:#D9A28F}
+  .today{outline:2px solid var(--gold);outline-offset:1px}
+  .cta{text-align:center;margin:22px 0 8px}
+  .cta a{display:inline-block;background:var(--terra);color:#fff;text-decoration:none;padding:13px 26px;border-radius:999px;font-weight:700;font-size:.95rem}
+  .note{color:var(--taupe);font-size:.78rem;text-align:center;margin:10px 0 40px;line-height:1.5}
+  .status{text-align:center;color:var(--taupe);font-size:.82rem;padding:14px}
+</style>
+</head>
+<body>
+
+<!-- ===== Guest access gate ===== -->
+<div id="gate">
+  <div class="box">
+    <img src="images/logo.jpg" alt="African Sky Villas">
+    <h2>Thorn Tree House</h2>
+    <p>Enter the access code from your enquiry to view live availability.</p>
+    <input id="code" type="text" autocomplete="off" placeholder="ACCESS CODE" aria-label="Access code">
+    <button id="enter">View availability</button>
+    <div class="err" id="err"></div>
+    <div class="hint">Don't have a code? Message African Sky on WhatsApp and we'll send one.</div>
+  </div>
+</div>
+
+<div id="app" hidden>
+  <header class="top">
+    <img src="images/logo.jpg" alt="">
+    <h1>Thorn Tree House <span>· Availability</span></h1>
+    <p class="sub">Live availability — Victoria Falls, Zambia</p>
+  </header>
+
+  <div class="wrap">
+    <div class="bar">
+      <button id="prev" aria-label="Previous month">‹</button>
+      <div class="mlabel" id="mlabel">—</div>
+      <button id="next" aria-label="Next month">›</button>
+      <button id="today">Today</button>
+    </div>
+    <div class="legend">
+      <span><i style="background:#3E7C4F"></i>Open</span>
+      <span><i style="background:#C79A3A"></i>Limited</span>
+      <span><i style="background:#7A4A3A"></i>Fully booked</span>
+    </div>
+    <div class="cal">
+      <div class="dow"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+      <div class="grid" id="grid"></div>
+      <div class="status" id="status">Loading availability…</div>
+    </div>
+    <div class="cta"><a href="thorntree.html#book">Enquire to book →</a></div>
+    <p class="note">Availability updates live. Dates are only held once your booking is confirmed by African Sky.<br>Read-only view — to make or change a booking, contact African Sky.</p>
+  </div>
+</div>
+
+<script>
+/* ================= GUEST ACCESS CODE (change here) ================= */
+var GUEST_CODE = "SKY-STAY";   // give this to guests with their enquiry
+/* ================================================================== */
+(function(){
+  var KEY="tt_guest_ok";
+  function authed(){try{return localStorage.getItem(KEY)==="1"}catch(e){return false}}
+  function grant(){try{localStorage.setItem(KEY,"1")}catch(e){}}
+  var gate=document.getElementById("gate"), app=document.getElementById("app");
+  function openApp(){gate.style.display="none";app.hidden=false;boot();}
+  function tryCode(){
+    var v=(document.getElementById("code").value||"").trim().toUpperCase();
+    if(v===GUEST_CODE.toUpperCase()){grant();openApp();}
+    else{document.getElementById("err").textContent="That code isn't right — check your enquiry message.";}
+  }
+  document.getElementById("enter").addEventListener("click",tryCode);
+  document.getElementById("code").addEventListener("keydown",function(e){if(e.key==="Enter")tryCode();});
+
+  // ---- calendar (pure render, no Firebase dependency) ----
+  var DEFAULT_ROOMS=[{id:"r1"},{id:"r2"},{id:"r3"},{id:"r4"},{id:"r5"}];
+  var state={rooms:DEFAULT_ROOMS.slice(),bookings:[],year:0,month:0,started:false,dataLoaded:false};
+  var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  function pad(n){return (n<10?"0":"")+n} function ymd(y,m,d){return y+"-"+pad(m+1)+"-"+pad(d)}
+  function toIdx(s){var p=s.split("-");return Math.round(Date.UTC(+p[0],+p[1]-1,+p[2])/86400000)}
+  function monthDays(y,m){return new Date(Date.UTC(y,m+1,0)).getUTCDate()}
+  function todayIdx(){var t=new Date();return toIdx(ymd(t.getFullYear(),t.getMonth(),t.getDate()))}
+  function bookedRoomsOn(dayIdx){var set={};for(var i=0;i<state.bookings.length;i++){var b=state.bookings[i];
+    if(!b.checkIn||!b.checkOut)continue;
+    if(toIdx(b.checkIn)<=dayIdx&&dayIdx<toIdx(b.checkOut)){(b.rooms||[]).forEach(function(r){set[r]=1})}}
+    return Object.keys(set).length;}
+  function render(){
+    document.getElementById("mlabel").textContent=MON[state.month]+" "+state.year;
+    var y=state.year,m=state.month,nd=monthDays(y,m);
+    var firstDow=new Date(Date.UTC(y,m,1)).getUTCDay();
+    var total=state.rooms.length||5, tIdx=todayIdx(), html="";
+    for(var i=0;i<firstDow;i++) html+='<div class="cell empty"></div>';
+    for(var d=1;d<=nd;d++){
+      var idx=toIdx(ymd(y,m,d)), past=idx<tIdx?" past":"", today=idx===tIdx?" today":"";
+      if(!state.dataLoaded){ html+='<div class="cell open'+past+today+'" style="opacity:.5"><span class="d">'+d+'</span><span class="s">—</span></div>'; continue; }
+      var booked=bookedRoomsOn(idx), left=Math.max(0,total-booked), cls,label;
+      if(booked<=0){cls="open";label="Open";}
+      else if(left>0){cls="limited";label=left+" left";}
+      else{cls="booked";label="Booked";}
+      html+='<div class="cell '+cls+past+today+'"><span class="d">'+d+'</span><span class="s">'+label+'</span></div>';
+    }
+    document.getElementById("grid").innerHTML=html;
+  }
+  function boot(){
+    if(state.started)return; state.started=true;
+    var t=new Date(); state.year=t.getFullYear(); state.month=t.getMonth();
+    document.getElementById("prev").onclick=function(){state.month--;if(state.month<0){state.month=11;state.year--;}render();};
+    document.getElementById("next").onclick=function(){state.month++;if(state.month>11){state.month=0;state.year++;}render();};
+    document.getElementById("today").onclick=function(){var n=new Date();state.year=n.getFullYear();state.month=n.getMonth();render();};
+    render();
+  }
+  // Firebase feeds data in through these:
+  window.__availSetRooms=function(r){if(r&&r.length){state.rooms=r;render();}};
+  window.__availSetBookings=function(arr){state.bookings=arr||[];state.dataLoaded=true;var st=document.getElementById("status");if(st)st.textContent="";render();};
+  window.__availError=function(msg){var st=document.getElementById("status");if(st)st.textContent=msg||"Couldn't load availability right now.";};
+
+  if(authed()) openApp();
+})();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getFirestore, collection, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+var firebaseConfig={apiKey:"AIzaSyCDN44pLuad9jMWg9BbVZydVNJa4UiTmus",authDomain:"african-sky-calendar.firebaseapp.com",projectId:"african-sky-calendar",storageBucket:"african-sky-calendar.firebasestorage.app",messagingSenderId:"451269398962",appId:"1:451269398962:web:9575438b33f7944375d4ab"};
+try{
+  var db=getFirestore(initializeApp(firebaseConfig));
+  onSnapshot(doc(db,"config","rooms"),function(snap){ if(snap.exists()&&snap.data().rooms) window.__availSetRooms(snap.data().rooms); },function(){});
+  onSnapshot(collection(db,"bookings"),function(qs){ var arr=[];qs.forEach(function(d){var v=d.data();v.id=d.id;arr.push(v);}); window.__availSetBookings(arr); },function(){ window.__availError(); });
+}catch(e){ window.__availError(); }
+</script>
+</body>
+</html>

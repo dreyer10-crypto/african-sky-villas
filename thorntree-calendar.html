@@ -154,6 +154,35 @@
 </style>
 </head>
 <body>
+<!-- ===== Staff sign-in gate (internal tool) ===== -->
+<div id="staffgate" style="position:fixed;inset:0;background:#120C04;z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;font-family:system-ui,Arial,sans-serif">
+  <div style="max-width:360px;width:100%;text-align:center;color:#FBF6EE">
+    <img src="images/logo.jpg" style="width:80px;height:80px;border-radius:50%;margin-bottom:14px" alt="">
+    <h2 style="font-family:Georgia,serif;margin:.2rem 0 .3rem">Staff sign-in</h2>
+    <p style="color:#C9BBA6;font-size:.9rem;margin:0 0 16px">Internal booking calendar — African Sky &amp; Thorn Tree teams only. Enter the staff passcode to continue.</p>
+    <input id="staffcode" type="password" autocomplete="off" placeholder="STAFF PASSCODE" style="width:100%;padding:14px;border-radius:12px;border:1px solid #2A2012;background:#0d0803;color:#FBF6EE;font-size:1.05rem;text-align:center;letter-spacing:.12em">
+    <button id="staffenter" style="margin-top:12px;width:100%;padding:14px;border:none;border-radius:12px;background:#C44D2C;color:#fff;font-weight:700;font-size:1rem;cursor:pointer">Sign in</button>
+    <div id="stafferr" style="color:#E9A08F;font-size:.85rem;margin-top:10px;min-height:1.1em"></div>
+  </div>
+</div>
+<script>
+(function(){
+  /* ============ CHANGE YOUR STAFF PASSCODE HERE ============ */
+  var STAFF_CODE="TT-STAFF-2026";
+  /* ========================================================= */
+  var KEY="tt_staff_ok", g=document.getElementById("staffgate");
+  function ok(){try{return localStorage.getItem(KEY)==="1"}catch(e){return false}}
+  function grant(){try{localStorage.setItem(KEY,"1")}catch(e){}}
+  if(ok()){g.style.display="none";return;}
+  function tryc(){
+    var v=(document.getElementById("staffcode").value||"").trim().toUpperCase();
+    if(v===STAFF_CODE.toUpperCase()){grant();g.style.display="none";}
+    else{document.getElementById("stafferr").textContent="Incorrect passcode.";}
+  }
+  document.getElementById("staffenter").addEventListener("click",tryc);
+  document.getElementById("staffcode").addEventListener("keydown",function(e){if(e.key==="Enter")tryc();});
+})();
+</script>
 <div class="wrap">
   <header class="top">
     <div class="brandrow">
