@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Internal / non-indexable
+Disallow: /asv_dashboard.html
+Disallow: /asv-activities-dashboard.html
+Disallow: /thorntree-calendar.html
+
+Sitemap: https://africansky.travel/sitemap.xml
