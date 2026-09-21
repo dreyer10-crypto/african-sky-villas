@@ -112,8 +112,9 @@
   .cause p{color:var(--ink-soft);font-size:.92rem}
 
   /* animals to protect */
-  .animals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-  @media(max-width:820px){.animals{grid-template-columns:1fr}}
+  .animals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+  @media(max-width:900px){.animals{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.animals{grid-template-columns:1fr}}
   .animal{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bone);display:flex;flex-direction:column}
   .animal .ph{height:210px;background:var(--forest-soft) center/cover no-repeat}
   .animal .ph.ill{background:var(--forest);display:flex;align-items:center;justify-content:center}
@@ -121,6 +122,7 @@
   .animal .tx{padding:20px 20px 22px}
   .animal .tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--green);border-radius:999px;padding:4px 10px;margin-bottom:9px}
   .animal .tag.ip{background:var(--gold);color:#3a2f10}
+  .animal .tag.warn{background:#C36A2B;color:#fff}
   .animal h3{font-family:var(--f-body);font-weight:800;font-size:1.18rem;color:var(--forest);margin:0 0 6px}
   .animal p{color:var(--ink-soft);font-size:.93rem}
   .animal .credit{font-size:.72rem;color:var(--muted);margin-top:10px}
@@ -238,7 +240,7 @@
 <section class="band" id="animals" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow sec-eye">The animals your gift protects</div>
-    <h2 class="big">Three species. One legacy.</h2>
+    <h2 class="big">Four species. One legacy.</h2>
     <p class="lead">Our conservation partner <b>The Boucher Legacy</b> has worked to safeguard Africa&rsquo;s wildlife since 2012 &mdash; across three pillars: <b>prosecution, conservation and education</b>. Your gift backs the front line for these species, in the reserves you visit.</p>
     <div class="pillars"><span>&#9878;&#65039; Prosecution</span><span>&#127807; Conservation</span><span>&#127891; Education</span></div>
     <div class="animals">
@@ -264,6 +266,14 @@
           <span class="tag">Flagship species</span>
           <h3>Elephant</h3>
           <p>Among the species the Boucher Legacy safeguards alongside rhino and pangolin &mdash; protecting Africa&rsquo;s giants and the habitat they share with wild dog, cheetah and lion across the reserves.</p>
+        </div>
+      </div>
+      <div class="animal">
+        <div class="ph" style="background-image:url('images/animals/wild-dog.jpg')"></div>
+        <div class="tx">
+          <span class="tag warn">Endangered</span>
+          <h3>Wild dog</h3>
+          <p>The African wild dog &mdash; one of the continent&rsquo;s most endangered carnivores &mdash; is among the species the Boucher Legacy works to protect across the reserves you visit.</p>
         </div>
       </div>
     </div>
