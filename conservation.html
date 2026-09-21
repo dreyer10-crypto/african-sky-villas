@@ -111,6 +111,22 @@
   .cause h3{font-family:var(--f-body);font-weight:800;font-size:1.12rem;color:var(--forest);margin:6px 0}
   .cause p{color:var(--ink-soft);font-size:.92rem}
 
+  /* animals to protect */
+  .animals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+  @media(max-width:820px){.animals{grid-template-columns:1fr}}
+  .animal{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bone);display:flex;flex-direction:column}
+  .animal .ph{height:210px;background:var(--forest-soft) center/cover no-repeat}
+  .animal .ph.ill{background:var(--forest);display:flex;align-items:center;justify-content:center}
+  .animal .ph.ill img{height:100%;width:100%;object-fit:contain;padding:6px}
+  .animal .tx{padding:20px 20px 22px}
+  .animal .tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--green);border-radius:999px;padding:4px 10px;margin-bottom:9px}
+  .animal .tag.ip{background:var(--gold);color:#3a2f10}
+  .animal h3{font-family:var(--f-body);font-weight:800;font-size:1.18rem;color:var(--forest);margin:0 0 6px}
+  .animal p{color:var(--ink-soft);font-size:.93rem}
+  .animal .credit{font-size:.72rem;color:var(--muted);margin-top:10px}
+  .pillars{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .pillars span{background:var(--bone);border:1px solid var(--line);color:var(--forest);font-weight:700;font-size:.76rem;border-radius:999px;padding:6px 13px}
+
   /* transparency */
   .trans{background:var(--forest);color:#fff;border-radius:24px;padding:clamp(28px,5vw,48px);margin-top:10px}
   .trans .eyebrow{color:var(--gold)}
@@ -147,6 +163,7 @@
     <nav class="links">
       <a href="#how">How it works</a>
       <a href="#causes">Where it goes</a>
+      <a href="#animals">Animals</a>
       <a href="index.html">Our stays</a>
       <a class="keep" href="#give" style="color:var(--green-deep)"><b>Register interest</b></a>
     </nav>
@@ -210,9 +227,46 @@
     <h2 class="big">Tied to the places you visit.</h2>
     <p class="lead">Your gift &mdash; channelled through our conservation partner <b>The Boucher Legacy</b> and <b>SANParks</b> &mdash; supports conservation in the very destinations of your stay, so the trip that brought you close to the wild helps keep it wild.</p>
     <div class="causes">
-      <div class="cause"><div class="ph" style="background-image:url('images/og-hero-villas.jpg')"></div><div class="tx"><div class="dest">Kruger &middot; Marloth Park</div><h3>Rhino &amp; anti-poaching</h3><p>The Boucher Legacy&rsquo;s rhino and anti-poaching work alongside SANParks rangers, keeping the Greater Kruger&rsquo;s wildlife safe.</p></div></div>
+      <div class="cause"><div class="ph" style="background-image:url('images/slow-safari.jpg')"></div><div class="tx"><div class="dest">Kruger &middot; Marloth Park</div><h3>Rhino &amp; anti-poaching</h3><p>The Boucher Legacy&rsquo;s rhino and anti-poaching work alongside SANParks rangers, keeping the Greater Kruger&rsquo;s wildlife safe.</p></div></div>
       <div class="cause"><div class="ph" style="background-image:url('images/og-hero-thorntree.jpg')"></div><div class="tx"><div class="dest">Zambezi &middot; Victoria Falls</div><h3>River &amp; wildlife</h3><p>Protecting the elephants, hippos and habitat along the Zambezi and around Mosi-oa-Tunya.</p></div></div>
       <div class="cause"><div class="ph" style="background-image:url('images/og-hero-beachside.jpg')"></div><div class="tx"><div class="dest">Cape Coast &middot; Big Bay</div><h3>Ocean &amp; coastline</h3><p>Supporting marine and coastal care along the Cape&rsquo;s beaches and kelp forests.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANIMALS TO PROTECT -->
+<section class="band" id="animals" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow sec-eye">The animals your gift protects</div>
+    <h2 class="big">Three species. One legacy.</h2>
+    <p class="lead">Our conservation partner <b>The Boucher Legacy</b> has worked to safeguard Africa&rsquo;s wildlife since 2012 &mdash; across three pillars: <b>prosecution, conservation and education</b>. Your gift backs the front line for these species, in the reserves you visit.</p>
+    <div class="pillars"><span>&#9878;&#65039; Prosecution</span><span>&#127807; Conservation</span><span>&#127891; Education</span></div>
+    <div class="animals">
+      <div class="animal">
+        <div class="ph" style="background-image:url('images/hlane-rhino.jpg')"></div>
+        <div class="tx">
+          <span class="tag">Founding cause</span>
+          <h3>Rhino</h3>
+          <p>Where it began. The Boucher Legacy funds anti-poaching and the RhODIS DNA database &mdash; linking poachers to horns and carcasses &mdash; and works with <b>SANParks</b> to collar and monitor individual rhino in the field.</p>
+        </div>
+      </div>
+      <div class="animal">
+        <div class="ph ill"><img src="images/animals/pangolin.svg" alt="Pangolin, illustrated"></div>
+        <div class="tx">
+          <span class="tag gold ip" style="background:var(--gold);color:#3a2f10">Signature project</span>
+          <h3>Pangolin</h3>
+          <p>The world&rsquo;s most-trafficked mammal. With the African Pangolin Working Group, the Boucher Legacy rehabilitates pangolins seized from poachers and releases them back into the wild &mdash; then keeps monitoring them.</p>
+          <p class="credit">Illustration &mdash; a licensed pangolin photograph will replace this at launch.</p>
+        </div>
+      </div>
+      <div class="animal">
+        <div class="ph" style="background-image:url('images/halfday-elephant.jpg')"></div>
+        <div class="tx">
+          <span class="tag">Flagship species</span>
+          <h3>Elephant</h3>
+          <p>Among the species the Boucher Legacy safeguards alongside rhino and pangolin &mdash; protecting Africa&rsquo;s giants and the habitat they share with wild dog, cheetah and lion across the reserves.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -251,7 +305,7 @@
       <span class="lockup"><span class="as" style="color:#CFE0D5">African Sky</span><span class="x">×</span><span class="txt" style="color:#fff">Tap<span class="two" style="color:var(--green-bright)">2</span>Protect</span></span>
       <span class="links"><a href="index.html">Home</a><a href="african-sky-villas-tours-and-activities.html">Marloth · Kruger</a><a href="african-sky-beachside-escape.html">Big Bay</a><a href="thorntree.html">Victoria Falls</a></span>
     </div>
-    <p class="fine">In partnership with <a href="https://www.theboucherlegacy.org/" target="_blank" rel="noopener">The Boucher Legacy</a>, with SANParks among the beneficiaries. Conservation &amp; giving is a programme in development: this page introduces the initiative; the live tap-to-give experience, final beneficiary allocations and reporting will be confirmed at launch. African Sky Collection &mdash; Marloth Park · Big Bay · Victoria Falls.</p>
+    <p class="fine">In partnership with <a href="https://boucherlegacy.co.za/" target="_blank" rel="noopener">The Boucher Legacy</a>, with SANParks among the beneficiaries. Conservation &amp; giving is a programme in development: this page introduces the initiative; the live tap-to-give experience, final beneficiary allocations and reporting will be confirmed at launch. African Sky Collection &mdash; Marloth Park · Big Bay · Victoria Falls.</p>
   </div>
 </footer>
 
