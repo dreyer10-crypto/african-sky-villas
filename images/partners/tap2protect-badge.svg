@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Tap2Protect">
+  <defs><linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E8B49"/><stop offset="1" stop-color="#256B39"/></linearGradient></defs>
+  <rect width="400" height="400" rx="52" fill="url(#tile)"/>
+  <circle cx="200" cy="190" r="150" fill="#FFFFFF"/>
+  <g><path d="M105.74 201.95 A104 104 0 1 1 294.26 201.95" stroke="#8FD08F" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M131.12 190.12 A76 76 0 1 1 268.88 190.12" stroke="#57B466" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M154.68 179.13 A50 50 0 1 1 245.32 179.13" stroke="#2E9149" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M176.44 168.99 A26 26 0 1 1 223.56 168.99" stroke="#17703A" stroke-width="15" fill="none" stroke-linecap="round"/></g>
+  <circle cx="200.0" cy="158.0" r="10" fill="#17703A"/>
+  <text x="200" y="250" text-anchor="middle" textLength="250" lengthAdjust="spacingAndGlyphs" font-family="Manrope, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="46" letter-spacing="-1" fill="#1C4A2C">Tap<tspan fill="#2E9149">2</tspan>Protect</text>
+</svg>
