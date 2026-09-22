@@ -149,6 +149,12 @@
   .amt:hover{border-color:var(--gold)}
   .amt.on{background:var(--gold);color:#3a2f10;border-color:var(--gold)}
   .amt small{display:block;font-weight:600;font-size:.62rem;color:inherit;opacity:.82;margin-top:2px;line-height:1.2}
+  .cz-lbl{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+  .causesel{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .cz{flex:1 1 calc(33.33% - 6px);min-width:80px;background:rgba(255,255,255,.06);border:1.5px solid var(--dark-line);border-radius:12px;padding:11px 5px;text-align:center;font-weight:700;color:#fff;cursor:pointer;transition:.15s;font-family:inherit;font-size:.84rem;line-height:1.15}
+  .cz:hover{border-color:var(--gold)}
+  .cz.on{background:var(--gold);color:#3a2f10;border-color:var(--gold)}
+  .cz small{display:block;font-weight:600;font-size:.6rem;opacity:.82;margin-top:1px}
   #customWrap{margin-top:10px;display:none}
   #customWrap input{width:100%;background:rgba(255,255,255,.09);border:1.5px solid var(--dark-line);border-radius:12px;padding:12px 14px;color:#fff;font-size:1rem;font-family:inherit}
   #customWrap input::placeholder{color:#9FB6A8}
@@ -339,13 +345,21 @@
         </ul>
       </div>
       <div class="panel">
+        <div class="cz-lbl">Choose a cause</div>
+        <div class="causesel">
+          <button class="cz on" data-cause="rhino" type="button">Rhino</button>
+          <button class="cz" data-cause="wild-dog" type="button">Wild dog</button>
+          <button class="cz" data-cause="pangolin" type="button">Pangolin</button>
+          <button class="cz" data-cause="elephant" type="button">Elephant</button>
+          <button class="cz" data-cause="zambezi" type="button">Zambezi<small>Foundation</small></button>
+        </div>
         <div class="plbl">Your gift</div>
         <div class="amts">
-          <button class="amt" data-v="100" type="button">R100<small>Ranger patrol</small></button>
+          <button class="amt" data-v="100" type="button">R100</button>
           <button class="amt on" data-v="250" type="button">R250<small>Popular</small></button>
-          <button class="amt" data-v="500" type="button">R500<small>Field kit</small></button>
-          <button class="amt" data-v="1000" type="button">R1 000<small>Anti-poaching</small></button>
-          <button class="amt" data-v="2500" type="button">R2 500<small>Rewild</small></button>
+          <button class="amt" data-v="500" type="button">R500</button>
+          <button class="amt" data-v="1000" type="button">R1 000</button>
+          <button class="amt" data-v="2500" type="button">R2 500</button>
           <button class="amt" data-v="" type="button">Other<small>You choose</small></button>
         </div>
         <div id="customWrap"><input id="customAmt" type="number" min="10" inputmode="numeric" placeholder="Enter amount (R)"></div>
@@ -433,6 +447,15 @@ var IKHOKHA_PAYLINK = ""; // e.g. "https://pay.ikhokha.com/xxxxxxxx"
   var btn=document.getElementById('donateBtn');
   var note=document.getElementById('donateNote');
   var amount='250';
+  var czs=[].slice.call(document.querySelectorAll('.cz'));
+  var cause='rhino';
+  czs.forEach(function(c){
+    c.addEventListener('click',function(){
+      czs.forEach(function(x){x.classList.remove('on');});
+      c.classList.add('on');
+      cause=c.getAttribute('data-cause')||'';
+    });
+  });
 
   chips.forEach(function(c){
     c.addEventListener('click',function(){
@@ -457,8 +480,8 @@ var IKHOKHA_PAYLINK = ""; // e.g. "https://pay.ikhokha.com/xxxxxxxx"
     btn.addEventListener('click',function(e){
       e.preventDefault();
       var amt=chosen();
-      if(typeof gtag==='function'){gtag('event','donate_click',{amount:amt||'unspecified'});}
-      var url=IKHOKHA_PAYLINK + (IKHOKHA_PAYLINK.indexOf('?')>-1?'&':'?') + 'ref=africansky-conservation' + (amt?('&amount='+amt):'');
+      if(typeof gtag==='function'){gtag('event','donate_click',{amount:amt||'unspecified',cause:cause});}
+      var url=IKHOKHA_PAYLINK + (IKHOKHA_PAYLINK.indexOf('?')>-1?'&':'?') + 'ref=africansky-conservation' + (cause?('&cause='+cause):'') + (amt?('&amount='+amt):'');
       window.open(url,'_blank','noopener');
     });
   } else {
