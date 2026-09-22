@@ -53,7 +53,7 @@
   .lockup img.rd{width:34px;height:34px;border-radius:50%}
   .lockup .as{font-family:var(--f-disp);font-weight:600;color:var(--forest);font-size:1.05rem}
   .lockup .x{color:var(--muted);font-weight:700;margin:0 1px}
-  .lockup img.t2p{height:28px;width:auto;border-radius:6px}
+  .lockup img.t2p{height:56px;width:auto;border-radius:6px}
   .top .links{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:.86rem;font-weight:600;color:var(--forest)}
   .top .links a:hover{color:var(--green)}
   .top .links a.cta{background:var(--green);color:#fff;padding:8px 16px;border-radius:999px}
@@ -158,6 +158,32 @@
   .paylogos{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap;color:#9FB6A8;font-size:.72rem;font-weight:600}
   .paylogos b{color:#DCE9DF}
 
+  /* rewards / conservation club */
+  .rewards-head{max-width:64ch}
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+  @media(max-width:860px){.tiers{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.tiers{grid-template-columns:1fr}}
+  .tier{background:var(--bone);border:1px solid var(--line);border-radius:18px;padding:22px 18px;text-align:center;display:flex;flex-direction:column}
+  .tier .emoji{font-size:2.1rem;line-height:1}
+  .tier .bname{font-family:var(--f-body);font-weight:800;color:var(--forest);margin:9px 0 2px;font-size:1.06rem}
+  .tier .thresh{font-size:.72rem;font-weight:700;color:var(--green-deep);text-transform:uppercase;letter-spacing:.04em}
+  .tier .perk{color:var(--ink-soft);font-size:.87rem;margin-top:9px;flex:1}
+  .tier .rlvl{display:inline-block;margin-top:13px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:rgba(18,58,42,.06);border-radius:999px;padding:4px 11px;align-self:center}
+  .share-card{margin-top:24px;background:linear-gradient(135deg,var(--green-deep),var(--forest));color:#fff;border-radius:20px;padding:26px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+  @media(max-width:680px){.share-card{grid-template-columns:1fr;text-align:center;justify-items:center}}
+  .amb{width:106px;height:106px;border-radius:20px;background:rgba(255,255,255,.08);border:1.5px solid var(--dark-line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:.2s;flex:none}
+  .amb.on{background:var(--gold);color:#3a2f10;border-color:var(--gold)}
+  .amb .e{font-size:2.3rem;line-height:1}
+  .amb .l{font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .share-card h3{font-family:var(--f-body);font-weight:800;font-size:1.2rem;color:#fff;margin:0 0 4px}
+  .share-card p{color:#CFE0D5;font-size:.92rem;max-width:54ch}
+  .share-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+  @media(max-width:680px){.share-row{justify-content:center}}
+  .sbtn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid var(--dark-line);color:#fff;font-weight:700;font-size:.85rem;padding:10px 15px;border-radius:999px;cursor:pointer;font-family:inherit;transition:.15s}
+  .sbtn:hover{background:rgba(255,255,255,.18)}
+  #shareToast{margin-top:12px;font-size:.84rem;font-weight:700;color:var(--gold);min-height:1.1em}
+  .rfine{margin-top:16px;font-size:.76rem;color:var(--muted);max-width:82ch}
+
   /* transparency */
   .trans{background:var(--forest);color:#fff;border-radius:24px;padding:clamp(26px,5vw,44px)}
   .trans .eyebrow{color:var(--gold)}
@@ -189,6 +215,7 @@
       <a href="#how">How it works</a>
       <a href="#animals">The animals</a>
       <a href="#regions">Where it goes</a>
+      <a href="#rewards">Rewards</a>
       <a class="cta" href="#donate">Donate</a>
     </nav>
   </div>
@@ -305,6 +332,7 @@
           <li>Card, Apple&nbsp;Pay &amp; Google&nbsp;Pay &mdash; secured by iKhokha</li>
           <li>The same trusted checkout African Sky Villas runs</li>
           <li>Open reporting on what was raised and where it went</li>
+          <li>Every gift earns a badge &amp; real African Sky rewards</li>
         </ul>
       </div>
       <div class="panel">
@@ -330,6 +358,38 @@
   </div>
 </section>
 
+<!-- REWARDS / CONSERVATION CLUB -->
+<section class="band" id="rewards" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow sec-eye">The Conservation Club</div>
+    <h2 class="big">Give back. Earn your stripes.</h2>
+    <p class="lead rewards-head">Every gift earns you a badge &mdash; and unlocks real African Sky rewards, from stay discounts to a place in our annual wildlife-experience draw. Share your support to climb faster and widen the herd.</p>
+    <div class="tiers">
+      <div class="tier"><div class="emoji">&#127793;</div><div class="bname">Seedling</div><div class="thresh">Any gift</div><div class="perk">Your digital conservation badge &mdash; and your name on the supporters&rsquo; wall.</div><span class="rlvl">Tier 1</span></div>
+      <div class="tier"><div class="emoji">&#129423;</div><div class="bname">Ranger</div><div class="thresh">R250+</div><div class="perk">Everything in Seedling, plus <b>5% off</b> your next African Sky stay.</div><span class="rlvl">Tier 2</span></div>
+      <div class="tier"><div class="emoji">&#128024;</div><div class="bname">Guardian</div><div class="thresh">R1 000+</div><div class="perk"><b>10% off</b> a stay and a <b>free guided activity</b> on your visit.</div><span class="rlvl">Tier 3</span></div>
+      <div class="tier"><div class="emoji">&#128081;</div><div class="bname">Legacy</div><div class="thresh">R2 500+ / recurring</div><div class="perk"><b>15% off</b>, a free activity, and entry into the annual <b>Win a Zambia Experience</b> draw.</div><span class="rlvl">Tier 4</span></div>
+    </div>
+
+    <div class="share-card">
+      <div class="amb" id="ambBadge"><span class="e">&#127756;</span><span class="l">Ambassador</span></div>
+      <div>
+        <h3>Share to earn your Ambassador badge</h3>
+        <p>Spread the word and you earn the <b>Ambassador</b> badge &mdash; plus a <b>free entry</b> into the wildlife-experience draw (no donation needed). Every share brings more giving to the causes and more travellers to African Sky.</p>
+        <div class="share-row">
+          <button class="sbtn" data-net="whatsapp" type="button">&#128241; WhatsApp</button>
+          <button class="sbtn" data-net="facebook" type="button">Facebook</button>
+          <button class="sbtn" data-net="x" type="button">X</button>
+          <button class="sbtn" data-net="native" type="button">Share&hellip;</button>
+          <button class="sbtn" data-net="copy" type="button">Copy link</button>
+        </div>
+        <div id="shareToast" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="rfine">Rewards and the wildlife-experience draw are launching across the African Sky Collection &mdash; benefits shown are indicative and subject to final terms &amp; conditions. <b>No purchase or donation is necessary to enter the draw.</b> Any promotional competition is run under South African law; full T&amp;Cs at launch.</p>
+  </div>
+</section>
+
 <!-- TRANSPARENCY -->
 <section class="band" style="padding-top:0">
   <div class="wrap">
@@ -349,7 +409,7 @@
 <footer>
   <div class="wrap">
     <div class="row">
-      <span class="lockup"><span class="as" style="color:#CFE0D5">African Sky</span><span class="x">×</span><img class="t2p" src="images/partners/tap2protect.png" alt="Tap2Protect" style="height:24px"></span>
+      <span class="lockup"><span class="as" style="color:#CFE0D5">African Sky</span><span class="x">×</span><img class="t2p" src="images/partners/tap2protect.png" alt="Tap2Protect" style="height:48px"></span>
       <span class="links"><a href="index.html">Home</a><a href="african-sky-villas-tours-and-activities.html">Marloth · Kruger</a><a href="african-sky-beachside-escape.html">Big Bay</a><a href="thorntree.html">Victoria Falls</a></span>
     </div>
     <p class="fine">In partnership with <a href="https://boucherlegacy.co.za/" target="_blank" rel="noopener">The Boucher Legacy</a>, with SANParks among the beneficiaries. Donations are collected securely via iKhokha and passed to the conservation partners; African Sky &amp; Tap2Protect carry the platform costs so 100% of your gift reaches the cause. Conservation &amp; giving is being rolled out across the African Sky Collection &mdash; Marloth Park · Big Bay · Victoria Falls.</p>
@@ -404,6 +464,30 @@ var IKHOKHA_PAYLINK = ""; // e.g. "https://pay.ikhokha.com/xxxxxxxx"
     document.getElementById('secureLine').textContent='Secure iKhokha checkout — connecting';
     note.innerHTML='The secure iKhokha checkout is being connected. In the meantime, register your interest at <a href="mailto:reservations@africansky.travel?subject=Conservation%20giving">reservations@africansky.travel</a> and we’ll let you know the moment it goes live.';
   }
+})();
+</script>
+<script>
+(function(){
+  var URL_="https://africansky.travel/conservation.html";
+  var MSG="I just backed rhino, elephant & pangolin conservation with African Sky \u00d7 Tap2Protect \uD83E\uDD8F\uD83D\uDC18 \u2014 every stay gives back. Join me:";
+  var toast=document.getElementById('shareToast');
+  var amb=document.getElementById('ambBadge');
+  function earn(){ try{localStorage.setItem('asv_ambassador','1');}catch(e){} if(amb)amb.classList.add('on'); if(typeof gtag==='function'){gtag('event','share',{method:'conservation'});} }
+  try{ if(localStorage.getItem('asv_ambassador')==='1'&&amb){amb.classList.add('on');} }catch(e){}
+  function say(t){ if(toast){toast.textContent=t; setTimeout(function(){toast.textContent='';},4000);} }
+  function open_(u){ window.open(u,'_blank','noopener'); }
+  var thanks='\uD83C\uDF3F Ambassador badge earned \u2014 thank you for sharing!';
+  [].slice.call(document.querySelectorAll('.sbtn')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var net=b.getAttribute('data-net');
+      var u=encodeURIComponent(URL_), m=encodeURIComponent(MSG+' ');
+      if(net==='whatsapp'){ open_('https://wa.me/?text='+m+u); earn(); say(thanks); }
+      else if(net==='facebook'){ open_('https://www.facebook.com/sharer/sharer.php?u='+u); earn(); say(thanks); }
+      else if(net==='x'){ open_('https://twitter.com/intent/tweet?text='+m+'&url='+u); earn(); say(thanks); }
+      else if(net==='native'){ if(navigator.share){navigator.share({title:'African Sky \u00d7 Tap2Protect',text:MSG,url:URL_}).then(earn).catch(function(){});}else{open_('https://wa.me/?text='+m+u);earn();} say(thanks); }
+      else if(net==='copy'){ if(navigator.clipboard){navigator.clipboard.writeText(URL_).then(function(){earn();say('\uD83D\uDD17 Link copied \u2014 Ambassador badge earned!');}).catch(function(){say('Copy this link: '+URL_);});}else{say('Copy this link: '+URL_);} }
+    });
+  });
 })();
 </script>
 </body>
