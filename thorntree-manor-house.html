@@ -94,7 +94,10 @@ section{padding:74px 0;}
 .rbody .btn{align-self:flex-start;}
 .facils{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .fac{display:flex;align-items:center;gap:12px;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-weight:600;font-size:.98rem;}
-.fac span{font-size:1.4rem;}
+.fac span{line-height:0;}
+.fac span svg{width:22px;height:22px;fill:none;stroke:var(--terracotta);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.card .ic{line-height:0}
+.card .ic svg{width:38px;height:38px;fill:none;stroke:var(--terracotta);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
 .expteaser{position:relative;border-radius:20px;overflow:hidden;color:var(--bone);}
 .expteaser img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .expteaser .v{position:absolute;inset:0;background:linear-gradient(120deg,rgba(26,16,6,.86),rgba(26,16,6,.35));}
@@ -182,12 +185,12 @@ section{padding:74px 0;}
 <section class="alt"><div class="wrap">
   <div class="shead"><div class="eyebrow">The lodge</div><h2>Everything for a slow few days in the bush.</h2></div>
   <div class="facils">
-    <div class="fac"><span>🛏️</span>5 bedrooms · sleeps 10</div>
-    <div class="fac"><span>🍳</span>Full self-catering kitchen</div>
-    <div class="fac"><span>🏊</span>Large private pool</div>
-    <div class="fac"><span>🔥</span>Lounge &amp; fireplace</div>
-    <div class="fac"><span>🍽️</span>Boma &amp; braai dining</div>
-    <div class="fac"><span>🌳</span>Riverside bush grounds</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg></span>5 bedrooms · sleeps 10</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></svg></span>Full self-catering kitchen</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>Large private pool</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>Lounge &amp; fireplace</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>Boma &amp; braai dining</div>
+    <div class="fac"><span><svg viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/></svg></span>Riverside bush grounds</div>
   </div>
 </div></section>
 
@@ -204,9 +207,9 @@ section{padding:74px 0;}
 <section class="alt"><div class="wrap">
   <div class="shead"><div class="eyebrow">Why book with African Sky</div><h2>A concierge partner, not just a booking button.</h2></div>
   <div class="why">
-    <div class="card"><div class="ic">🌍</div><h3>Made for international guests</h3><p>We specialise in overseas travellers and tailor the whole Southern African journey — Kruger, Cape Town and the Falls.</p></div>
-    <div class="card"><div class="ic">🤝</div><h3>One point of contact</h3><p>A real person manages your enquiry, the house and your experiences — before you arrive and while you&rsquo;re here.</p></div>
-    <div class="card"><div class="ic">✨</div><h3>Part of a curated collection</h3><p>Thorn Tree sits alongside our hand-picked bush and beach stays at africansky.travel.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><h3>Made for international guests</h3><p>We specialise in overseas travellers and tailor the whole Southern African journey — Kruger, Cape Town and the Falls.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div><h3>One point of contact</h3><p>A real person manages your enquiry, the house and your experiences — before you arrive and while you&rsquo;re here.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></div><h3>Part of a curated collection</h3><p>Thorn Tree sits alongside our hand-picked bush and beach stays at africansky.travel.</p></div>
   </div>
 </div></section>
 

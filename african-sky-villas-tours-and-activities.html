@@ -1887,30 +1887,30 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     const fullName = (payload.firstName + ' ' + payload.lastName).trim() || 'Guest';
 
     const waLines = [
-      'Hi African Sky Villas! 🦁',
+      'Hi African Sky Villas!',
       '',
       "I'd like to make a booking:",
       '',
-      '👤 *Name:* ' + fullName,
-      '📱 *Phone:* ' + (payload.phone || '—'),
-      '📧 *Email:* ' + (payload.email || '—'),
-      '🌍 *Language:* ' + (payload.language || 'en'),
+      '*Name:* ' + fullName,
+      '*Phone:* ' + (payload.phone || '—'),
+      '*Email:* ' + (payload.email || '—'),
+      '*Language:* ' + (payload.language || 'en'),
       '',
-      '🎯 *Activities (' + payload.activity_count + '):*',
+      '*Activities (' + payload.activity_count + '):*',
       payload.bookings_summary || '(none specified)',
       '',
-      '👥 *Total guests:* ' + payload.total_guests
+      '*Total guests:* ' + payload.total_guests
     ];
     if (payload.booking_ref) {
       waLines.push('');
-      waLines.push('🏨 *Booking.com ref:* ' + payload.booking_ref);
+      waLines.push('*Booking.com ref:* ' + payload.booking_ref);
     }
     if (payload.notes) {
       waLines.push('');
-      waLines.push('📝 *Special requests:* ' + payload.notes);
+      waLines.push('*Special requests:* ' + payload.notes);
     }
     waLines.push('');
-    waLines.push('Please confirm availability & send the payment link. Thank you! 🌅');
+    waLines.push('Please confirm availability & send the payment link. Thank you!');
 
     const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(waLines.join('\n'));
 
