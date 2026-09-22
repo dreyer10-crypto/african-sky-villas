@@ -118,7 +118,8 @@
   .animal h3{font-family:var(--f-body);font-weight:800;font-size:1.14rem;color:var(--forest);margin:0 0 6px}
   .animal p{color:var(--ink-soft);font-size:.9rem}
   .pillars{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-  .pillars span{background:var(--bone);border:1px solid var(--line);color:var(--forest);font-weight:700;font-size:.76rem;border-radius:999px;padding:6px 13px}
+  .pillars span{background:var(--bone);border:1px solid var(--line);color:var(--forest);font-weight:700;font-size:.76rem;border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px}
+  .pillars span svg{width:15px;height:15px;fill:none;stroke:var(--green-deep);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
   /* where your gift works */
   .regions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
@@ -283,7 +284,7 @@
     <div class="eyebrow sec-eye">The animals your gift protects</div>
     <h2 class="big">Four species. One legacy.</h2>
     <p class="lead">Our conservation partner <b>The Boucher Legacy</b> has safeguarded Africa&rsquo;s wildlife since 2012 &mdash; across three pillars: <b>prosecution, conservation and education</b>. Your gift backs the front line for these species.</p>
-    <div class="pillars"><span>&#9878;&#65039; Prosecution</span><span>&#127807; Conservation</span><span>&#127891; Education</span></div>
+    <div class="pillars"><span><svg viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Prosecution</span><span><svg viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg> Conservation</span><span><svg viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg> Education</span></div>
     <div class="animals">
       <div class="animal">
         <div class="ph" style="background-image:url('images/hlane-rhino.jpg')"></div>
@@ -394,7 +395,7 @@
         <h3>Share to earn your Ambassador badge</h3>
         <p>Spread the word and you earn the <b>Ambassador</b> badge &mdash; plus a <b>free entry</b> into the wildlife-experience draw (no donation needed). Every share brings more giving to the causes and more travellers to African Sky.</p>
         <div class="share-row">
-          <button class="sbtn" data-net="whatsapp" type="button">&#128241; WhatsApp</button>
+          <button class="sbtn" data-net="whatsapp" type="button">WhatsApp</button>
           <button class="sbtn" data-net="facebook" type="button">Facebook</button>
           <button class="sbtn" data-net="x" type="button">X</button>
           <button class="sbtn" data-net="native" type="button">Share&hellip;</button>
@@ -502,7 +503,7 @@ var IKHOKHA_PAYLINK = ""; // e.g. "https://pay.ikhokha.com/xxxxxxxx"
   try{ if(localStorage.getItem('asv_ambassador')==='1'&&amb){amb.classList.add('on');} }catch(e){}
   function say(t){ if(toast){toast.textContent=t; setTimeout(function(){toast.textContent='';},4000);} }
   function open_(u){ window.open(u,'_blank','noopener'); }
-  var thanks='\uD83C\uDF3F Ambassador badge earned \u2014 thank you for sharing!';
+  var thanks='Ambassador badge earned \u2014 thank you for sharing!';
   [].slice.call(document.querySelectorAll('.sbtn')).forEach(function(b){
     b.addEventListener('click',function(){
       var net=b.getAttribute('data-net');
@@ -511,7 +512,7 @@ var IKHOKHA_PAYLINK = ""; // e.g. "https://pay.ikhokha.com/xxxxxxxx"
       else if(net==='facebook'){ open_('https://www.facebook.com/sharer/sharer.php?u='+u); earn(); say(thanks); }
       else if(net==='x'){ open_('https://twitter.com/intent/tweet?text='+m+'&url='+u); earn(); say(thanks); }
       else if(net==='native'){ if(navigator.share){navigator.share({title:'African Sky \u00d7 Tap2Protect',text:MSG,url:URL_}).then(earn).catch(function(){});}else{open_('https://wa.me/?text='+m+u);earn();} say(thanks); }
-      else if(net==='copy'){ if(navigator.clipboard){navigator.clipboard.writeText(URL_).then(function(){earn();say('\uD83D\uDD17 Link copied \u2014 Ambassador badge earned!');}).catch(function(){say('Copy this link: '+URL_);});}else{say('Copy this link: '+URL_);} }
+      else if(net==='copy'){ if(navigator.clipboard){navigator.clipboard.writeText(URL_).then(function(){earn();say('Link copied \u2014 Ambassador badge earned!');}).catch(function(){say('Copy this link: '+URL_);});}else{say('Copy this link: '+URL_);} }
     });
   });
 })();
