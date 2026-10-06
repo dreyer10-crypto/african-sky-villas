@@ -64,7 +64,7 @@ body{
 
 /* ALERTS */
 .alert{padding:12px 15px;border-radius:8px;font-size:13px;margin-bottom:12px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
-.alert .ico{flex-shrink:0;font-size:15px;}
+.alert .ico{flex-shrink:0;font-size:15px;}.alert .ico svg{width:15px;height:15px;stroke:currentColor;fill:none;vertical-align:-2px;}
 .alert-warn{background:rgba(212,162,76,0.09);border:1px solid rgba(212,162,76,0.28);color:var(--gold-soft);}
 .alert-danger{background:rgba(196,90,74,0.1);border:1px solid rgba(196,90,74,0.32);color:#e08a7a;}
 .alert-info{background:rgba(90,139,176,0.1);border:1px solid rgba(90,139,176,0.3);color:#8fb6d4;}
@@ -141,7 +141,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
 
 <nav class="nav">
   <div class="nav-logo">
-    <div class="mark">🦁</div>
+    <div class="mark"><img src="images/logo-transparent.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
     <div class="txt">African <b>Sky</b> Villas</div>
   </div>
   <div class="nav-tabs" id="navTabs">
@@ -200,7 +200,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
     <h1 class="page-title">WhatsApp <em>outreach</em></h1>
     <p class="page-sub">Tap a guest's button to open WhatsApp with their personalised welcome message pre-written. Mark them sent as you go.</p>
   </div>
-  <div class="alert alert-warn"><span class="ico">⚠</span><span><b>Renate Wenghöfer</b> has an unverified phone number (Brazilian format on a German booking). Confirm it before sending. The two <b>CATTEAU</b> entries share a number — check before messaging both.</span></div>
+  <div class="alert alert-warn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><span><b>Renate Wenghöfer</b> has an unverified phone number (Brazilian format on a German booking). Confirm it before sending. The two <b>CATTEAU</b> entries share a number — check before messaging both.</span></div>
   <div id="waList"></div>
 </div>
 
@@ -319,11 +319,11 @@ function renderDash(){
   // alerts
   let a='';
   const renate = real.find(g=>g.flag&&g.flag.indexOf('REVIEW')>-1);
-  if(renate) a+=alert('danger','⚠','<b>'+fullName(renate)+'</b> — phone unverified ('+renate.phone+'). Confirm before messaging.');
+  if(renate) a+=alert('danger','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>','<b>'+fullName(renate)+'</b> — phone unverified ('+renate.phone+'). Confirm before messaging.');
   const cat = real.filter(g=>g.last.toUpperCase()==='CATTEAU');
-  if(cat.length>1) a+=alert('warn','⚑','The two <b>CATTEAU</b> bookings share a phone number — verify before messaging both.');
-  if(toMsg>0) a+=alert('info','✉','<b>'+toMsg+' guests</b> still to message. Head to the WhatsApp tab to send their welcome links.');
-  if(!a) a=alert('info','✓','All caught up — nothing needs attention right now.');
+  if(cat.length>1) a+=alert('warn','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>','The two <b>CATTEAU</b> bookings share a phone number — verify before messaging both.');
+  if(toMsg>0) a+=alert('info','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>','<b>'+toMsg+' guests</b> still to message. Head to the WhatsApp tab to send their welcome links.');
+  if(!a) a=alert('info','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>','All caught up — nothing needs attention right now.');
   document.getElementById('dashAlerts').innerHTML=a;
 
   // next 5
@@ -366,7 +366,7 @@ function renderWA(){
       '<div class="muted" style="font-size:12px;margin-top:3px">'+g.arrival+' · '+g.unit+' · '+g.guests+' guests · '+g.lang.toUpperCase()+' · '+g.phone+'</div></div>'+
       '<div class="btn-row">'+
       '<a class="btn btn-wa btn-sm" href="'+g.wa+'" target="_blank" onclick="markSent(\''+g.ref+'\')">Open WhatsApp</a>'+
-      (sent?'<button class="btn btn-outline btn-sm" onclick="unmarkSent(\''+g.ref+'\')">Sent ✓</button>':'<button class="btn btn-outline btn-sm" onclick="markSent(\''+g.ref+'\')">Mark sent</button>')+
+      (sent?'<button class="btn btn-outline btn-sm" onclick="unmarkSent(\''+g.ref+'\')">Sent <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;vertical-align:-1px"><path d="M20 6 9 17l-5-5"/></svg></button>':'<button class="btn btn-outline btn-sm" onclick="markSent(\''+g.ref+'\')">Mark sent</button>')+
       '<a class="btn btn-outline btn-sm" href="'+g.url+'" target="_blank">Preview link</a>'+
       '</div></div></div>';
   }).join('');

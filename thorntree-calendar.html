@@ -427,7 +427,7 @@ function saveBooking(e){
   persistBooking(b).then(function(){
     sync("live","● Saved — the calendar just updated for everyone with this link.");
   }).catch(function(){
-    sync("local","⚠ Couldn’t save that booking to the shared calendar — check your connection and try again.");
+    sync("local","Couldn’t save that booking to the shared calendar — check your connection and try again.");
   });
   return true;
   function se(m){err.textContent=m;err.className="err show";return false}
@@ -438,7 +438,7 @@ function deleteBooking(id){
   persistDeleteBooking(id).then(function(){
     sync("live","● Booking removed for everyone with this link.");
   }).catch(function(){
-    sync("local","⚠ Couldn’t remove that booking from the shared calendar — please try again.");
+    sync("local","Couldn’t remove that booking from the shared calendar — please try again.");
   });
 }
 
@@ -453,7 +453,7 @@ function saveRooms(){var rows=byId("roomList").querySelectorAll("input[type=text
   persistRooms(out).then(function(){
     sync("live","● Rooms updated for everyone with this link.");
   }).catch(function(){
-    sync("local","⚠ Couldn’t save the room list to the shared calendar — please try again.");
+    sync("local","Couldn’t save the room list to the shared calendar — please try again.");
   });
 }
 
@@ -482,7 +482,7 @@ function boot(){
 
 function connect(){
   if(!db){
-    sync("local","⚠ Live sharing couldn’t start — the calendar can’t reach the shared server right now. Changes won’t be saved.");
+    sync("local","Live sharing couldn’t start — the calendar can’t reach the shared server right now. Changes won’t be saved.");
     state.rooms=DEFAULT_ROOMS.slice();state.roomsLoaded=true;render();
     return;
   }
@@ -499,7 +499,7 @@ function connect(){
     state.roomsLoaded=true;render();
     if(firstRooms){firstRooms=false;markLive();}
   },function(err){
-    sync("local","⚠ Live sharing error — "+(err&&err.code||"could not read the calendar")+". Changes may not be saved.");
+    sync("local","Live sharing error — "+(err&&err.code||"could not read the calendar")+". Changes may not be saved.");
     if(!state.roomsLoaded){state.rooms=DEFAULT_ROOMS.slice();state.roomsLoaded=true;render();}
   });
   // Bookings collection
@@ -508,7 +508,7 @@ function connect(){
     state.bookings=arr;state.bookingsLoaded=true;render();
     if(firstBookings){firstBookings=false;markLive();}
   },function(err){
-    sync("local","⚠ Live sharing error — "+(err&&err.code||"could not read bookings")+". Changes may not be saved.");
+    sync("local","Live sharing error — "+(err&&err.code||"could not read bookings")+". Changes may not be saved.");
   });
   function markLive(){
     if(!firstRooms&&!firstBookings){

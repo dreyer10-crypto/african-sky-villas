@@ -48,6 +48,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--cream);mi
 .stat-sub{font-size:11px;color:var(--gold);margin-top:6px;}
 .alert{padding:12px 15px;border-radius:8px;font-size:13px;margin-bottom:12px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
 .alert .ico{flex-shrink:0;font-size:15px;}
+.alert .ico svg{width:15px;height:15px;stroke:currentColor;fill:none;vertical-align:-2px;}
 .alert-warn{background:rgba(212,162,76,0.09);border:1px solid rgba(212,162,76,0.28);color:var(--gold-soft);}
 .alert-danger{background:rgba(196,90,74,0.1);border:1px solid rgba(196,90,74,0.32);color:#e08a7a;}
 .alert-info{background:rgba(90,139,176,0.1);border:1px solid rgba(90,139,176,0.3);color:#8fb6d4;}
@@ -99,7 +100,7 @@ td b{color:var(--cream);font-weight:600;}
 </head>
 <body>
 <nav class="nav">
-  <div class="nav-logo"><div class="mark">🐘</div><div class="txt">African <b>Sky</b> Villas</div></div>
+  <div class="nav-logo"><div class="mark"><img src="images/logo-transparent.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div class="txt">African <b>Sky</b> Villas</div></div>
   <div class="nav-tabs" id="navTabs">
     <button class="nav-tab active" onclick="showPage('dashboard',this)">Dashboard</button>
     <button class="nav-tab" onclick="showPage('activities',this)">Activities</button>
@@ -184,7 +185,7 @@ td b{color:var(--cream);font-weight:600;}
     <div class="panel-sub">What I need from you to switch this dashboard from sample data to live.</div>
     <div id="checklist"></div>
   </div>
-  <div class="alert alert-warn" style="margin-top:4px;"><span class="ico">⚠️</span><span><b>Human-approval gates stay on.</b> Invoices and pay links are generated as drafts only — no money moves, and nothing is sent to a guest, without you clicking approve. Tax/cancellation wording stays under the standing compliance hold.</span></div>
+  <div class="alert alert-warn" style="margin-top:4px;"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><span><b>Human-approval gates stay on.</b> Invoices and pay links are generated as drafts only — no money moves, and nothing is sent to a guest, without you clicking approve. Tax/cancellation wording stays under the standing compliance hold.</span></div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -262,7 +263,7 @@ function renderAlerts(){
   const dueSoon=bookings.filter(b=>b.status==='confirmed');
   document.getElementById('dashAlerts').innerHTML =
     `<div class="alert alert-danger"><span class="ico">⏱</span><span><b>${enq.length} enquiries awaiting reply.</b> Each one cools fast — confirm availability and send the deposit link to lock them in.</span></div>`+
-    `<div class="alert alert-info"><span class="ico">💳</span><span><b>${dueSoon.length} confirmed bookings awaiting payment</b> (${ZAR(dueSoon.reduce((s,b)=>s+b.value,0))}). Balance is due 30 days before the activity date.</span></div>`;
+    `<div class="alert alert-info"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg></span><span><b>${dueSoon.length} confirmed bookings awaiting payment</b> (${ZAR(dueSoon.reduce((s,b)=>s+b.value,0))}). Balance is due 30 days before the activity date.</span></div>`;
 }
 function renderRecent(){
   document.getElementById('recentRows').innerHTML = bookings.slice().sort((a,b)=>a.date<b.date?-1:1).slice(0,6).map(b=>{
