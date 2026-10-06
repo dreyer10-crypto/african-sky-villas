@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VM28F24DH4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VM28F24DH4');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brochure — African Sky Villas</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;600;700;800&display=swap">
+<style>
+  :root{--cream:#FBF8F2;--cream-deep:#F2E9D8;--espresso:#1A1006;--terra:#C0462A;--terra2:#9A3A1F;
+    --taupe:#8B7352;--line:rgba(26,16,6,.14);--bone:#FFFCF6;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream-deep);color:var(--espresso);font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;
+    background:var(--espresso);color:var(--cream);padding:11px 16px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+  .bar .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream);}
+  .bar .brand img{width:30px;height:30px;border-radius:50%;}
+  .bar .brand span{font-family:'Fraunces',Georgia,serif;font-size:15px;font-weight:500;}
+  .bar .brand b{color:#E8C98A;font-weight:500;}
+  .bar .sp{flex:1;}
+  .bar a.act,.bar button.act{font-family:inherit;font-weight:700;font-size:13px;text-decoration:none;
+    border-radius:999px;padding:8px 15px;cursor:pointer;border:1px solid transparent;white-space:nowrap;}
+  .bar .back{color:rgba(251,248,242,.85);border-color:rgba(251,248,242,.3);background:transparent;}
+  .bar .back:hover{background:rgba(251,248,242,.12);}
+  .bar .dl{background:var(--terra);color:#fff;border-color:var(--terra);}
+  .bar .dl:hover{background:var(--terra2);}
+  #stage{max-width:900px;margin:0 auto;padding:18px 12px 48px;}
+  #stage canvas{display:block;width:100%;height:auto;margin:0 auto 16px;border-radius:8px;
+    box-shadow:0 10px 36px rgba(26,16,6,.22);background:#fff;}
+  .msg{max-width:620px;margin:60px auto;text-align:center;color:var(--taupe);padding:0 20px;}
+  .msg h1{font-family:'Fraunces',serif;font-weight:500;color:var(--espresso);font-size:22px;margin-bottom:10px;}
+  .msg a{color:var(--terra2);font-weight:700;}
+  .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--terra);
+    border-radius:50%;animation:sp .8s linear infinite;margin:70px auto;}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  @media(max-width:480px){.bar .brand span{display:none;} }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <a class="brand" href="african-sky-villas-tours-and-activities.html">
+      <img src="images/logo-transparent.png" alt=""><span>African Sky <b>Villas</b></span>
+    </a>
+    <span class="sp"></span>
+    <a class="act back" href="african-sky-villas-tours-and-activities.html">← Tours</a>
+    <a class="act dl" id="dl" href="#" download>Download</a>
+  </div>
+  <div id="stage"><div class="spin" id="spin"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+  (function(){
+    var stage=document.getElementById('stage'), spin=document.getElementById('spin'), dl=document.getElementById('dl');
+    function fail(msg){ stage.innerHTML='<div class="msg"><h1>'+msg+'</h1>'+
+      '<p><a href="african-sky-villas-tours-and-activities.html">← Back to tours &amp; activities</a></p></div>'; }
+    function failWithPdf(msg,path){ stage.innerHTML='<div class="msg"><h1>'+msg+'</h1>'+
+      '<p><a href="'+path+'" target="_blank" rel="noopener">Open the brochure PDF directly →</a></p>'+
+      '<p style="margin-top:10px"><a href="african-sky-villas-tours-and-activities.html">← Back to tours &amp; activities</a></p></div>'; }
+    // read + validate the requested pdf (same-origin, under pdfs/, .pdf only)
+    var q=new URLSearchParams(location.search);
+    var raw=q.get('pdf')||(q.get('doc')?('pdfs/'+q.get('doc')+'.pdf'):'');
+    var path=(raw||'').replace(/^\/+/,'');
+    if(!/^pdfs\/[A-Za-z0-9_\-]+\.pdf$/.test(path)){ fail('Brochure not found.'); return; }
+    dl.href=path;
+    var title=path.split('/')[1].replace('.pdf','').replace(/-/g,' ');
+    document.title = title.replace(/\b\w/g,function(c){return c.toUpperCase();}) + ' — African Sky Villas';
+    if(!window.pdfjsLib){ failWithPdf('Could not load the viewer.', path); return; }
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    var scale=Math.min(2, (window.devicePixelRatio||1)*1.5);
+    pdfjsLib.getDocument(path).promise.then(function(pdf){
+      if(spin)spin.remove();
+      var chain=Promise.resolve();
+      for(var n=1;n<=pdf.numPages;n++){ (function(num){
+        chain=chain.then(function(){ return pdf.getPage(num).then(function(page){
+          var vp=page.getViewport({scale:scale});
+          var cv=document.createElement('canvas');
+          cv.width=vp.width; cv.height=vp.height;
+          stage.appendChild(cv);
+          return page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;
+        }); });
+      })(n); }
+      return chain;
+    }).catch(function(){ failWithPdf('This brochure could not be opened.', path); });
+  })();
+  </script>
+</body>
+</html>
