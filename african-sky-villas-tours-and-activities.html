@@ -1711,6 +1711,7 @@ function renderActivities(filter) {
   list.forEach((a, i) => {
     const card = document.createElement('article');
     card.className = 'activity-card';
+    card.id = 'tour-' + a.id;
     card.dataset.category = a.category;
     card.style.animationDelay = `${i * 0.08}s`;
     const name = a.name[currentLang] || a.name.en;
@@ -1730,7 +1731,7 @@ function renderActivities(filter) {
           <span>· ${capacity}</span>
         </div>
         <p class="activity-desc">${desc}</p>
-        ${a.pdf ? `<a class="brochure-link" href="brochure.html?pdf=${encodeURIComponent(a.pdf)}" target="_blank" rel="noopener" aria-label="${t('activities.viewBrochure')}">
+        ${a.pdf ? `<a class="brochure-link" href="brochure.html?pdf=${encodeURIComponent(a.pdf)}&from=tour-${a.id}" aria-label="${t('activities.viewBrochure')}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
           ${t('activities.viewBrochure')}
         </a>` : ''}
@@ -2060,6 +2061,20 @@ prefillFromURL();   // resolve guest details + language from personalised link F
 applyTranslations();
 renderActivities('all');
 initCookieConsent();
+
+// Returning from a brochure (brochure.html?from=tour-<id>): jump back to that card
+(function restoreTour(){
+  var h = location.hash || '';
+  if (!/^#tour-\d+$/.test(h)) return;
+  var el = document.getElementById(h.slice(1));
+  if (!el) return;
+  setTimeout(function(){
+    el.scrollIntoView({ block: 'center' });
+    el.style.transition = 'box-shadow .5s';
+    el.style.boxShadow = '0 0 0 3px var(--terracotta, #C44D2C)';
+    setTimeout(function(){ el.style.boxShadow = ''; }, 1700);
+  }, 80);
+})();
 </script>
 
 </body>

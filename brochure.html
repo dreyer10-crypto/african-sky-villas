@@ -50,7 +50,7 @@
       <img src="images/logo-transparent.png" alt=""><span>African Sky <b>Villas</b></span>
     </a>
     <span class="sp"></span>
-    <a class="act back" href="african-sky-villas-tours-and-activities.html">← Tours</a>
+    <a class="act back" id="backlink" href="african-sky-villas-tours-and-activities.html">← Tours</a>
     <a class="act dl" id="dl" href="#" download>Download</a>
   </div>
   <div id="stage"><div class="spin" id="spin"></div></div>
@@ -70,6 +70,12 @@
     var path=(raw||'').replace(/^\/+/,'');
     if(!/^pdfs\/[A-Za-z0-9_\-]+\.pdf$/.test(path)){ fail('Brochure not found.'); return; }
     dl.href=path;
+    // "Back to tours" returns to the exact tour the guest opened (brochure.html?from=tour-<id>)
+    var from=q.get('from')||'';
+    if(/^tour-\d+$/.test(from)){
+      var bl=document.getElementById('backlink');
+      if(bl) bl.href='african-sky-villas-tours-and-activities.html#'+from;
+    }
     var title=path.split('/')[1].replace('.pdf','').replace(/-/g,' ');
     document.title = title.replace(/\b\w/g,function(c){return c.toUpperCase();}) + ' — African Sky Villas';
     if(!window.pdfjsLib){ failWithPdf('Could not load the viewer.', path); return; }
