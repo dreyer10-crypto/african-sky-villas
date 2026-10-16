@@ -555,5 +555,9 @@
   // Boot
   applyI18n();
 </script>
+<script>/* Lead tracking: WhatsApp, email, phone and booking-site clicks -> GA4 generate_lead */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a||typeof gtag!=='function')return;var h=a.getAttribute('href')||'',m=null;
+if(/wa\.me|whatsapp/i.test(h))m='whatsapp';else if(/^mailto:/i.test(h))m='email';else if(/^tel:/i.test(h))m='phone';else if(/booking\.com/i.test(h))m='booking_com';else if(/airbnb\./i.test(h))m='airbnb';
+if(m)gtag('event','generate_lead',{method:m,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,80)});},true);</script>
 </body>
 </html>
