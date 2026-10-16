@@ -162,4 +162,8 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 window.ttWhats=function(){var NL=String.fromCharCode(10),by=function(i){return document.getElementById(i);},lines=[];document.querySelectorAll('.actrow').forEach(function(r){var o=r.querySelector('.act').selectedOptions[0];var q=r.querySelector('.aqty').value;var dt=r.querySelector('.adate').value||'date TBC';lines.push('- '+o.textContent+' x'+q+' ('+dt+')');});var body='New Thorn Tree booking request (via African Sky)'+NL+NL+'Name: '+by('firstName').value+' '+by('lastName').value+NL+'Email: '+by('email').value+NL+'Phone: '+by('phone').value+NL+NL+'Items:'+NL+lines.join(NL)+NL+NL+'Estimated total: '+by('total').textContent+NL+NL+'Special requests: '+by('notes').value;window.open('https://wa.me/27762095334?text='+encodeURIComponent(body),'_blank');var bs=by('bsuccess');if(bs){bs.textContent='Thank you! Your request has opened in WhatsApp — just press send to reach us.';bs.style.display='block';bs.scrollIntoView({behavior:'smooth',block:'center'});}};
 </script>
+<script>/* Lead tracking: WhatsApp, email, phone and booking-site clicks -> GA4 generate_lead */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a||typeof gtag!=='function')return;var h=a.getAttribute('href')||'',m=null;
+if(/wa\.me|whatsapp/i.test(h))m='whatsapp';else if(/^mailto:/i.test(h))m='email';else if(/^tel:/i.test(h))m='phone';else if(/booking\.com/i.test(h))m='booking_com';else if(/airbnb\./i.test(h))m='airbnb';
+if(m)gtag('event','generate_lead',{method:m,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,80)});},true);</script>
 </body></html>
