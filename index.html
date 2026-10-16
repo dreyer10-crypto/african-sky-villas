@@ -117,6 +117,25 @@
 
   footer{background:var(--charcoal);color:rgba(251,246,238,.65);padding:32px 0;font-size:.85rem;text-align:center}
   footer b{color:var(--cream)}
+
+/* Villa photo gallery */
+.villa-gal{display:grid;gap:22px;padding:34px clamp(18px,3vw,40px);background:var(--bone);border:1px solid var(--line);border-radius:20px}
+.vg-head{display:grid;gap:8px;max-width:68ch}
+.vg-eb{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe)}
+.vg-head h3,.vg-head h2{margin:0;font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1;color:var(--espresso)}
+.vg-head p{margin:0;color:var(--charcoal)}
+.vg-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;align-items:start}
+.vg-label{display:grid;gap:2px;padding-top:4px}
+.vg-label b{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.15rem;color:var(--espresso)}
+.vg-label span{font-size:.8rem;color:var(--taupe)}
+.vg-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.vg-grid.vg-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:33%}
+.villa-gal figure{margin:0;position:relative;border-radius:8px;overflow:hidden;background:var(--cream-deep)}
+.villa-gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .4s}
+.villa-gal figure:hover img{transform:scale(1.05)}
+.villa-gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 6px;font-size:.72rem;font-weight:700;color:#FFFBF3;background:linear-gradient(0deg,rgba(26,16,6,.75),transparent)}
+@media(max-width:900px){.vg-row{grid-template-columns:1fr}.vg-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vg-grid.vg-2{max-width:66%}}
+@media(max-width:520px){.vg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vg-grid.vg-2{max-width:100%}}
 </style>
 </head>
 <body>
@@ -169,6 +188,14 @@
       </div>
     </div>
   </article>
+
+
+<div class="villa-gal">
+  <div class="vg-head"><span class="vg-eb">Inside African Sky Villas</span><h3>Two villas, one bush camp</h3><p>Sky Villa has the bigger pool, thatched lapa and larger rooms. Remington Villa is the cosier option, with a courtyard plunge pool and a boma fire pit. Breakfast is served daily at both.</p></div>
+  <div class="vg-row"><div class="vg-label"><b>Sky Villa</b><span>Larger pool · bigger rooms</span></div><div class="vg-grid"><figure><img loading="lazy" src="images/villas/sky-pool.jpg" alt="Sky Villa pool and thatched lapa"><figcaption>Pool &amp; lapa</figcaption></figure><figure><img loading="lazy" src="images/villas/sky-bedroom-1.jpg" alt="Sky Villa thatched bedroom"><figcaption>Thatched bedroom</figcaption></figure><figure><img loading="lazy" src="images/villas/sky-bedroom-2.jpg" alt="Sky Villa bedroom opening onto the garden"><figcaption>Garden bedroom</figcaption></figure><figure><img loading="lazy" src="images/villas/sky-lounge.jpg" alt="Sky Villa lounge"><figcaption>Lounge</figcaption></figure><figure><img loading="lazy" src="images/villas/sky-deck.jpg" alt="Sky Villa deck under the trees"><figcaption>Deck</figcaption></figure><figure><img loading="lazy" src="images/villas/sky-suite.jpg" alt="Sky Villa suite"><figcaption>Suite</figcaption></figure></div></div>
+  <div class="vg-row"><div class="vg-label"><b>Remington Villa</b><span>Plunge pool · cosy rooms</span></div><div class="vg-grid"><figure><img loading="lazy" src="images/villas/remington-pool.jpg" alt="Remington Villa courtyard pool"><figcaption>Courtyard pool</figcaption></figure><figure><img loading="lazy" src="images/villas/remington-plunge-pool.jpg" alt="Remington Villa plunge pool and loungers"><figcaption>Plunge pool</figcaption></figure><figure><img loading="lazy" src="images/villas/remington-bedroom-1.jpg" alt="Remington Villa bedroom"><figcaption>Bedroom</figcaption></figure><figure><img loading="lazy" src="images/villas/remington-patio.jpg" alt="Remington Villa patio lounge"><figcaption>Patio lounge</figcaption></figure><figure><img loading="lazy" src="images/villas/remington-bedroom-2.jpg" alt="Remington Villa bedroom with mosquito net"><figcaption>Bedroom</figcaption></figure><figure><img loading="lazy" src="images/villas/remington-boma.jpg" alt="Remington Villa boma with fire pit"><figcaption>Boma &amp; fire pit</figcaption></figure></div></div>
+  <div class="vg-row"><div class="vg-label"><b>Both villas</b><span>Breakfast &amp; the bush</span></div><div class="vg-grid vg-2"><figure><img loading="lazy" src="images/villas/breakfast.jpg" alt="Breakfast served at African Sky Villas"><figcaption>Daily breakfast</figcaption></figure><figure><img loading="lazy" src="images/villas/nyala-in-camp.jpg" alt="Nyala walking through camp"><figcaption>Wildlife in camp</figcaption></figure></div></div>
+</div>
 
   <!-- Beachside Escape -->
   <article class="prop rev">
