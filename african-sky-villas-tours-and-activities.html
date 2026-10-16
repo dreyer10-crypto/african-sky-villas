@@ -228,6 +228,25 @@ section { padding: 7rem 2.5rem; position: relative; }
 
 /* ---- Activities ---- */
 .activities { background: var(--cream); padding-top: 8rem; }
+/* Animal watermarks below the hero */
+.intro, .activities { position: relative; isolation: isolate; }
+.intro::after, .activities::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-repeat: no-repeat; opacity: .16;
+}
+.intro::after {
+  background-image: url('images/watermarks/lions.webp');
+  background-position: right 2% center; background-size: auto 95%;
+}
+.activities::after {
+  background-image: url('images/watermarks/elephant.webp'), url('images/watermarks/wild-dog.webp'), url('images/watermarks/elephant-sunset.webp');
+  background-position: left -6% top 2%, right -6% top 40%, left -4% bottom 3%;
+  background-size: 44% auto, 40% auto, 46% auto;
+}
+@media (max-width: 720px) {
+  .intro::after { background-size: 110% auto; background-position: center bottom; }
+  .activities::after { background-size: 100% auto, 100% auto, 100% auto; background-position: center top 1%, center 45%, center bottom 1%; }
+}
 .section-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 4rem; flex-wrap: wrap; gap: 2rem; }
 .section-head h2 { font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; letter-spacing: -0.025em; max-width: 720px; }
 .section-head h2 em { font-style: italic; color: var(--terracotta); }
