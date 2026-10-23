@@ -5,5 +5,6 @@ Allow: /
 Disallow: /asv_dashboard.html
 Disallow: /asv-activities-dashboard.html
 Disallow: /thorntree-calendar.html
+Disallow: /collection-preview.html
 
 Sitemap: https://africansky.travel/sitemap.xml
