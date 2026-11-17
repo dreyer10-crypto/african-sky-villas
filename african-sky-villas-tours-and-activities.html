@@ -1609,17 +1609,17 @@ const activities = [
     }
   },
   {
-    id: "shuttle-kmia", category: "transfer", duration: "One way · per person", price: 2150, tiers: { 3: 2150, 4: 950 }, img: "images/shuttle-van-full.jpg", pdf: null,
+    id: "shuttle-kmia", category: "transfer", duration: "One way · per person", price: 950, minPax: 4, img: "images/shuttle-van-full.jpg", pdf: null,
     name: { en: "Shuttle — KMIA airport to African Sky Villas", nl: "Shuttle — luchthaven KMIA naar African Sky Villas", fr: "Navette — l’aéroport KMIA vers African Sky Villas", de: "Shuttle — Flughafen KMIA nach African Sky Villas", pt: "Shuttle — aeroporto KMIA para African Sky Villas", es: "Shuttle — aeropuerto KMIA a African Sky Villas" },
     tag: { en: "Shuttle", nl: "Shuttle", fr: "Navette", de: "Shuttle", pt: "Shuttle", es: "Shuttle" },
-    capacity: { en: "1–3 guests R2,150 pp · 4+ guests R950 pp", nl: "1–3 gasten R2 150 pp · 4+ gasten R950 pp", fr: "1–3 pers. 2 150 R pp · 4+ pers. 950 R pp", de: "1–3 Gäste 2 150 R pP · ab 4 Gäste 950 R pP", pt: "1–3 hóspedes R2 150 pp · 4+ hóspedes R950 pp", es: "1–3 personas R2 150 pp · 4+ personas R950 pp" },
+    capacity: { en: "Minimum charge 4 seats (R3,800)", nl: "Minimaal 4 plaatsen (R3 800)", fr: "Minimum 4 places (3 800 R)", de: "Mindestens 4 Plätze (3 800 R)", pt: "Mínimo 4 lugares (R3 800)", es: "Mínimo 4 plazas (R3 800)" },
     desc: {
-      en: "Shuttle from KMIA airport to African Sky Villas in Marloth Park, door to door. Book with your stay and we'll confirm your pick-up time. Groups of 4 or more: R950 per person.",
-      nl: "Shuttle van luchthaven KMIA naar African Sky Villas in Marloth Park, van deur tot deur. Boek bij je verblijf en wij bevestigen je ophaaltijd. Groepen van 4 of meer: R950 per persoon.",
-      fr: "Navette de l’aéroport KMIA à African Sky Villas à Marloth Park, de porte à porte. Réservez avec votre séjour et nous confirmerons l'heure de prise en charge. Groupes de 4 personnes ou plus : 950 R par personne.",
-      de: "Shuttle von Flughafen KMIA zu African Sky Villas im Marloth Park, von Tür zu Tür. Mit deinem Aufenthalt buchen – wir bestätigen die Abholzeit. Gruppen ab 4 Personen: 950 R pro Person.",
-      pt: "Shuttle de aeroporto KMIA para African Sky Villas em Marloth Park, porta a porta. Reserve com a sua estadia e confirmamos a hora de recolha. Grupos de 4 ou mais: R950 por pessoa.",
-      es: "Shuttle desde aeropuerto KMIA a African Sky Villas en Marloth Park, puerta a puerta. Resérvalo con tu estancia y confirmaremos la hora de recogida. Grupos de 4 o más: R950 por persona."
+      en: "Shuttle from KMIA airport to African Sky Villas in Marloth Park, door to door. Book with your stay and we'll confirm your pick-up time. R950 per person, with a minimum charge of 4 seats (R3,800).",
+      nl: "Shuttle van luchthaven KMIA naar African Sky Villas in Marloth Park, van deur tot deur. Boek bij je verblijf en wij bevestigen je ophaaltijd. R950 per persoon, minimaal 4 plaatsen (R3 800).",
+      fr: "Navette de l’aéroport KMIA à African Sky Villas à Marloth Park, de porte à porte. Réservez avec votre séjour et nous confirmerons l'heure de prise en charge. 950 R par personne, minimum 4 places (3 800 R).",
+      de: "Shuttle von Flughafen KMIA zu African Sky Villas im Marloth Park, von Tür zu Tür. Mit deinem Aufenthalt buchen – wir bestätigen die Abholzeit. 950 R pro Person, mindestens 4 Plätze (3 800 R).",
+      pt: "Shuttle de aeroporto KMIA para African Sky Villas em Marloth Park, porta a porta. Reserve com a sua estadia e confirmamos a hora de recolha. R950 por pessoa, mínimo 4 lugares (R3 800).",
+      es: "Shuttle desde aeropuerto KMIA a African Sky Villas en Marloth Park, puerta a puerta. Resérvalo con tu estancia y confirmaremos la hora de recogida. R950 por persona, mínimo 4 plazas (R3 800)."
     }
   }
 ];
@@ -1704,6 +1704,13 @@ function priceFor(tour, guests) {
   for (const k of keys) { if (g <= k) return tour.tiers[k]; }
   return tour.tiers[keys[keys.length - 1]];
 }
+
+// Total for a booking row: per-person price × guests, but never fewer than
+// tour.minPax paid seats (e.g. the KMIA shuttle charges a minimum of 4).
+function totalFor(tour, guests) {
+  const g = parseInt(guests, 10) || 0;
+  return priceFor(tour, g) * Math.max(g, tour.minPax || 0);
+}
 function minTierPrice(tour) {
   if (!tour) return null;
   return tour.tiers ? Math.min(...Object.values(tour.tiers)) : tour.price;
@@ -1765,8 +1772,10 @@ function updateRowPrice(row) {
   const g = parseInt(row.querySelector('.row-guests').value, 10) || 0;
   const pp = priceFor(tour, g);
   const perPerson = t('activities.perPerson');
+  const seats = Math.max(g, tour.minPax || 0);
+  const minNote = tour.minPax && g < tour.minPax ? ` (min. ${tour.minPax})` : '';
   el.textContent = g > 0
-    ? `R${pp.toLocaleString()} ${perPerson} × ${g} = R${(pp * g).toLocaleString()}`
+    ? `R${pp.toLocaleString()} ${perPerson} × ${seats}${minNote} = R${totalFor(tour, g).toLocaleString()}`
     : `R${pp.toLocaleString()} ${perPerson}`;
 }
 
@@ -1924,6 +1933,7 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
       tour_id: id,
       tour_name: tour ? (tour.name[currentLang] || tour.name.en) : '',
       price: tour ? priceFor(tour, guests) : null,
+      total: tour ? totalFor(tour, guests) : null,
       date: r.querySelector('.row-date').value,
       guests: guests
     };
@@ -1936,7 +1946,7 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
   }
 
   const summary = items.map((it, i) =>
-    `${i+1}. ${it.tour_name}  —  ${it.date}  —  ${it.guests} guest(s)  —  R${it.price ? it.price.toLocaleString() : '?'} pp`
+    `${i+1}. ${it.tour_name}  —  ${it.date}  —  ${it.guests} guest(s)  —  R${it.price ? it.price.toLocaleString() : '?'} pp  —  total R${it.total ? it.total.toLocaleString() : '?'}`
   ).join('\n');
   document.getElementById('bookingsSummary').value = summary;
   document.getElementById('bookingsJson').value = JSON.stringify(items);
